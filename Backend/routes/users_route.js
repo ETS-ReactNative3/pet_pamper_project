@@ -1,8 +1,7 @@
 const express = require('express')
 const app = express()
+const signupController = require('../controllers/signupController')
 
-app.get('/signup', (req,res) => {
-    res.send(req.body)
-})
+app.post('/signup', signupController.addUser)
 
 module.exports = app
