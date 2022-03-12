@@ -35,7 +35,9 @@ const addUserSchema = new Schema({
 
     status: {
         type: String
-    }
-})
+    },
+
+    
+}, { timestamps: true })
 
 module.exports = addUser = mongoose.model("User", addUserSchema)
