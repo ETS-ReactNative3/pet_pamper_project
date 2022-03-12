@@ -1,15 +1,25 @@
-const User = require('../models/User')
+require('dotenv').config()
+
+const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
 exports.getUser = function(req, res) {
-    User.findOne({email: req.body.email, password: req.body.password}, {first_name:1, last_name:1, email:1, password:1, status:1, online:1}).then((user)=>{
+    User.findOne({email: req.body.email, password: req.body.password}, {first_name:1, last_name:1, email:1, password:1, status:1, online:1, token:1}).then((user)=>{
+        
         if (!user) {
             return res.status(400).json({message: "Please enter a valid email or password"})
         }else {
+            const email = req.body.email
+            const user_email = {name: email}
+            const token = jwt.sign(user_email, process.env.ACCESS_TOKEN)
+
             const updateUser = user.set({
-                online: true,
+                token: token,
+                online: true,          
             })
-            updateUser.save()
-            return res.status(200).json(user)
-            }
+
+        updateUser.save()
+        return res.status(200).json(user)
+        }
     })
 }

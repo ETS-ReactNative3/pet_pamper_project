@@ -40,6 +40,11 @@ const addUserSchema = new Schema({
     online: {
         type: Boolean,
         default: false
+    },
+
+    token: {
+        type: String,
+        default: ""
     }
 
     
