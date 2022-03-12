@@ -12,7 +12,7 @@ const db = mongoose.connection
 db.on('error', (error)=> {console.log(error)})
 db.once('open', ()=> {console.log('connected to database')})
 
-// Body parser with content-type urlencoded
+// Body parser content-type urlencoded
 app.use(bodyParser.urlencoded({
     extended: true
 }));
