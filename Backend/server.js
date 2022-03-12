@@ -1,7 +1,12 @@
-const express = require('express')
-const app = express()
-const users_route = require('./routes/users_route')
+const express = require('express');
+const app = express();
+const usersRoute = require('./routes/users_route');
+const bodyParser = require('body-parser');
 
-app.use('/user', users_route)
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-app.listen(3000)
+app.use('/user', usersRoute);
+
+app.listen(3000);
