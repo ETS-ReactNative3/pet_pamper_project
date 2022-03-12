@@ -37,6 +37,11 @@ const addUserSchema = new Schema({
         type: String
     },
 
+    online: {
+        type: Boolean,
+        default: false
+    }
+
     
 }, { timestamps: true })
 
