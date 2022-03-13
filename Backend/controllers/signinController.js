@@ -4,8 +4,10 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 exports.getUser = function(req, res) {
+    //Search for the using email and password attributes
     User.findOne({email: req.body.email, password: req.body.password}, {first_name:1, last_name:1, email:1, password:1, status:1, online:1, token:1}).then((user)=>{
         
+        // check if the user entered an invalid email/password or return user information
         if (!user) {
             return res.status(400).json({message: "Please enter a valid email or password"})
         }else {

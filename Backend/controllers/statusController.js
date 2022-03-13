@@ -2,9 +2,8 @@ const User = require('../models/User')
 
 exports.statusUpdate = function(req, res) {
 
-    User.findById(req.body.id).then((user)=>{
-        if (user) {
-            
+    User.findOne({req.body.token}).then((user)=>{
+        if (user) {           
             const updateUser = user.set({
                 status: req.body.status,
             })
@@ -13,5 +12,5 @@ exports.statusUpdate = function(req, res) {
         }else{
             return res.status(400).json({message: "You don't have access"})
         }
-    }).catch((err) => res.send({message: "ID is wrong"}))
+    }).catch((err) => res.send({message: "JWT is wrong"}))
 }
