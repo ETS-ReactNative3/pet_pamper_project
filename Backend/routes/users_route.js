@@ -22,4 +22,7 @@ app.post('/signin', signinController.getUser)
 //Status update route
 app.post('/status', statusController.statusUpdate)
 
+//Show communities
+app.post('/communities', userCommunitiesController.getCommunities)
+
 module.exports = app
