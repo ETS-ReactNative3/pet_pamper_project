@@ -29,7 +29,13 @@ exports.addCommunity = (req, res) => {
                             newCommunity.members.push(user._id)
                             newCommunity.save()
 
-                            return res.status(200).json({message: "Successfully added community"})
+                            User.findOne({'token': req.body.token}).then((userSelected)=>{
+                                userSelected.communities.push(newCommunity._id)
+                                userSelected.save()
+                         
+                            }).catch((err) => res.send({message: "JWT is wrong"}))
+
+                            return res.status(200).json({message: "Successfully added a new community"})
                             
                         }else {return res.status(400).json({message: "You are not a pet walker"})}
                     }

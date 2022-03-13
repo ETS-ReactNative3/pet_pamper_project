@@ -60,7 +60,7 @@ const addUserSchema = new Schema({
         required: true
     },
 
-    Communities: [mongoose.Types.ObjectId],
+    communities: [mongoose.Types.ObjectId],
     
 }, { timestamps: true })
 

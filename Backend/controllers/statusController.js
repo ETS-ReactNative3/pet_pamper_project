@@ -4,10 +4,10 @@ exports.statusUpdate = function(req, res) {
 
     User.findOne({'token': req.body.token}).then((user)=>{
         if (user) {           
-            const updateUser = user.set({
+            const updateUserStatus = user.set({
                 status: req.body.status,
             })
-            updateUser.save()
+            updateUserStatus.save()
             return res.status(200).json({message: "Successfully updated user status"})
         }else{
             return res.status(400).json({message: "You don't have access"})
