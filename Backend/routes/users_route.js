@@ -44,7 +44,8 @@ app.post('/user_info_update', userInfoController.infoUpdate)
 //add a community to the user's communities list
 app.post('/add_community', addCommunityController.addCommunity)
 
-
+//logout
+app.post('/logout', logoutController.logOut)
 
 }catch(err) {console.log(err)}
 
