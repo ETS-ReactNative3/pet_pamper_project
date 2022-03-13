@@ -1,7 +1,7 @@
 const Community = require('../models/Community')
 const User = require('../models/User')
 
-exports.addCommunity = (req, res) => { 
+exports.createCommunity = (req, res) => { 
     //Check if any of the fields is missing
     try {
         if (!req.body.name || !req.body.token) {

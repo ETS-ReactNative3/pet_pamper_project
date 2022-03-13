@@ -6,6 +6,6 @@ const communityController = require('../controllers/communityController')
 
 
 //Create community route
-app.post('/createCommunity', communityController.addCommunity)
+app.post('/createCommunity', communityController.createCommunity)
 
 module.exports = app

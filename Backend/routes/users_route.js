@@ -5,6 +5,7 @@ const {body, validationResult} = require('express-validator')
 const signupController = require('../controllers/signupController')
 const statusController = require('../controllers/statusController')
 const signinController = require('../controllers/signinController')
+const userCommunitiesController = require('../controllers/userCommunitiesController')
 
 //Signup route
 app.post('/signup', body('email').isEmail(), body('password').isLength({min: 8}), (req, res) => { 
