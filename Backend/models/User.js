@@ -29,12 +29,19 @@ const addUserSchema = new Schema({
         unique: true
     },
 
-    gender: {
-        type: String,
-        required: true
+    status: {
+        type: String
     },
 
-    status: {
+    image: {
+        type: String
+    },
+
+    latitude: {
+        type: String
+    },
+
+    longitude: {
         type: String
     },
 
@@ -51,8 +58,9 @@ const addUserSchema = new Schema({
     account_type: {
         type: String,
         required: true
-    }
+    },
 
+    Communities: [mongoose.Types.ObjectId],
     
 }, { timestamps: true })
 
