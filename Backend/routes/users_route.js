@@ -10,7 +10,7 @@ const petShopController = require('../controllers/petShopController')
 const veterinariesController = require('../controllers/veterinariesController')
 const userInfoController = require('../controllers/userInfoController')
 const addCommunityController = require('../controllers/addCommunityController')
-
+const logoutController = require('../controllers/logoutController')
 
 try{
 //Signup route
@@ -43,6 +43,8 @@ app.post('/user_info_update', userInfoController.infoUpdate)
 
 //add a community to the user's communities list
 app.post('/add_community', addCommunityController.addCommunity)
+
+
 
 }catch(err) {console.log(err)}
 
