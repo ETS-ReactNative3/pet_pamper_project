@@ -2,7 +2,7 @@ const User = require('../models/User')
 
 exports.statusUpdate = function(req, res) {
 
-    User.findOne({req.body.token}).then((user)=>{
+    User.findOne({'token': req.body.token}).then((user)=>{
         if (user) {           
             const updateUser = user.set({
                 status: req.body.status,
