@@ -3,7 +3,8 @@ const express = require('express');
 const app = express();
 const usersRoute = require('./routes/users_route');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const res = require('express/lib/response');
 
 // Database connection
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -23,4 +24,4 @@ app.use('/user', usersRoute);
 // Listen to the port
 try{
     app.listen(parseInt(process.env.PORT))
-}catch(err) {message: "JWT is wrong"}
+}catch(err) {res.send({message: "Something is wrong with the server connection"})}

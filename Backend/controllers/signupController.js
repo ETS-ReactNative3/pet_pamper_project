@@ -12,12 +12,12 @@ exports.addUser = (req, res) => {
     }
 
     // Search if the user exist in the database using email parameter
-    User.findOne({email: req.body.email}).then((user)=>{
+    User.findOne({email: req.body.email} && {phone_number:  req.body.phone_number}).then((user)=>{
 
         //Send that email already exist or add the user to the database
         try{
             if (user) {
-                return res.status(400).json({message: "user email already exists"})
+                return res.status(400).json({message: "user email or phone number already exists"})
             }else {
                 const newUser = new User({
                     first_name: req.body.first_name,
