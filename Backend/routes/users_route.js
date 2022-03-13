@@ -9,7 +9,10 @@ const userCommunitiesController = require('../controllers/userCommunitiesControl
 const petShopController = require('../controllers/petShopController')
 const veterinariesController = require('../controllers/veterinariesController')
 const userInfoController = require('../controllers/userInfoController')
+const addCommunityController = require('../controllers/addCommunityController')
 
+
+try{
 //Signup route
 app.post('/signup', body('email').isEmail(), body('password').isLength({min: 8}), (req, res) => { 
     const errors = validationResult(req)
@@ -36,6 +39,10 @@ app.post('/pet_shops', petShopController.getPetShops)
 app.post('/veterinaries', veterinariesController.getVeterinaries)
 
 //Update user information
-app.post('/info_update', userInfoController.infoUpdate)
+app.post('/user_info_update', userInfoController.infoUpdate)
+
+
+
+}catch(err) {console.log(err)}
 
 module.exports = app
