@@ -21,4 +21,6 @@ app.use(bodyParser.urlencoded({
 app.use('/user', usersRoute);
 
 // Listen to the port
-app.listen(parseInt(process.env.PORT))
+try{
+    app.listen(parseInt(process.env.PORT))
+}catch(err) {message: "JWT is wrong"}

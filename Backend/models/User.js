@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { required } = require('nodemon/lib/config');
 const Schema = mongoose.Schema;
 
 const addUserSchema = new Schema({
@@ -45,6 +46,11 @@ const addUserSchema = new Schema({
     token: {
         type: String,
         default: ""
+    },
+
+    account_type: {
+        type: String,
+        required: true
     }
 
     
