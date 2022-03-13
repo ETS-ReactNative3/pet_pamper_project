@@ -41,7 +41,8 @@ app.post('/veterinaries', veterinariesController.getVeterinaries)
 //Update user information
 app.post('/user_info_update', userInfoController.infoUpdate)
 
-
+//add a community to the user's communities list
+app.post('/add_community', addCommunityController.addCommunity)
 
 }catch(err) {console.log(err)}
 
