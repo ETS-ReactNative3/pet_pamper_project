@@ -6,6 +6,7 @@ const signupController = require('../controllers/signupController')
 const statusController = require('../controllers/statusController')
 const signinController = require('../controllers/signinController')
 const userCommunitiesController = require('../controllers/userCommunitiesController')
+const petShopController = require('../controllers/petShopController')
 
 //Signup route
 app.post('/signup', body('email').isEmail(), body('password').isLength({min: 8}), (req, res) => { 
@@ -25,5 +26,7 @@ app.post('/status', statusController.statusUpdate)
 
 //Show communities
 app.post('/communities', userCommunitiesController.getCommunities)
+
+
 
 module.exports = app
