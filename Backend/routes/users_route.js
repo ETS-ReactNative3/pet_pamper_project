@@ -35,6 +35,7 @@ app.post('/pet_shops', petShopController.getPetShops)
 //Show veterinaries
 app.post('/veterinaries', veterinariesController.getVeterinaries)
 
-
+//Update user information
+app.post('/info_update', userInfoController.infoUpdate)
 
 module.exports = app
