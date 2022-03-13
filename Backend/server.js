@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const usersRoute = require('./routes/users_route');
+const communitiesRoute = require('./routes/communities_route');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const res = require('express/lib/response');
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({
 
 // Router
 app.use('/user', usersRoute);
+app.use('/community', communitiesRoute);
 
 // Listen to the port
 try{
