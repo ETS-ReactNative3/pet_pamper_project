@@ -32,5 +32,7 @@ app.post('/communities', userCommunitiesController.getCommunities)
 //Show pet shops
 app.post('/pet_shops', petShopController.getPetShops)
 
+//Show veterinaries
+app.post('/veterinaries', veterinariesController.getVeterinaries)
 
 module.exports = app
