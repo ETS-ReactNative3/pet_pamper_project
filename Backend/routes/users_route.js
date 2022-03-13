@@ -27,6 +27,7 @@ app.post('/status', statusController.statusUpdate)
 //Show communities
 app.post('/communities', userCommunitiesController.getCommunities)
 
-
+//Show pet shops
+app.post('/pet_shops', petShopController.getPetShops)
 
 module.exports = app
