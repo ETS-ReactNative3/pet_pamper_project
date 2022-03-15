@@ -7,16 +7,11 @@ function SigninButton(props) {
     return (
         <View style={styles.buttonArea}>
             <Pressable style={styles.button}>
-                <View style={styles.googleIconArea}>
-                    <Image style={styles.googleIcon} source={require('../../assets/Google-icon.png')}></Image>
-                </View>
-                <Text style={styles.text}>Sign in with Google</Text>
+                <Text style={styles.text}>Sign in with your Email</Text>
             </Pressable>
         </View>
     );
 }
-
-
 
 
 const styles = StyleSheet.create({
@@ -24,10 +19,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#518ef8',
         borderRadius: 7,
-        width: '80%',
-        height: 50,
+        width: '90%',
+        height: 60,
         textTransform: 'capitalize',
-        marginTop: 50
+        marginTop: 30
     },
     
     button: {
@@ -35,41 +30,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 5,
         justifyContent: 'center',
-        backgroundColor: '#518ef8',
+        backgroundColor: '#004b67',
         width: '100%',
         alignItems: 'center',   
     },
 
     text: {
-        paddingLeft: 10,
-        flexBasis: '78%',
-        fontSize: 16,
-        color: 'white',
+        paddingLeft: 15,
+        fontSize: 19,
+        color: '#80f7e3',
         fontWeight: 'bold',
     },
 
-    googleIconArea: {
-        marginLeft: 2,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexBasis: '20%',
-        width: '100%',
-        height: '90%',
-        backgroundColor: 'white',
-        resizeMode: 'contain',
-        borderWidth: 1,
-        borderColor: 'white',
-        borderRadius: 5
-    },
-
-    googleIcon: {
-        
-        justifyContent: 'center',
-        width: '90%',
-        height: '90%',
-        resizeMode: 'contain',
-    }
 })
 
 export default SigninButton;

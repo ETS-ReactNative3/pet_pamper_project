@@ -1,13 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Image, Platform, StatusBar } from 'react-native';
+import GoogleSigninButton from '../../components/googleSigninButton'
 import SigninButton from '../../components/signinButton'
-
+import TextInputs from '../../components/textInput';
 
 function SigninScreen(props) {
     return (
         <View style= {styles.backgroudArea}>
             <Image style={styles.image} source={require("../../assets/Pet_Pamper_signIn.png")}/>
-            <View style= {styles.googleButton}><SigninButton/></View>
+            <View style= {styles.googleButton}>
+                <GoogleSigninButton/>
+                <View style={styles.line}/>
+                <Text style= {styles.orText}>or</Text>
+                <SigninButton/>
+            </View>
+            
         </View>  
     );
 }
@@ -37,6 +44,22 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         alignItems: 'center'
+      },
+
+      line: {
+          backgroundColor: '#004b67',
+          width: '90%',
+          marginTop: 20,
+          height: 1
+      },
+
+      orText: {
+        position: 'absolute',
+        top: 120,
+        fontSize: 17,
+        zIndex: 1,
+        backgroundColor: 'white',
+        padding: 5
       }
 })
 
