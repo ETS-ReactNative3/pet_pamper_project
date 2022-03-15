@@ -13,8 +13,6 @@ function SignupScreen(props) {
                 <GoogleSigninButton/>
                 <View style={styles.line}/>
                 <Text style= {styles.orText}>or</Text>
-                
-                <Text style={styles.signup}>Don't have an account? <Text style={{fontWeight: 'bold'}}>Sign up</Text></Text>  
             </View>        
         </View>  
     );
