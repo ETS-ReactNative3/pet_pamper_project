@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         borderColor: '#518ef8',
         borderRadius: 7,
         width: '90%',
-        height: 60,
+        height: 55,
         textTransform: 'capitalize',
         marginTop: 30
     },
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 
     text: {
         paddingLeft: 15,
-        fontSize: 19,
+        fontSize: 17,
         color: '#80f7e3',
         fontWeight: 'bold',
     },

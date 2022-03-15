@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
         borderColor: '#518ef8',
         borderRadius: 7,
         width: '90%',
-        height: 60,
+        height: 55,
         textTransform: 'capitalize',
-        marginTop: 50,
+        marginTop: 40,
         marginBottom: 10
     },
     
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     text: {
         paddingLeft: 15,
         flexBasis: '80%',
-        fontSize: 19,
+        fontSize: 17,
         color: 'white',
         fontWeight: 'bold',
     },
