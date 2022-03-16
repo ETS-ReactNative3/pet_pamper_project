@@ -6,7 +6,7 @@ import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNat
 function GoogleSigninButton(props) {
     return (
         <View style={styles.buttonArea}>
-            <Pressable style={styles.button}>
+            <Pressable  style={styles.button}>
                 <View style={styles.googleIconArea}>
                     <Image style={styles.googleIcon} source={require('../../assets/Google-icon.png')}></Image>
                 </View>

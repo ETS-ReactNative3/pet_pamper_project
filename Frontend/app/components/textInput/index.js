@@ -17,7 +17,7 @@ const TextInputs = () => {
         <TextInput
             style= {styles.email_input}
             label="Password"
-            secureTextEntry
+            secureTextEntry= {true}
             right={<TextInput.Icon name="eye" />}
         />
         </View>

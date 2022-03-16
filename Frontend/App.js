@@ -4,25 +4,25 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignupScreen from './app/screens/signup-screen';
 
-const Nav = createNativeStackNavigator();
+const stack = createNativeStackNavigator();
 
 export default function App() {
   console.log("App Executed")
   return (
     <SafeAreaView style= {styles.AndroidSafeArea}>
       <NavigationContainer>
-        <Nav.Navigator>
-          <Nav.Screen 
-            name="Welcome to Pet Pamper"
+        <stack.Navigator>
+          <stack.Screen 
+            name="Home"
             component={HomeScreen}
-            options={{ title: '' }}
+            options={{ title: '', headerShown: false }}
           />
-        <Nav.Screen
+        <stack.Screen
             name="Sign Up"
             component={SignupScreen}
             options={{ title: '' }}
           />
-        </Nav.Navigator>
+        </stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
   );
