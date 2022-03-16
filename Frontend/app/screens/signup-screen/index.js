@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image} from 'react-native';
+import { StyleSheet, Text, View, Image, Picker} from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
+import SignupButton from '../../components/signupButton'
 
 
 function SignupScreen(props) {
@@ -9,6 +10,7 @@ function SignupScreen(props) {
     const [email, onChangeEmail] = React.useState("");
     const [phone_number, onChangePhoneNumber] = React.useState("");
     const [password, onChangePassword] = React.useState("");
+    const [selectedValue, setSelectedValue] = React.useState("");
 
     return (
         <View style= {styles.backgroudArea}>
@@ -63,7 +65,17 @@ function SignupScreen(props) {
                     placeholder="Enter Password"
                 />
 
+                <Picker
+                    selectedValue={selectedValue}
+                        style={styles.picker}
+                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                    >
+                    <Picker.Item label="Pet Walker" value="Pet Walker" />
+                    <Picker.Item label="Veterinary" value="Veterinary" />
+                    <Picker.Item label="Pet Shop" value="Pet Shop" />
+                </Picker>
 
+                <SignupButton/>
 
             </View>
         </View>  
@@ -132,6 +144,12 @@ const styles = StyleSheet.create({
         marginTop: 10 
     },
 
+    picker: {
+        width: '80%',
+        height: 50,
+        borderWidth: 1,
+        borderColor: 'black'
+    }
 
 
 })
