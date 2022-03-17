@@ -3,6 +3,36 @@ import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
 
 function SigninScreen({navigation}) {
+    const [email, onChangeEmail] = React.useState("");
+    const [password, onChangePassword] = React.useState("");
+    const [status, setStatus] = React.useState("")
+    const url = 'http://192.168.1.107:3000/user/signin'
+    
+    async function signin() {
+ 
+        let result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            })
+        })
+
+        result = await result.json()
+        
+        setStatus(result.message)
+        
+    }
+
+    function redirect() {
+        if (status == "Successful login!") {
+            navigation.navigate('Explore')
+        }
+    }
 
     return (
         <View style= {styles.backgroudArea}>
