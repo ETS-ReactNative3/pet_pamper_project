@@ -18,7 +18,7 @@ app.post('/signup', body('email').isEmail(), body('password').isLength({min: 8})
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
-        return res.status(400).send({message: 'Invalid email address or password. Please try again.'})
+        return res.status(400).send({message: "Invalid email or password"})
     }
     signupController.addUser(req,res)
 })

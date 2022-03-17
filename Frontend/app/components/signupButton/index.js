@@ -1,14 +1,14 @@
 import React from 'react';
-import { Pressable, View, StyleSheet, Text, Image } from 'react-native';
+import { Pressable, View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 function SignupButton(props) {
     return (
-        <View style={styles.buttonArea}>
-            <Pressable style={styles.button}>
+        <View  style={styles.buttonArea}>
+            <TouchableOpacity style={styles.button}>
                 <Text style={styles.text}>SIGN UP</Text>
-            </Pressable>
+            </TouchableOpacity>
         </View>
     );
 }

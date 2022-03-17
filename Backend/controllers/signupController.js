@@ -17,7 +17,7 @@ exports.addUser = (req, res) => {
         //Send that email already exist or add the user to the database
         try{
             if (user) {
-                return res.status(400).json({message: "user email or phone number already exists"})
+                return res.status(400).json({message: "User email or phone number already exists"})
             }else {
                 const newUser = new User({
                     first_name: req.body.first_name,

@@ -1,17 +1,18 @@
 import React from 'react';
-import { Pressable, View, StyleSheet, Text, Image } from 'react-native';
+import { Pressable, View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+
 
 function GoogleSigninButton(props) {
     return (
         <View style={styles.buttonArea}>
-            <Pressable  style={styles.button}>
+            <TouchableOpacity onPress={() => alert('Hello, world!')} style={styles.button}>
                 <View style={styles.googleIconArea}>
                     <Image style={styles.googleIcon} source={require('../../assets/Google-icon.png')}></Image>
                 </View>
                 <Text style={styles.text}>Sign in with Google</Text>
-            </Pressable>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
         width: '90%',
         height: '90%',
         resizeMode: 'contain',
-    }
+    },
 })
 
 export default GoogleSigninButton;
