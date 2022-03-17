@@ -14,8 +14,6 @@ function SignupScreen({navigation}) {
     const url = 'http://192.168.1.107:3000/user/signup'
     
     async function signup() {
-        
-        alert(password)
  
         let result = await fetch(url, {
             method: 'POST',
@@ -40,7 +38,7 @@ function SignupScreen({navigation}) {
     }
 
     function redirect() {
-        if (status == 'Successfully added user') {
+        if (status == 'Successful sign up!') {
             navigation.navigate('Home')
         }
     }

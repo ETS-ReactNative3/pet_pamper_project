@@ -6,12 +6,12 @@ import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNat
 
 function GoogleSigninButton(props) {
     return (
-        <View style={styles.buttonArea}>
-            <TouchableOpacity onPress={() => alert('Hello, world!')} style={styles.button}>
+        <View style={styles.button_area_signin}>
+            <TouchableOpacity onPress={() => alert('Hello, world!')} style={styles.button_signin}>
                 <View style={styles.googleIconArea}>
                     <Image style={styles.googleIcon} source={require('../../assets/Google-icon.png')}></Image>
                 </View>
-                <Text style={styles.text}>Sign in with Google</Text>
+                <Text style={styles.text_signin}>Sign in with Google</Text>
             </TouchableOpacity>
         </View>
     );
@@ -19,7 +19,7 @@ function GoogleSigninButton(props) {
 
 
 const styles = StyleSheet.create({
-    buttonArea: {
+    button_area_signin: {
         borderWidth: 1,
         borderColor: '#518ef8',
         borderRadius: 7,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     
-    button: {
+    button_signin: {
         flex: 1,
         flexDirection: 'row',
         borderRadius: 5,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',   
     },
 
-    text: {
+    text_signin: {
         paddingLeft: 15,
         flexBasis: '80%',
         fontSize: 17,

@@ -21,7 +21,9 @@ exports.getUser = function(req, res) {
             })
 
         updateUser.save()
-        return res.status(200).json(user)
+        const user_info = user.toJSON()
+        user_info.message = "Successful login!"
+        return res.status(200).json(user_info)
         }
     })
 }

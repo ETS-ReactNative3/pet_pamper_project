@@ -29,7 +29,7 @@ exports.addUser = (req, res) => {
                 })
 
                 newUser.save()
-                return res.status(200).json({message: "Successfully added user"})
+                return res.status(200).json({message: "Successful sign up!"})
             }
         }catch(err) {res.send(err)}
     })
