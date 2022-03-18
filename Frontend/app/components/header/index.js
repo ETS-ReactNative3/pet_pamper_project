@@ -21,7 +21,7 @@ function Header(props) {
                 </TouchableOpacity>
             </View>
 
-            <Text style= {styles.sub_title}>{props.sub_title}</Text>
+            <Text style={styles.sub_title}>{props.sub_title}</Text>
         </View>
     );
 }
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 
     sub_title:{
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 19,
         marginTop: 10,
         marginLeft: 15,
         color: '#004b67'

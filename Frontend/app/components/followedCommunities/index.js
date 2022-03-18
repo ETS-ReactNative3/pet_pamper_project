@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, View, Text, Image, StyleSheet} from 'react-native';
+import {ScrollView, View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 const items = [
     {
@@ -31,19 +31,30 @@ const items = [
         image: require('../../assets/Pet_Pamper_signIn.png'),
         text: "Community 6"
     },
+
+    
 ];
 
 function FollowedCommunties(props) {
     return (
+        <View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {items.map((item,index) => (
-                <View key= {index} style={{alignItems: 'center'}}>
-                    <Image style= {styles.image} source= {item.image}/>
-                    <Text style= {styles.text}>{item.text}</Text>
+                <View key= {index} >
+                    <TouchableOpacity>
+                        <Image style= {styles.image} source= {item.image}/>
+
+                        <Text style= {styles.text}>{item.text}</Text>
+                        <View style={styles.button_area}>
+                            <View style={styles.button}>
+                                <Text style={styles.button_text}>PING</Text>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
                 </View>
-            ))}
-          
+            ))}         
         </ScrollView>
+        </View>
     );
 }
 
@@ -53,7 +64,7 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 100,
         opacity: 0.6,
-        borderColor: 'red',
+        borderColor: '#004b67',
         borderWidth: 3,
         marginTop: 10,
         marginLeft: 10,
@@ -64,6 +75,26 @@ const styles = StyleSheet.create({
         marginTop: 5,
         fontSize: 15,
         fontWeight: 'bold'
+    },
+
+    button_area: {
+        paddingHorizontal: 20
+    },
+    
+    button: {
+        backgroundColor: '#004b67',
+        borderRadius: 5,
+        alignItems: 'center',
+        position: 'relative',
+        zIndex: 2,
+        top: -86,
+        left: 5,
+        paddingVertical: 3
+    },
+
+    button_text: {
+        color: 'white'
     }
+
 })
 export default FollowedCommunties;
