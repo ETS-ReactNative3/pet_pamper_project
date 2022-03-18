@@ -19,7 +19,7 @@ function HomeScreen({ navigation }) {
                         <Text style={styles.text_signin}>Sign in with Google</Text>
                     </TouchableOpacity>
                 </View>
-
+                
                 <View style={styles.line}/>
 
                 <Text style= {styles.orText}>or</Text>

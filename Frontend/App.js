@@ -13,7 +13,8 @@ export default function App() {
   console.log("App Executed")
   return (
     <SafeAreaView style= {styles.AndroidSafeArea}>
-      <NavigationContainer>
+      <ExploreScreen/>
+      {/* <NavigationContainer>
         <stack.Navigator>
           <stack.Screen 
             name="Home"
@@ -32,13 +33,13 @@ export default function App() {
             options={{ title: '' }}
           />
 
-<stack.Screen
+        <stack.Screen
             name="Explore"
             component={ExploreScreen}
             options={{ title: '', headerShown: false }}
           />
         </stack.Navigator>
-      </NavigationContainer>
+      </NavigationContainer> */}
     </SafeAreaView>
   );
 }

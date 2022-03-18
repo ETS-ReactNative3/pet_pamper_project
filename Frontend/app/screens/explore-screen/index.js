@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text} from 'react-native'
+import Header from '../../components/header'
 
 function ExploreScreen(props) {
     return (
         <View>
-            <Text>Hello World!</Text>
+            <Header title={'Discover'} sub_title={'Your communities'}/>
         </View>
     );
 }
