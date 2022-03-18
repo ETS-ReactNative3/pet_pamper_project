@@ -6,6 +6,7 @@ import SignupScreen from './app/screens/signup-screen';
 import SigninScreen from './app/screens/signin-screen';
 import ExploreScreen from './app/screens/explore-screen';
 import VeterinariesScreen from './app/screens/veterinaries-screen';
+import PetShopsScreen from './app/screens/pet-shops-screen';
 
 const stack = createNativeStackNavigator();
 
@@ -13,7 +14,7 @@ export default function App() {
   console.log("App Executed")
   return (
     <SafeAreaView style= {styles.AndroidSafeArea}>
-      <VeterinariesScreen/>
+      <PetShopsScreen/>
       {/* <NavigationContainer>
         <stack.Navigator>
           <stack.Screen 
@@ -42,6 +43,12 @@ export default function App() {
           <stack.Screen
             name="Veterinaries"
             component={VeterinariesScreen}
+            options={{ title: '', headerShown: false }}
+          />
+          
+          <stack.Screen
+            name="Pet Shops"
+            component={PetShopsScreen}
             options={{ title: '', headerShown: false }}
           />
         </stack.Navigator>
