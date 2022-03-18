@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignupScreen from './app/screens/signup-screen';
 import SigninScreen from './app/screens/signin-screen';
 import ExploreScreen from './app/screens/explore-screen';
-
+import VeterinariesScreen from './app/screens/veterinaries-screen';
 
 const stack = createNativeStackNavigator();
 
@@ -13,7 +13,7 @@ export default function App() {
   console.log("App Executed")
   return (
     <SafeAreaView style= {styles.AndroidSafeArea}>
-      <ExploreScreen/>
+      <VeterinariesScreen/>
       {/* <NavigationContainer>
         <stack.Navigator>
           <stack.Screen 
@@ -36,6 +36,12 @@ export default function App() {
         <stack.Screen
             name="Explore"
             component={ExploreScreen}
+            options={{ title: '', headerShown: false }}
+          />
+        
+          <stack.Screen
+            name="Veterinaries"
+            component={VeterinariesScreen}
             options={{ title: '', headerShown: false }}
           />
         </stack.Navigator>
