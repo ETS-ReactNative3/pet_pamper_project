@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native'
 import Header from '../../components/header'
 import FollowedCommunties from '../../components/followedCommunities'
 import NearbyCommunities from '../../components/nearbyCommunities'
+import NavigationBar from '../../components/navigationBar'
 
 function ExploreScreen(props) {
     return (
@@ -11,6 +12,7 @@ function ExploreScreen(props) {
             <FollowedCommunties/>
             <Text style={styles.sub_title}>Nearby communities</Text>
             <NearbyCommunities/>
+            <NavigationBar/>
         </View>
     );
 }

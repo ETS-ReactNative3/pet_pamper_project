@@ -32,12 +32,6 @@ const items = [
         text: "Community 11",
         members: "4 members"
     },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 12",
-        members: "36 members"
-    },
 ];
 
 function NearbyCommunities(props) {
@@ -47,7 +41,7 @@ function NearbyCommunities(props) {
                 {items.map((item,index) => (
                     <View key= {index}>
                         <View>
-                            <View style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <View>
                                     <Image style= {styles.image} source= {item.image}/>
                                 </View>
