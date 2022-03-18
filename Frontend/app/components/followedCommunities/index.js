@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
         marginLeft: 17,
         marginTop: 5,
         fontSize: 15,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#004b67'
     },
 
     button_area: {

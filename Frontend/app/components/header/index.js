@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         fontSize: 19,
         marginTop: 10,
         marginLeft: 15,
-        color: '#004b67'
+        color: 'black'
     }
 })
 export default Header;

@@ -93,7 +93,8 @@ const styles = StyleSheet.create({
 
     text_title: {
         fontSize: 17,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#004b67'
     },
 
     text_members: {

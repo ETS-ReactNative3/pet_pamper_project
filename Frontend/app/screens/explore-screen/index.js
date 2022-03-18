@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 19,
         marginLeft: 15,
-        color: '#004b67'
+        color: 'black'
     }
 })
 export default ExploreScreen;
