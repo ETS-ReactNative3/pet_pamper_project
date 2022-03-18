@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 function NavigationBar(props) {
     return (
         <View style={styles.nav_bar}>
-            <View style={{flexDirection:'row', flex:1, marginLeft: 37, marginTop: 10}}>
+            <View style={styles.icon_area}>
 
                 <TouchableOpacity style={{flex: 1}}>
                     <Icon  color= "#80f7e3" size={40} name="group"/>
@@ -34,6 +34,13 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 60,
         backgroundColor: '#004b67'
+    },
+
+    icon_area: {
+        flexDirection:'row',
+        flex:1,
+        marginLeft: 37,
+        marginTop: 10
     }
 })
 export default NavigationBar;
