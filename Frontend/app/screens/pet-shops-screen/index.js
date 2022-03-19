@@ -39,7 +39,7 @@ const nps_items = [
 
 function PetShopsScreen({navigation}) {
     return (
-        <View>
+        <View style={styles.background}>
             <View style={styles.header_area}>
                 <View style={styles.header}>              
                     <View style={styles.header_image_area}>
@@ -117,6 +117,11 @@ function PetShopsScreen({navigation}) {
 
 
 const styles = StyleSheet.create({
+    background: {
+        backgroundColor: 'white',
+        flex: 1
+    },
+
     header_area: {
         borderColor: 'white',
         width: '100%',

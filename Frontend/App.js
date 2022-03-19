@@ -18,13 +18,7 @@ export default function App() {
   return (
     <SafeAreaView style= {styles.AndroidSafeArea}>
       <NavigationContainer>
-        <stack.Navigator>
-          
-          <stack.Screen
-            name="Edit Profile"
-            component={EditProfileScreen}
-            options={{ title: '', headerShown: false }}
-          />
+        <stack.Navigator>     
 
           <stack.Screen 
             name="Home"
@@ -73,6 +67,11 @@ export default function App() {
             options={{ title: '', headerShown: false }}
           />
           
+          <stack.Screen
+            name="Edit Profile"
+            component={EditProfileScreen}
+            options={{ title: '', headerShown: false }}
+          />
 
         </stack.Navigator>
       </NavigationContainer>

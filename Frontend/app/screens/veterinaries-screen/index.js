@@ -39,7 +39,7 @@ const nv_items = [
 
 function VeterinariesScreen({navigation}) {
     return (
-        <View>
+        <View style={styles.background}>
          
             <View style={styles.header_area}>
                 <View style={styles.header}>              
@@ -118,6 +118,11 @@ function VeterinariesScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
+    background: {
+        backgroundColor: 'white',
+        flex: 1
+    },
+
     header_area: {
         borderColor: 'white',
         width: '100%',

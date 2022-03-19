@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 function ProfileScreen({navigation}) {
     return (
-        <View style={{backgroundColor: 'white', flex:1}}>
+        <View style={styles.background}>
             <TouchableOpacity>     
                 <View style= {styles.profile_image_area}>
                     <Image style= {styles.profile_image} source={require('../../assets/Pet_Pamper_signIn.png')}/>
@@ -19,15 +19,15 @@ function ProfileScreen({navigation}) {
 
             <View style={styles.edit_area}>
                 <View style={styles.edit}>                              
-                    <TouchableOpacity>
-                        <Icon style={styles.edit_user_icon} color="black" size={25} name="user" />
-                    </TouchableOpacity>
+                    
+                    <Icon style={styles.edit_user_icon} color="black" size={25} name="user" />
+                    
                     
                     <View style={styles.edit_text_area}>
                         <Text style={styles.edit_text}>Edit profile</Text>
                     </View>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=> navigation.navigate('Edit Profile')}>
                         <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
                     </TouchableOpacity>
                 </View>
@@ -35,15 +35,15 @@ function ProfileScreen({navigation}) {
 
             <View style={styles.edit_area}>
                 <View style={styles.edit}>                              
-                    <TouchableOpacity>
-                        <Icon style={styles.create_user_icon} color="black" size={25} name="group" />
-                    </TouchableOpacity>
+                    
+                    <Icon style={styles.create_user_icon} color="black" size={25} name="group" />
+                    
                     
                     <View style={styles.create_text_area}>
                         <Text style={styles.edit_text}>Create community</Text>
                     </View>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity >
                         <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
                     </TouchableOpacity>
                 </View>
@@ -79,6 +79,11 @@ function ProfileScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
+    background: {
+        backgroundColor: 'white',
+        flex: 1
+    },
+
     profile_image_area: {
         width: '100%',
         height: 200,
