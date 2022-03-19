@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
 
     orText: {
         position: 'absolute',
-        top: 470,
+        top: 473,
         fontSize: 19,
         zIndex: 1,
         backgroundColor: 'white',

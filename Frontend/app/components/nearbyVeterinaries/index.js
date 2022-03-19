@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView, View, Text, Image, StyleSheet} from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
-const items = [
+const nv_items = [
     {
         image: require('../../assets/Pet_Pamper_signIn.png'),
         text: "Veterinary 1",
@@ -35,39 +35,40 @@ const items = [
 
 function NearbyVeterinaries(props) {
     return (
-            
-            <ScrollView vertical>
-                {items.map((item,index) => (
-                    <View key= {index}>
-                        <View>
-                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                <View>
-                                    <Image style= {styles.image} source= {item.image}/>
-                                </View>
+            <View>
+                <ScrollView>
+                    {nv_items.map((nv_item, nv_index) => (
+                        <View key= {nv_index}>
+                            <View>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <View>
+                                        <Image style= {styles.nv_image} source= {nv_item.image}/>
+                                    </View>
 
-                                <View style= {styles.text}>
-                                    <Text style= {styles.text_title}>{item.text}</Text>
-                                    <Text style= {styles.text_location}>{item.location}</Text>
-                                </View>
+                                    <View style= {styles.nv_text}>
+                                        <Text style= {styles.nv_text_title}>{nv_item.text}</Text>
+                                        <Text style= {styles.nv_text_location}>{nv_item.location}</Text>
+                                    </View>
 
-                                <View>    
-                                    <TouchableOpacity style= {styles.button}>
-                                        <Text style={styles.button_text}>LOCATE</Text>
-                                    </TouchableOpacity>
+                                    <View>    
+                                        <TouchableOpacity style= {styles.nv_button}>
+                                            <Text style={styles.nv_button_text}>LOCATE</Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
                         </View>
-                    </View>
-                ))}
-            
-            </ScrollView>
+                    ))}
+                
+                </ScrollView>
+            </View>
             
        
     );
 }
 
 const styles = StyleSheet.create({
-    image: {
+    nv_image: {
         flexBasis: '10%',
         width: 50,
         height: 50,
@@ -78,24 +79,24 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
 
-    text: {
+    nv_text: {
         flexBasis: '55%',
         marginLeft: 17,
         marginTop: 5,
     },
 
-    text_title: {
+    nv_text_title: {
         fontSize: 17,
         fontWeight: 'bold',
         color: '#004b67'
     },
 
-    text_location: {
+    nv_text_location: {
         fontSize: 12,
         color: '#545454'
     },
 
-    button: {
+    nv_button: {
         backgroundColor: '#004b67',
         marginRight: 10,
         flexBasis: '30%',
@@ -105,11 +106,11 @@ const styles = StyleSheet.create({
         
     },
 
-    button_text: {
+    nv_button_text: {
         color: 'white',
         fontWeight: 'bold',
         fontSize: 14
-    }
+    },
 })
 
 export default NearbyVeterinaries;

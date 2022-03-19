@@ -1,7 +1,7 @@
 import React from 'react';
 import {ScrollView, View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
-const items = [
+const fc_items = [
     {
         image: require('../../assets/Pet_Pamper_signIn.png'),
         text: "Community 1"
@@ -38,28 +38,28 @@ const items = [
 function FollowedCommunties(props) {
     return (
         <View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {items.map((item,index) => (
-                <View key= {index} >
-                    <TouchableOpacity>
-                        <Image style= {styles.image} source= {item.image}/>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {fc_items.map((fc_item, fc_index) => (
+                    <View key= {fc_index} >
+                        <TouchableOpacity>
+                            <Image style= {styles.fc_image} source= {fc_item.image}/>
 
-                        <Text style= {styles.text}>{item.text}</Text>
-                        <View style={styles.button_area}>
-                            <View style={styles.button}>
-                                <Text style={styles.button_text}>PING</Text>
+                            <Text style= {styles.fc_text}>{fc_item.text}</Text>
+                            <View style={styles.fc_button_area}>
+                                <View style={styles.fc_button}>
+                                    <Text style={styles.fc_button_text}>PING</Text>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            ))}         
-        </ScrollView>
+                        </TouchableOpacity>
+                    </View>
+                ))}         
+            </ScrollView>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    image: {
+    fc_image: {
         width: 100,
         height: 100,
         borderRadius: 100,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
 
-    text: {
+    fc_text: {
         marginLeft: 17,
         marginTop: 5,
         fontSize: 15,
@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
         color: '#004b67'
     },
 
-    button_area: {
+    fc_button_area: {
         paddingHorizontal: 20
     },
     
-    button: {
+    fc_button: {
         backgroundColor: '#004b67',
         borderRadius: 5,
         alignItems: 'center',
@@ -93,9 +93,9 @@ const styles = StyleSheet.create({
         paddingVertical: 3
     },
 
-    button_text: {
+    fc_button_text: {
         color: 'white'
-    }
+    },
 
 })
 export default FollowedCommunties;

@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView, View, Text, Image, StyleSheet} from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
-const items = [
+const nc_items = [
     {
         image: require('../../assets/Pet_Pamper_signIn.png'),
         text: "Community 7",
@@ -36,39 +36,40 @@ const items = [
 
 function NearbyCommunities(props) {
     return (
-            
-            <ScrollView vertical>
-                {items.map((item,index) => (
-                    <View key= {index}>
-                        <View>
-                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                <View>
-                                    <Image style= {styles.image} source= {item.image}/>
-                                </View>
-
-                                <View style= {styles.text}>
-                                    <Text style= {styles.text_title}>{item.text}</Text>
-                                    <Text style= {styles.text_members}>{item.members}</Text>
-                                </View>
-
-                                <View>    
-                                    <TouchableOpacity style= {styles.button}>
-                                        <Text style={styles.button_text}>JOIN</Text>
-                                    </TouchableOpacity>
+            <View>
+                <ScrollView >
+                    {nc_items.map((nc_item, nc_index) => (
+                        <View key= {nc_index}>
+                            <View>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <View>
+                                        <Image style= {styles.nc_image} source= {nc_item.image}/>
+                                    </View>
+    
+                                    <View style= {styles.nc_text}>
+                                        <Text style= {styles.nc_text_title}>{nc_item.text}</Text>
+                                        <Text style= {styles.nc_text_members}>{nc_item.members}</Text>
+                                    </View>
+    
+                                    <View>    
+                                        <TouchableOpacity style= {styles.nc_button}>
+                                            <Text style={styles.nc_button_text}>JOIN</Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
                         </View>
-                    </View>
-                ))}
-            
-            </ScrollView>
-            
+                    ))}
+                
+                </ScrollView>
+                
+            </View>
        
     );
 }
 
 const styles = StyleSheet.create({
-    image: {
+    nc_image: {
         flexBasis: '10%',
         width: 50,
         height: 50,
@@ -79,24 +80,24 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
 
-    text: {
+    nc_text: {
         flexBasis: '60%',
         marginLeft: 17,
         marginTop: 5,
     },
 
-    text_title: {
+    nc_text_title: {
         fontSize: 17,
         fontWeight: 'bold',
         color: '#004b67'
     },
 
-    text_members: {
+    nc_text_members: {
         fontSize: 12,
         color: '#545454'
     },
 
-    button: {
+    nc_button: {
         backgroundColor: '#004b67',
         marginRight: 10,
         flexBasis: '20%',
@@ -106,10 +107,10 @@ const styles = StyleSheet.create({
         
     },
 
-    button_text: {
+    nc_button_text: {
         color: 'white',
         fontWeight: 'bold',
         fontSize: 14
-    }
+    },
 })
 export default NearbyCommunities;
