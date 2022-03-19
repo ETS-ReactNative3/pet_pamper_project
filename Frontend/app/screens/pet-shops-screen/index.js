@@ -51,7 +51,7 @@ function PetShopsScreen({navigation}) {
                         <Icon style={styles.header_icon_arrow} size={20} name="chevron-down"/>
                     </View>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
                         <Avatar.Icon style={styles.header_icon} size={40} icon="bell" />
                     </TouchableOpacity>
                 </View>

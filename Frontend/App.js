@@ -7,6 +7,7 @@ import SigninScreen from './app/screens/signin-screen';
 import ExploreScreen from './app/screens/explore-screen';
 import VeterinariesScreen from './app/screens/veterinaries-screen';
 import PetShopsScreen from './app/screens/pet-shops-screen';
+import NotificationsScreen from './app/screens/notifications-screen';
 
 const stack = createNativeStackNavigator();
 
@@ -16,6 +17,12 @@ export default function App() {
     <SafeAreaView style= {styles.AndroidSafeArea}>
       <NavigationContainer>
         <stack.Navigator>
+          <stack.Screen
+            name="Notifications"
+            component={NotificationsScreen}
+            options={{ title: '', headerShown: false }}
+          />
+          
           <stack.Screen 
             name="Home"
             component={HomeScreen}
@@ -50,6 +57,8 @@ export default function App() {
             component={PetShopsScreen}
             options={{ title: '', headerShown: false }}
           />
+          
+
         </stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

@@ -47,8 +47,7 @@ const styles = StyleSheet.create({
     header_text_area: {
         flex:3,
         paddingLeft: 90,
-        paddingTop: 10
-        
+        paddingTop: 10       
     },
 
     header_text: {
