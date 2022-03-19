@@ -9,6 +9,7 @@ import VeterinariesScreen from './app/screens/veterinaries-screen';
 import PetShopsScreen from './app/screens/pet-shops-screen';
 import NotificationsScreen from './app/screens/notifications-screen';
 import ProfileScreen from './app/screens/profile-screen';
+import EditProfileScreen from './app/screens/edit-profile-screen';
 
 const stack = createNativeStackNavigator();
 
@@ -20,8 +21,8 @@ export default function App() {
         <stack.Navigator>
           
           <stack.Screen
-            name="Profile"
-            component={ProfileScreen}
+            name="Edit Profile"
+            component={EditProfileScreen}
             options={{ title: '', headerShown: false }}
           />
 
@@ -63,6 +64,12 @@ export default function App() {
           <stack.Screen
             name="Notifications"
             component={NotificationsScreen}
+            options={{ title: '', headerShown: false }}
+          />
+          
+          <stack.Screen
+            name="Profile"
+            component={ProfileScreen}
             options={{ title: '', headerShown: false }}
           />
           
