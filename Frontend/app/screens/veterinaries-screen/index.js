@@ -106,7 +106,7 @@ function VeterinariesScreen({navigation}) {
                         <Text style= {{color:'#80f7e3'}}>Pet Shop</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={{flex: 1.}}>
+                    <TouchableOpacity style={{flex: 1.}} onPress={() => navigation.navigate('Profile')}>
                         <Icon style={styles.nav_icon_profile} color= "#80f7e3" size={30} name="user-circle-o"/>
                         <Text style= {{color:'#80f7e3'}}>Profile</Text>
                     </TouchableOpacity>
