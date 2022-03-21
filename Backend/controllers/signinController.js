@@ -17,7 +17,9 @@ exports.getUser = function(req, res) {
 
             const updateUser = user.set({
                 token: token,
-                online: true,          
+                online: true,
+                latitude: req.body.latitude,
+                longitude: req.body.longitude          
             })
 
         updateUser.save()

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
@@ -12,6 +12,12 @@ function SignupScreen({navigation}) {
     const [account_type, setAccountType] = React.useState("");
     const [status, setStatus] = React.useState("")
     const url = 'http://192.168.1.107:3000/user/signup'
+
+    useEffect(()=> {
+        if (status == 'Successful sign up!') {
+            navigation.navigate('Home')
+        }
+      }, [status])
     
     async function signup() {
  
@@ -37,11 +43,6 @@ function SignupScreen({navigation}) {
         
     }
 
-    function redirect() {
-        if (status == 'Successful sign up!') {
-            navigation.navigate('Home')
-        }
-    }
 
     return (
         <View style= {styles.backgroudArea}>
@@ -51,7 +52,7 @@ function SignupScreen({navigation}) {
 
                 <Text style= {styles.text_header}>Sign Up</Text>
 
-                <Text onChange={redirect({navigation})}>{status}</Text>
+                <Text>{status}</Text>
 
                 <View style= {styles.name}>
                     <TextInput

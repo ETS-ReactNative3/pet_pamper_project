@@ -1,13 +1,38 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
+import * as Location from 'expo-location';
 
 function SigninScreen({navigation}) {
     const [email, onChangeEmail] = React.useState("");
     const [password, onChangePassword] = React.useState("");
+    const [latitude, setLatitude] = React.useState("");
+    const [longitude, setLongitude] = React.useState("");
     const [status, setStatus] = React.useState("")
     const url = 'http://192.168.1.107:3000/user/signin'
     
+    useEffect(() => {
+        (async () => {
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+          }
+    
+          let location = await Location.getCurrentPositionAsync({});
+          setLatitude(location.coords.latitude);
+          setLongitude(location.coords.longitude);
+          
+        })();
+      }, []);
+
+      useEffect(()=> {
+        if (status == "Successful login!") {
+            navigation.navigate('Explore')
+        }
+      }, [status])
+
+
     async function signin() {
  
         let result = await fetch(url, {
@@ -19,6 +44,8 @@ function SigninScreen({navigation}) {
             body: JSON.stringify({
                 email: email,
                 password: password,
+                latitude: latitude,
+                longitude: longitude
             })
         })
 
@@ -26,12 +53,6 @@ function SigninScreen({navigation}) {
         
         setStatus(result.message)
         
-    }
-
-    function redirect() {
-        if (status == "Successful login!") {
-            navigation.navigate('Explore')
-        }
     }
 
     return (
@@ -42,7 +63,7 @@ function SigninScreen({navigation}) {
 
                 <Text style= {styles.text_header}>Sign In</Text>
 
-                <Text onChange={redirect({navigation})}>{status}</Text>
+                <Text>{status}</Text>
 
                 <TextInput
                     style= {styles.email_input}
