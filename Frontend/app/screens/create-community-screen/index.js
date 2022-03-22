@@ -1,13 +1,47 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
 import { Avatar, TextInput } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Location from 'expo-location';
+import * as ImagePicker from 'expo-image-picker';
 
 function CreateCommunityScreen({navigation}) {
-
+    const [image, setImage] = React.useState(null);
+    const [image_base64, setImageBase64] = React.useState(null);
     const [name, onChangeName] = React.useState("");
-    const [status, setStatus] = React.useState("")
+    const [status, setStatus] = React.useState("");
+    const [latitude, setLatitude] = React.useState("");
+    const [longitude, setLongitude] = React.useState("");
     const url = 'http://192.168.1.107:3000/community/createCommunity'
+
+    useEffect(() => {
+        (async () => {
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+          }
+    
+          let location = await Location.getCurrentPositionAsync({});
+          setLatitude(location.coords.latitude);
+          setLongitude(location.coords.longitude);
+        })();
+      }, []);
+
+      const pickImage = async () => {
+        
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4,3],
+            base64: true,
+            quality: 0.5,
+        });
+        
+        setImageBase64(result.base64);
+        setImage(result.uri)
+      };
+
     
     async function createCommunity() {
  
@@ -20,9 +54,9 @@ function CreateCommunityScreen({navigation}) {
             body: JSON.stringify({
                 name: name,
                 token: "", // add jwt from storage
-                image: image, //add image base64 frontend
-                latitude: latitude, // add current latitude frontend
-                longitude: longitude, // add current longitude frontend
+                image: image_base64, 
+                latitude: latitude, 
+                longitude: longitude, 
                 
             })
         })
@@ -64,16 +98,22 @@ function CreateCommunityScreen({navigation}) {
                     <TextInput
                         style= {styles.name_input}
                         mode="outlined"
-                        label="First Name"
-                        placeholder="Enter First Name"
+                        label="Community Name"
+                        placeholder="Enter Community Name"
                         onChangeText={newText => onChangeName(newText)}
-                    />
-                    
+                    /> 
 
+                    <View style={styles.picked_image_area}>
+                        <TouchableOpacity onPress={pickImage} style={styles.picked_image_button}>
+                            <Text style={styles.picked_image_text}>Choose an image</Text>
+                        </TouchableOpacity>
+                        {/* {image &&<Text>{image}</Text>} */}
+                        {image && <Image source={{ uri: image}} style={styles.picked_image} />}
+                    </View>
 
-                    <View  style={styles.button_area_edit}>
-                        <TouchableOpacity style={styles.button_edit} onPress={()=> createCommunity()}>
-                            <Text style={styles.text_edit}>UPDATE</Text>
+                    <View  style={styles.button_area_create}>
+                        <TouchableOpacity style={styles.button_create} onPress={()=> createCommunity()}>
+                            <Text style={styles.text_create}>CREATE</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -196,7 +236,7 @@ const styles = StyleSheet.create({
     },
   
 
-    button_area_edit: {
+    button_area_create: {
         borderWidth: 1,
         borderColor: '#518ef8',
         borderRadius: 7,
@@ -206,7 +246,7 @@ const styles = StyleSheet.create({
         marginTop: 30
     },
     
-    button_edit: {
+    button_create: {
         flex: 1,
         flexDirection: 'row',
         borderRadius: 5,
@@ -216,7 +256,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',   
     },
 
-    text_edit: {
+    text_create: {
         fontSize: 17,
         color: '#80f7e3',
         fontWeight: 'bold',
@@ -252,6 +292,35 @@ const styles = StyleSheet.create({
     nav_icon_profile: {
         marginLeft: 5
     },
+
+    picked_image_area: {
+        marginTop: 40, 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+    },
+
+    picked_image_button:{
+        color: 'white',
+        height: 50,
+        borderRadius: 5,
+        justifyContent: 'center',
+        backgroundColor: '#80f7e3',
+        width: '100%',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        marginBottom: 10
+    },
+
+    picked_image_text:{
+        color: 'black',
+        fontWeight: 'bold',
+    },
+
+    picked_image:{
+        borderWidth: 5,
+        width:200,
+        height: 200
+    }
 
 })
 
