@@ -10,6 +10,7 @@ import PetShopsScreen from './app/screens/pet-shops-screen';
 import NotificationsScreen from './app/screens/notifications-screen';
 import ProfileScreen from './app/screens/profile-screen';
 import EditProfileScreen from './app/screens/edit-profile-screen';
+import CreateCommunityScreen from './app/screens/create-community-screen';
 
 const stack = createNativeStackNavigator();
 
@@ -20,6 +21,11 @@ export default function App() {
       <NavigationContainer>
         <stack.Navigator>     
 
+          <stack.Screen
+            name="Create Community"
+            component={CreateCommunityScreen}
+            options={{ title: '', headerShown: false }}
+          />
           <stack.Screen 
             name="Home"
             component={HomeScreen}

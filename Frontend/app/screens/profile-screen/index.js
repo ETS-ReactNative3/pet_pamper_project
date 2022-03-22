@@ -43,7 +43,7 @@ function ProfileScreen({navigation}) {
                         <Text style={styles.edit_text}>Create community</Text>
                     </View>
 
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={()=> navigation.navigate('Create Community')}>
                         <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
                     </TouchableOpacity>
                 </View>
