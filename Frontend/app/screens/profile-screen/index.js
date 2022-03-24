@@ -4,14 +4,12 @@ import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as ImagePicker from 'expo-image-picker';
 import {useSelector, useDispatch} from 'react-redux'
-
+import {setUserImage, setUserStatus} from '../../redux/actions/user-info'
 
 function ProfileScreen({navigation}) {
     const {userToken, userFirstName, userLastName, userImage, userStatus} = useSelector(state => state.userReducer)
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     
-    const [image, setImage] = React.useState(null); 
-    const [image_base64, setImageBase64] = React.useState(null);
     const url = 'http://192.168.1.107:3000/user/image'
 
     const pickImage = async () => {
@@ -23,9 +21,7 @@ function ProfileScreen({navigation}) {
             base64: true,
             quality: 0.5,
         });
-        
-        setImageBase64(result.base64);
-        setImage(result.uri)
+        dispatch(setUserImage(result.base64))
       };
 
             
@@ -38,13 +34,13 @@ function ProfileScreen({navigation}) {
             },
             body: JSON.stringify({
                 token: userToken,
-                image: image_base64
+                image: userImage
             })
         })
 
         results = await results.json()
 
-      },[image])
+      },[userImage])
 
     
     return (
@@ -57,7 +53,7 @@ function ProfileScreen({navigation}) {
 
             <TouchableOpacity>     
                 <View style= {styles.profile_image_area}>
-                    {image == null ? <Image style= {styles.profile_image} source={require('../../assets/avatar.png')}/> : <Image style= {styles.profile_image} source={{ uri: image}}/>}
+                    {userImage == "" ? <Image style= {styles.profile_image} source={require('../../assets/avatar.png')}/> : <Image style={styles.profile_image} source= {{uri: `data:image/gif;base64,${userImage}`}}/>}
                 </View>
             </TouchableOpacity>
 
@@ -66,7 +62,7 @@ function ProfileScreen({navigation}) {
                 <Text style= {styles.user_status}>{userStatus}</Text>
             </View>
 
-            {/* A dog is the only creature that loves you more than you love yourself. */}
+            
             <View style={styles.edit_area}>
                 <View style={styles.edit}>                              
                     
