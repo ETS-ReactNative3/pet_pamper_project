@@ -9,7 +9,6 @@ import {setUserImage, setUserStatus} from '../../redux/actions/user-info'
 function ProfileScreen({navigation}) {
     const {userToken, userFirstName, userLastName, userImage, userStatus} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
-    
     const url = 'http://192.168.1.107:3000/user/image'
 
     const pickImage = async () => {
@@ -17,7 +16,7 @@ function ProfileScreen({navigation}) {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4,3],
+            aspect: [4,4],
             base64: true,
             quality: 0.5,
         });
@@ -53,7 +52,7 @@ function ProfileScreen({navigation}) {
 
             <TouchableOpacity>     
                 <View style= {styles.profile_image_area}>
-                    {userImage == "" ? <Image style= {styles.profile_image} source={require('../../assets/avatar.png')}/> : <Image style={styles.profile_image} source= {{uri: `data:image/gif;base64,${userImage}`}}/>}
+                    {userImage == undefined ? <Image style= {styles.profile_image} source={require('../../assets/avatar.png')}/> : <Image style={styles.profile_image} source= {{uri: `data:image/gif;base64,${userImage}`}}/>}
                 </View>
             </TouchableOpacity>
 

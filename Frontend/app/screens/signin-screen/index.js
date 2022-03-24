@@ -91,7 +91,6 @@ function SigninScreen({navigation}) {
         dispatch(setUserStatus(result.status))
         dispatch(setUserPassword(result.password))
 
-        console.log(userImage)
         
     }
 

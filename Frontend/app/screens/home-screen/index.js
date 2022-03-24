@@ -5,9 +5,10 @@ import SigninButton from '../../components/signinButton'
 import TextInputs from '../../components/textInput';
 
 function HomeScreen({ navigation }) {
+    
     return (
         <View style= {styles.backgroudArea}>
-            <Image style={styles.image} source={require("../../assets/Pet_Pamper_signIn.png")}/>
+            <Image style={styles.image} source={require('../../assets/Pet_Pamper_signIn.png')}/>
 
             <View style= {styles.googleButton}>
                 <View style={styles.button_area_signin}>
