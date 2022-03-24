@@ -11,7 +11,7 @@ const veterinariesController = require('../controllers/veterinariesController')
 const userInfoController = require('../controllers/userInfoController')
 const addCommunityController = require('../controllers/addCommunityController')
 const logoutController = require('../controllers/logoutController')
-// const addUserImageController = require('../controllers/addUserImageController')
+const addUserImageController = require('../controllers/addUserImageController')
 try{
 //Signup route
 app.post('/signup', body('email').isEmail(), body('password').isLength({min: 8}), (req, res) => { 
@@ -45,7 +45,7 @@ app.post('/user_info_update', userInfoController.infoUpdate)
 app.post('/add_community', addCommunityController.addCommunity)
 
 //Image update
-// app.post('/image', addUserImageController.imageUpdate)
+app.post('/image', addUserImageController.imageUpdate)
 
 //logout
 app.post('/logout', logoutController.logOut)

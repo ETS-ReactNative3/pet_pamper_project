@@ -23,7 +23,10 @@ exports.createCommunity = (req, res) => {
                     }else {
                         if(user.account_type == 'pet walker') {
                             const newCommunity = new Community({
-                                name: req.body.name                       
+                                name: req.body.name,
+                                latitude: req.body.latitude,
+                                longitude: req.body.longitude,
+                                image: req.body.image                       
                             })
 
                             newCommunity.members.push(user._id)

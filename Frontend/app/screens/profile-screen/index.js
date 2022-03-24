@@ -1,14 +1,58 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native'
 import { Avatar, TextInput } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import * as ImagePicker from 'expo-image-picker';
 
 function ProfileScreen({navigation}) {
+    const [image, setImage] = React.useState(null); 
+    const [image_base64, setImageBase64] = React.useState(null);
+    const url = 'http://192.168.1.107:3000/user/image'
+
+    const pickImage = async () => {
+        
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4,3],
+            base64: true,
+            quality: 0.5,
+        });
+        
+        setImageBase64(result.base64);
+        setImage(result.uri)
+      };
+
+            
+    useEffect(async ()=> {
+        let results = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWxpNkBnbWFpbC5jb20iLCJpYXQiOjE2NDc5NzU4MzV9.ygYJZ-K9oYH1rYmgiARtaq0_S8q4Pdl8gZmaaqKgujs",
+                image: image_base64
+            })
+        })
+
+        results = await results.json()
+
+      },[image])
+
+    
     return (
         <View style={styles.background}>
+
+            <TouchableOpacity onPress={pickImage} style={styles.edit_image_icon}>
+                <Icon  color="black" size={25} name="edit" />
+            </TouchableOpacity>
+
+
             <TouchableOpacity>     
                 <View style= {styles.profile_image_area}>
-                    <Image style= {styles.profile_image} source={require('../../assets/Pet_Pamper_signIn.png')}/>
+                    {image == null ? <Image style= {styles.profile_image} source={require('../../assets/avatar.png')}/> : <Image style= {styles.profile_image} source={{ uri: image}}/>}
                 </View>
             </TouchableOpacity>
 
@@ -87,7 +131,7 @@ const styles = StyleSheet.create({
     profile_image_area: {
         width: '100%',
         height: 200,
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     profile_image: {
@@ -147,6 +191,13 @@ const styles = StyleSheet.create({
         marginLeft: 24
     },
     
+    edit_image_icon: {
+        position: 'absolute',
+        left: 327,
+        top: 5,
+        zIndex: 1, 
+    },
+
     create_user_icon: {
         backgroundColor: 'white',
         marginLeft: 20

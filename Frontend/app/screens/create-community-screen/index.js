@@ -12,7 +12,7 @@ function CreateCommunityScreen({navigation}) {
     const [status, setStatus] = React.useState("");
     const [latitude, setLatitude] = React.useState("");
     const [longitude, setLongitude] = React.useState("");
-    const url = 'http://192.168.1.107:3000/community/createCommunity'
+    const url = 'http://192.168.1.107:3000/community/create_community'
 
     useEffect(() => {
         (async () => {
@@ -53,7 +53,7 @@ function CreateCommunityScreen({navigation}) {
             },
             body: JSON.stringify({
                 name: name,
-                token: "", // add jwt from storage
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWxpNkBnbWFpbC5jb20iLCJpYXQiOjE2NDc5NzU4MzV9.ygYJZ-K9oYH1rYmgiARtaq0_S8q4Pdl8gZmaaqKgujs", // add jwt from storage
                 image: image_base64, 
                 latitude: latitude, 
                 longitude: longitude, 
@@ -157,7 +157,6 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         width: '100%',
         height: 100,
-    
     },
     
     header: {
@@ -171,7 +170,7 @@ const styles = StyleSheet.create({
 
     header_text_area: {
         flex:3,
-        paddingLeft: 75,
+        paddingLeft: 50,
         paddingTop: 10       
     },
 
@@ -204,7 +203,7 @@ const styles = StyleSheet.create({
 
     header_icon_arrow: {
         color: '#004b67',
-        marginLeft: 24,
+        marginLeft: 50,
         marginTop: 0
     },
 

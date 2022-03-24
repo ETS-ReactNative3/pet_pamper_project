@@ -22,15 +22,17 @@ export default function App() {
         <stack.Navigator>     
 
           <stack.Screen
-            name="Create Community"
-            component={CreateCommunityScreen}
+            name="Profile"
+            component={ProfileScreen}
             options={{ title: '', headerShown: false }}
           />
+            
           <stack.Screen 
             name="Home"
             component={HomeScreen}
             options={{ title: '', headerShown: false }}
           />
+
         <stack.Screen
             name="Sign Up"
             component={SignupScreen}
@@ -67,11 +69,6 @@ export default function App() {
             options={{ title: '', headerShown: false }}
           />
           
-          <stack.Screen
-            name="Profile"
-            component={ProfileScreen}
-            options={{ title: '', headerShown: false }}
-          />
           
           <stack.Screen
             name="Edit Profile"
@@ -79,6 +76,11 @@ export default function App() {
             options={{ title: '', headerShown: false }}
           />
 
+          <stack.Screen
+            name="Create Community"
+            component={CreateCommunityScreen}
+            options={{ title: '', headerShown: false }}
+          />
         </stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
