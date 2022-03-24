@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
 import * as Location from 'expo-location';
 import {useSelector, useDispatch} from 'react-redux'
-import {setUserToken, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus} from '../../redux/actions/user-info'
+import {setUserToken, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus, setUserPassword} from '../../redux/actions/user-info'
 
 function SigninScreen({navigation}) {
     const {userToken, userCommunities, userFirstName, userLastName, userLatitude, userLongitude, userImage, userStatus} = useSelector(state => state.userReducer)
@@ -89,6 +89,7 @@ function SigninScreen({navigation}) {
         dispatch(setUserLongitude(result.longitude))
         dispatch(setUserImage(result.image))
         dispatch(setUserStatus(result.status))
+        dispatch(setUserPassword(result.password))
 
         
     }

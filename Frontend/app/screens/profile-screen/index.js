@@ -4,15 +4,12 @@ import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as ImagePicker from 'expo-image-picker';
 import {useSelector, useDispatch} from 'react-redux'
-import {setUserToken, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus} from '../../redux/actions/user-info'
+
 
 function ProfileScreen({navigation}) {
-    const {userToken, userCommunities, userFirstName, userLastName, userLatitude, userLongitude, userImage, userStatus} = useSelector(state => state.userReducer)
-    const dispatch = useDispatch()
+    const {userToken, userFirstName, userLastName, userImage, userStatus} = useSelector(state => state.userReducer)
+    // const dispatch = useDispatch()
     
-    console.log(userFirstName)
-    console.log(userLastName)
-    console.log(userToken)
     const [image, setImage] = React.useState(null); 
     const [image_base64, setImageBase64] = React.useState(null);
     const url = 'http://192.168.1.107:3000/user/image'
@@ -65,10 +62,11 @@ function ProfileScreen({navigation}) {
             </TouchableOpacity>
 
             <View>
-                <Text style= {styles.user_name}>Ali Azzam</Text>
-                <Text style= {styles.user_status}>A dog is the only creature that loves you more than you love yourself.</Text>
+                <Text style= {styles.user_name}>{userFirstName} {userLastName}</Text>
+                <Text style= {styles.user_status}>{userStatus}</Text>
             </View>
 
+            {/* A dog is the only creature that loves you more than you love yourself. */}
             <View style={styles.edit_area}>
                 <View style={styles.edit}>                              
                     

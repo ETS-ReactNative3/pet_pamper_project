@@ -2,12 +2,13 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
+import {setUserLastName, setUserFirstName, setUserPassword} from '../../redux/actions/user-info'
+import {useSelector, useDispatch} from 'react-redux'
 
 function EditProfileScreen({navigation}) {
-
-    const [first_name, onChangeFirstName] = React.useState("");
-    const [last_name, onChangeLastName] = React.useState("");
-    const [password, onChangePassword] = React.useState("");
+    const {userToken, userFirstName, userLastName, userPassword} = useSelector(state => state.userReducer)
+    const dispatch = useDispatch()
+    
     const [status, setStatus] = React.useState("")
     const url = 'http://192.168.1.107:3000/user/user_info_update'
     
@@ -20,17 +21,16 @@ function EditProfileScreen({navigation}) {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                first_name: first_name,
-                last_name: last_name,
-                password: password,
-                token: ""
+                first_name: userFirstName,
+                last_name: userLastName,
+                password: userPassword,
+                token: userToken
             })
         })
 
         result = await result.json()
         
         setStatus(result.message)
-        
     }
 
 
@@ -66,7 +66,8 @@ function EditProfileScreen({navigation}) {
                         mode="outlined"
                         label="First Name"
                         placeholder="Enter First Name"
-                        onChangeText={newText => onChangeFirstName(newText)}
+                        value ={userFirstName}
+                        onChangeText={newText => dispatch(setUserFirstName(newText))}
                     />
                     
                     <TextInput
@@ -74,15 +75,17 @@ function EditProfileScreen({navigation}) {
                         mode="outlined"
                         label="Last Name"
                         placeholder="Enter Last Name"
-                        onChangeText={newText => onChangeLastName(newText)}
+                        value ={userLastName}
+                        onChangeText={newText => dispatch(setUserLastName(newText))}
                     />
 
                     <TextInput
                         style= {styles.password_input}
                         label="Password"
                         mode="outlined"
-                        secureTextEntry= {true}
-                        onChangeText= {newText => onChangePassword(newText)}
+                        // secureTextEntry= {true}
+                        onChangeText= {newText => dispatch(setUserPassword(newText))}
+                        value ={userPassword}
                         placeholder="Enter Password"
                     />
 

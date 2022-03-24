@@ -1,4 +1,4 @@
-import {ADD_USER_INFO, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_IMAGE, SET_USER_LATITUDE, SET_USER_LONGITUDE,SET_USER_STATUS} from '../constants'
+import {ADD_USER_INFO, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_IMAGE, SET_USER_LATITUDE, SET_USER_LONGITUDE,SET_USER_STATUS, SET_USER_PASSWORD} from '../constants'
 
 // export function addUserinfo(user_info) {
 //     return {
@@ -60,5 +60,12 @@ export const setUserStatus = userStatus => dispatch => {
     dispatch({
         type: SET_USER_STATUS,
         payload: userStatus 
+    }) 
+}
+
+export const setUserPassword = userPassword => dispatch => {
+    dispatch({
+        type: SET_USER_PASSWORD,
+        payload: userPassword 
     }) 
 }

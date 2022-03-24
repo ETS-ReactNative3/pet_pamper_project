@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 exports.getUser = function(req, res) {
     //Search for the using email and password attributes
-    User.findOne({email: req.body.email, password: req.body.password}, {first_name:1, last_name:1, email:1, status:1, online:1, token:1, account_type:1, image:1, latitude:1, longitude:1, communities:1}).then((user)=>{
+    User.findOne({email: req.body.email, password: req.body.password}, {first_name:1, last_name:1, email:1, status:1, online:1, token:1, account_type:1, image:1, latitude:1, longitude:1, communities:1, password: 1}).then((user)=>{
         
         // check if the user entered an invalid email/password or return user information
         if (!user) {
