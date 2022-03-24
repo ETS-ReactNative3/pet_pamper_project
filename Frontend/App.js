@@ -11,79 +11,83 @@ import NotificationsScreen from './app/screens/notifications-screen';
 import ProfileScreen from './app/screens/profile-screen';
 import EditProfileScreen from './app/screens/edit-profile-screen';
 import CreateCommunityScreen from './app/screens/create-community-screen';
+import { Provider } from 'react-redux';
+import { Store } from './app/redux/store';
 
 const stack = createNativeStackNavigator();
 
 export default function App() {
   console.log("App Executed")
   return (
-    <SafeAreaView style= {styles.AndroidSafeArea}>
-      <NavigationContainer>
-        <stack.Navigator>     
+    <Provider store={Store}>
+      <SafeAreaView style= {styles.AndroidSafeArea}>
+        <NavigationContainer>
+          <stack.Navigator>     
 
-          <stack.Screen
-            name="Profile"
-            component={ProfileScreen}
-            options={{ title: '', headerShown: false }}
-          />
-            
-          <stack.Screen 
-            name="Home"
-            component={HomeScreen}
-            options={{ title: '', headerShown: false }}
-          />
-
-        <stack.Screen
-            name="Sign Up"
-            component={SignupScreen}
-            options={{ title: '' }}
-          />
-
-        <stack.Screen
-            name="Sign In"
-            component={SigninScreen}
-            options={{ title: '' }}
-          />
-
-          <stack.Screen
-              name="Explore"
-              component={ExploreScreen}
+            <stack.Screen 
+              name="Home"
+              component={HomeScreen}
               options={{ title: '', headerShown: false }}
             />
 
           <stack.Screen
-            name="Veterinaries"
-            component={VeterinariesScreen}
-            options={{ title: '', headerShown: false }}
-          />      
-          
-          <stack.Screen
-            name="Pet Shops"
-            component={PetShopsScreen}
-            options={{ title: '', headerShown: false }}
-          />
-          
-          <stack.Screen
-            name="Notifications"
-            component={NotificationsScreen}
-            options={{ title: '', headerShown: false }}
-          />
-          
-          
-          <stack.Screen
-            name="Edit Profile"
-            component={EditProfileScreen}
-            options={{ title: '', headerShown: false }}
-          />
+              name="Sign Up"
+              component={SignupScreen}
+              options={{ title: '' }}
+            />
 
           <stack.Screen
-            name="Create Community"
-            component={CreateCommunityScreen}
-            options={{ title: '', headerShown: false }}
-          />
-        </stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+              name="Sign In"
+              component={SigninScreen}
+              options={{ title: '' }}
+            />
+
+            <stack.Screen
+                name="Explore"
+                component={ExploreScreen}
+                options={{ title: '', headerShown: false }}
+              />
+
+            <stack.Screen
+              name="Veterinaries"
+              component={VeterinariesScreen}
+              options={{ title: '', headerShown: false }}
+            />      
+            
+            <stack.Screen
+              name="Pet Shops"
+              component={PetShopsScreen}
+              options={{ title: '', headerShown: false }}
+            />
+            
+            <stack.Screen
+              name="Notifications"
+              component={NotificationsScreen}
+              options={{ title: '', headerShown: false }}
+            />
+            
+            <stack.Screen
+              name="Profile"
+              component={ProfileScreen}
+              options={{ title: '', headerShown: false }}
+            />
+            
+            <stack.Screen
+              name="Edit Profile"
+              component={EditProfileScreen}
+              options={{ title: '', headerShown: false }}
+            />
+
+            <stack.Screen
+              name="Create Community"
+              component={CreateCommunityScreen}
+              options={{ title: '', headerShown: false }}
+            />
+
+          </stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </Provider>
   );
 }
 

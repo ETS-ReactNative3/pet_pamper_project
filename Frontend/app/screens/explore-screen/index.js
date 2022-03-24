@@ -73,6 +73,7 @@ const nc_items = [
     },
 ];
 
+
 function ExploreScreen({ navigation }) {
     return (
         <View style={styles.background}>

@@ -2,8 +2,13 @@ import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
 import * as Location from 'expo-location';
+import {useSelector, useDispatch} from 'react-redux'
+import {setUserToken, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus} from '../../redux/actions/user-info'
 
 function SigninScreen({navigation}) {
+    const {userToken, userCommunities, userFirstName, userLastName, userLatitude, userLongitude, userImage, userStatus} = useSelector(state => state.userReducer)
+    const dispatch = useDispatch()
+
     const [email, onChangeEmail] = React.useState("");
     const [password, onChangePassword] = React.useState("");
     const [latitude, setLatitude] = React.useState("");
@@ -12,6 +17,8 @@ function SigninScreen({navigation}) {
     // const [communities, setCommunities] = React.useState("")
     const url = 'http://192.168.1.107:3000/user/signin'
     // const url2 = 'http://192.168.1.107:3000/user/communities'
+
+  
 
     useEffect(() => {
         (async () => {
@@ -71,7 +78,19 @@ function SigninScreen({navigation}) {
         result = await result.json()
         
         setStatus(result.message)
-       
+
+ 
+
+        dispatch(setUserToken(result.token))
+        dispatch(setUserCommunities(result.communities))
+        dispatch(setUserFirstName(result.first_name))
+        dispatch(setUserLastName(result.last_name))
+        dispatch(setUserLatitude(result.latitude))
+        dispatch(setUserLongitude(result.longitude))
+        dispatch(setUserImage(result.image))
+        dispatch(setUserStatus(result.status))
+
+        
     }
 
     return (

@@ -3,8 +3,16 @@ import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as ImagePicker from 'expo-image-picker';
+import {useSelector, useDispatch} from 'react-redux'
+import {setUserToken, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus} from '../../redux/actions/user-info'
 
 function ProfileScreen({navigation}) {
+    const {userToken, userCommunities, userFirstName, userLastName, userLatitude, userLongitude, userImage, userStatus} = useSelector(state => state.userReducer)
+    const dispatch = useDispatch()
+    
+    console.log(userFirstName)
+    console.log(userLastName)
+    console.log(userToken)
     const [image, setImage] = React.useState(null); 
     const [image_base64, setImageBase64] = React.useState(null);
     const url = 'http://192.168.1.107:3000/user/image'
@@ -32,7 +40,7 @@ function ProfileScreen({navigation}) {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWxpNkBnbWFpbC5jb20iLCJpYXQiOjE2NDc5NzU4MzV9.ygYJZ-K9oYH1rYmgiARtaq0_S8q4Pdl8gZmaaqKgujs",
+                token: userToken,
                 image: image_base64
             })
         })
