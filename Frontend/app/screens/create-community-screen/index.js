@@ -4,8 +4,10 @@ import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Location from 'expo-location';
 import * as ImagePicker from 'expo-image-picker';
+import {useSelector} from 'react-redux'
 
 function CreateCommunityScreen({navigation}) {
+    const {userToken} = useSelector(state => state.userReducer)
     const [image, setImage] = React.useState(null);
     const [image_base64, setImageBase64] = React.useState(null);
     const [name, onChangeName] = React.useState("");
@@ -53,7 +55,7 @@ function CreateCommunityScreen({navigation}) {
             },
             body: JSON.stringify({
                 name: name,
-                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWxpNkBnbWFpbC5jb20iLCJpYXQiOjE2NDc5NzU4MzV9.ygYJZ-K9oYH1rYmgiARtaq0_S8q4Pdl8gZmaaqKgujs", // add jwt from storage
+                token: userToken,
                 image: image_base64, 
                 latitude: latitude, 
                 longitude: longitude, 
