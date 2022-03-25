@@ -6,7 +6,7 @@ import NavigationBar from '../../components/navigationBar'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
-import {setUserFollowedCommunities} from '../../redux/actions/user-info'
+import {setUserNearbyVeterinaries} from '../../redux/actions/user-info'
 
 
 const nv_items = [
@@ -41,10 +41,28 @@ const nv_items = [
 ];
 
 function VeterinariesScreen({navigation}) {
-    const {userToken, userImage} = useSelector(state => state.userReducer)
+    const {userToken, userImage, userNearbyVeterinaries, userLatitude, userLongitude} = useSelector(state => state.userReducer)
+    const dispatch= useDispatch()
+    const url = 'http://192.168.1.107:3000/user/veterinaries'
 
+    React.useEffect(async ()=> {
+        let result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({})
+        })
 
+        result = await result.json()
+        console.log(result)
+        const nearby_veterinaries = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 )
+        dispatch(setUserNearbyVeterinaries(nearby_veterinaries))
+        
+      }, []);
 
+      const nv_items = userNearbyVeterinaries
 
 
 
@@ -77,12 +95,12 @@ function VeterinariesScreen({navigation}) {
                             <View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View>
-                                        <Image style= {styles.nv_image} source= {nv_item.image}/>
+                                        <Image style= {styles.nv_image} source= {{uri: `data:image/gif;base64,${nv_item.image}`}}/>
                                     </View>
 
                                     <View style= {styles.nv_text}>
-                                        <Text style= {styles.nv_text_title}>{nv_item.text}</Text>
-                                        <Text style= {styles.nv_text_location}>{nv_item.location}</Text>
+                                        <Text style= {styles.nv_text_title}>{nv_item.first_name}</Text>
+                                        {/* <Text style= {styles.nv_text_location}>{nv_item.location}</Text> */}
                                     </View>
 
                                     <View>    
@@ -174,7 +192,7 @@ const styles = StyleSheet.create({
         width: '70%',
         height: '70%',
         resizeMode: 'contain',
-        borderRadius: 200
+        borderRadius: 200,
     },
 
     header_icon: {
@@ -202,7 +220,7 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 10,
-        borderColor: 'white',
+        borderColor: '#004b67',
         borderWidth: 2,
         marginTop: 10,
         marginLeft: 10,
