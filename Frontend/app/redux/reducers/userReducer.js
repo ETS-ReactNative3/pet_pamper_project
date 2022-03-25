@@ -1,21 +1,5 @@
-import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES} from '../constants';
+import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS} from '../constants';
 
-// const initial_state = {};
-
-// const userReducer = (state = initial_state, action) => {
-//     switch(action.type) {
-
-//         case ADD_USER_INFO:
-//             return {
-//                 ...state,
-//                 user_info: action.payload
-//             };
-
-//         default:
-//             return state;
-//     }
-// }
-//     export default userReducer;
 
 const initial_state = {
     userToken: "",
@@ -28,7 +12,8 @@ const initial_state = {
     userStatus: "",
     userPassword: "",
     userFollowedCommunities: [],
-    userNearbyVeterinaries: []
+    userNearbyVeterinaries: [],
+    userNearbyPetShops: []
 };
 
 const userReducer = (state = initial_state, action) => {
@@ -98,6 +83,12 @@ const userReducer = (state = initial_state, action) => {
             return {
                 ...state,
                 userNearbyVeterinaries: action.payload
+            };
+        
+        case SET_USER_NEARBY_PET_SHOPS:
+            return {
+                ...state,
+                userNearbyPetShops: action.payload
             };
 
         default:

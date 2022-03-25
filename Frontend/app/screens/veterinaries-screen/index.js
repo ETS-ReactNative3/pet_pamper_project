@@ -9,37 +9,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import {setUserNearbyVeterinaries} from '../../redux/actions/user-info'
 
 
-const nv_items = [
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Veterinary 1",
-        location: "Hamra"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Veterinary 2",
-        location: "Bliss"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Veterinary 3",
-        location: "Verdun"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Veterinary 4",
-        location: "Kraytem"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Veterinary 5",
-        location: "Rawshe"    },
-];
-
 function VeterinariesScreen({navigation}) {
     const {userToken, userImage, userNearbyVeterinaries, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
@@ -56,7 +25,7 @@ function VeterinariesScreen({navigation}) {
         })
 
         result = await result.json()
-        console.log(result)
+        
         const nearby_veterinaries = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 )
         dispatch(setUserNearbyVeterinaries(nearby_veterinaries))
         

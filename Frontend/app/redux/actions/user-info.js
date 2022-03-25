@@ -1,4 +1,4 @@
-import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_IMAGE, SET_USER_LATITUDE, SET_USER_LONGITUDE,SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES} from '../constants'
+import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_IMAGE, SET_USER_LATITUDE, SET_USER_LONGITUDE,SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS} from '../constants'
 
 // export function addUserinfo(user_info) {
 //     return {
@@ -81,5 +81,12 @@ export const setUserNearbyVeterinaries = userNearbyVeterinaries => dispatch => {
     dispatch({
         type: SET_USER_NEARBY_VETERINARIES,
         payload: userNearbyVeterinaries 
+    }) 
+}
+
+export const setUserNearbyPetShops = userNearbyPetShops => dispatch => {
+    dispatch({
+        type: SET_USER_NEARBY_PET_SHOPS,
+        payload: userNearbyPetShops 
     }) 
 }

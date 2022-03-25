@@ -5,7 +5,8 @@ import NearbyPetShops from '../../components/nearbyPetShops'
 import NavigationBar from '../../components/navigationBar'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {setUserNearbyPetShops} from '../../redux/actions/user-info'
 
 const nps_items = [
     {
@@ -39,7 +40,29 @@ const nps_items = [
 ];
 
 function PetShopsScreen({navigation}) {
-    const {userToken, userImage} = useSelector(state => state.userReducer)
+    const {userToken, userImage, userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
+    const dispatch= useDispatch()
+    const url = 'http://192.168.1.107:3000/user/pet_shops'
+
+    React.useEffect(async ()=> {
+        let result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({})
+        })
+
+        result = await result.json()
+        console.log(userNearbyPetShops)
+        const nearby_pet_shops = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 )
+        dispatch(setUserNearbyPetShops(nearby_pet_shops))
+        
+      }, []);
+
+      const nps_items = userNearbyPetShops
+
     return (
         <View style={styles.background}>
             <View style={styles.header_area}>
@@ -69,12 +92,12 @@ function PetShopsScreen({navigation}) {
                             <View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View>
-                                        <Image style= {styles.nps_image} source= {nps_item.image}/>
+                                        <Image style= {styles.nps_image} source= {{uri: `data:image/gif;base64,${nps_item.image}`}}/>
                                     </View>
 
                                     <View style= {styles.nps_text}>
-                                        <Text style= {styles.nps_text_title}>{nps_item.text}</Text>
-                                        <Text style= {styles.nps_text_location}>{nps_item.location}</Text>
+                                        <Text style= {styles.nps_text_title}>{nps_item.first_name}</Text>
+                                        {/* <Text style= {styles.nps_text_location}>{nps_item.location}</Text> */}
                                     </View>
 
                                     <View>    
@@ -193,7 +216,7 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 10,
-        borderColor: 'white',
+        borderColor: '#004b67',
         borderWidth: 2,
         marginTop: 10,
         marginLeft: 10,
