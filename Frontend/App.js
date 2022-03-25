@@ -42,11 +42,11 @@ export default function App() {
               options={{ title: '' }}
             />
 
-            <stack.Screen
-                name="Explore"
-                component={ExploreScreen}
-                options={{ title: '', headerShown: false }}
-              />
+          <stack.Screen
+              name="Explore"
+              component={ExploreScreen}
+              options={{ title: '', headerShown: false }}
+            />
 
             <stack.Screen
               name="Veterinaries"

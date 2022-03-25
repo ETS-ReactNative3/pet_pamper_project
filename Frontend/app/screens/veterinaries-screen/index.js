@@ -5,7 +5,9 @@ import NearbyVeterinaries from '../../components/nearbyVeterinaries'
 import NavigationBar from '../../components/navigationBar'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {setUserFollowedCommunities} from '../../redux/actions/user-info'
+
 
 const nv_items = [
     {
@@ -40,6 +42,12 @@ const nv_items = [
 
 function VeterinariesScreen({navigation}) {
     const {userToken, userImage} = useSelector(state => state.userReducer)
+
+
+
+
+
+
     return (
         <View style={styles.background}>
          

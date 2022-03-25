@@ -16,7 +16,6 @@ function SigninScreen({navigation}) {
     const [status, setStatus] = React.useState("")
     // const [communities, setCommunities] = React.useState("")
     const url = 'http://192.168.1.107:3000/user/signin'
-    // const url2 = 'http://192.168.1.107:3000/user/communities'
 
   
 
@@ -41,22 +40,6 @@ function SigninScreen({navigation}) {
         }
       }, [status])
 
-    //   useEffect(async ()=> {
-    //     let results = await fetch(url2, {
-    //         method: 'POST',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             communities: communities
-    //         })
-    //     })
-
-    //     results = await results.json()
-    //     console.log(results)
-
-    //   },[communities])
 
 
     async function signin() {
@@ -77,7 +60,7 @@ function SigninScreen({navigation}) {
 
         result = await result.json()
         
-        setStatus(result.message)
+        
 
  
 
@@ -90,10 +73,10 @@ function SigninScreen({navigation}) {
         dispatch(setUserImage(result.image))
         dispatch(setUserStatus(result.status))
         dispatch(setUserPassword(result.password))
-
+        setStatus(result.message)
         
     }
-
+    
     return (
         <View style= {styles.backgroudArea}>
 

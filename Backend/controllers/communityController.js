@@ -21,7 +21,7 @@ exports.createCommunity = (req, res) => {
                     if (community) {
                         return res.status(400).json({message: "name already exists"})
                     }else {
-                        if(user.account_type == 'pet walker') {
+                        if(user.account_type == 'Pet Walker') {
                             const newCommunity = new Community({
                                 name: req.body.name,
                                 latitude: req.body.latitude,

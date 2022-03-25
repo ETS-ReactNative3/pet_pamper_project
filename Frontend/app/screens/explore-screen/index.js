@@ -6,41 +6,9 @@ import NearbyCommunities from '../../components/nearbyCommunities'
 import NavigationBar from '../../components/navigationBar'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {setUserFollowedCommunities} from '../../redux/actions/user-info'
 
-const fc_items = [
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 1"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 2"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 3"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 4"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 5"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 6"
-    },
-
-    
-];
 
 const nc_items = [
     {
@@ -76,7 +44,33 @@ const nc_items = [
 
 
 function ExploreScreen({ navigation }) {
-    const {userToken, userImage} = useSelector(state => state.userReducer)
+
+    const {userToken, userImage, userCommunities, userFollowedCommunities, userLatitude, userLongitude} = useSelector(state => state.userReducer)
+    const dispatch= useDispatch()
+    const url = 'http://192.168.1.107:3000/user/communities'
+
+    React.useEffect(async ()=> {
+            let result = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    communities: userCommunities
+                })
+            })
+    
+            result = await result.json()
+            const nearby_followed_communities = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 )
+            dispatch(setUserFollowedCommunities(nearby_followed_communities))
+            
+          }, [userCommunities]);
+
+          const fc_items = userFollowedCommunities
+          
+
+      
     return (
         <View style={styles.background}>
             <View style={styles.header_area}>
@@ -102,10 +96,10 @@ function ExploreScreen({ navigation }) {
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     {fc_items.map((fc_item, fc_index) => (
                         <View key= {fc_index} >
-                            <TouchableOpacity>
-                                <Image style= {styles.fc_image} source= {fc_item.image}/>
+                            <TouchableOpacity style={{alignItems: 'center'}}>
+                                <Image style= {styles.fc_image} source= {{uri: `data:image/gif;base64,${fc_item.image}`}}/>
 
-                                <Text style= {styles.fc_text}>{fc_item.text}</Text>
+                                <Text style= {styles.fc_text}>{fc_item.name}</Text>
                                 <View style={styles.fc_button_area}>
                                     <View style={styles.fc_button}>
                                         <Text style={styles.fc_button_text}>PING</Text>
@@ -257,7 +251,7 @@ const styles = StyleSheet.create({
     },
 
     fc_text: {
-        marginLeft: 17,
+        marginLeft: 10,
         marginTop: 5,
         fontSize: 15,
         fontWeight: 'bold',
@@ -276,7 +270,8 @@ const styles = StyleSheet.create({
         zIndex: 2,
         top: -86,
         left: 5,
-        paddingVertical: 3
+        paddingVertical: 3,
+        paddingHorizontal: 15
     },
 
     fc_button_text: {

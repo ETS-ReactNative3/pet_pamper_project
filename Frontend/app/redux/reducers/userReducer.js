@@ -1,4 +1,4 @@
-import {ADD_USER_INFO, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD} from '../constants';
+import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES} from '../constants';
 
 // const initial_state = {};
 
@@ -26,7 +26,9 @@ const initial_state = {
     userLongitude: "",
     userImage: "",
     userStatus: "",
-    userPassword: ""
+    userPassword: "",
+    userFollowedCommunities: [],
+    userNearbyVeterinaries: []
 };
 
 const userReducer = (state = initial_state, action) => {
@@ -84,6 +86,18 @@ const userReducer = (state = initial_state, action) => {
             return {
                 ...state,
                 userPassword: action.payload
+            };
+        
+        case SET_USER_FOLLOWED_COMMUNITIES:
+            return {
+                ...state,
+                userFollowedCommunities: action.payload
+            };
+        
+        case SET_USER_NEARBY_VETERINARIES:
+            return {
+                ...state,
+                userNearbyVeterinaries: action.payload
             };
 
         default:

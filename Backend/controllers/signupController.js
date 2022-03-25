@@ -4,7 +4,7 @@ const User = require('../models/User')
 exports.addUser = (req, res) => { 
     //Check if any of the fields is missing
     try {
-        if (!req.body.first_name || !req.body.last_name || !req.body.email || !req.body.password || !req.body.phone_number || !req.body.account_type) {
+        if (!req.body.first_name || !req.body.email || !req.body.password || !req.body.phone_number || !req.body.account_type) {
             return res.status(400).json({message: "Please don't leave any field empty"})
         }
     } catch (err) {
