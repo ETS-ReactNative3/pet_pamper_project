@@ -8,37 +8,9 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
 import {setUserNearbyPetShops} from '../../redux/actions/user-info'
 import * as Location from 'expo-location';
+import * as Linking from 'expo-linking'
 
-const nps_items = [
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Pet Shop 1",
-        location: "Hamra"
-    },
 
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Pet Shop 2",
-        location: "Bliss"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Pet Shop 3",
-        location: "Verdun"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Pet Shop 4",
-        location: "Kraytem"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Pet Shop 5",
-        location: "Rawshe"    },
-];
 
 function PetShopsScreen({navigation}) {
     const {userToken, userImage, userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)

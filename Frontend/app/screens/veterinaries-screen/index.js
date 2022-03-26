@@ -7,7 +7,7 @@ import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
 import {setUserNearbyVeterinaries} from '../../redux/actions/user-info'
-
+import * as Linking from 'expo-linking'
 
 function VeterinariesScreen({navigation}) {
     const {userToken, userImage, userNearbyVeterinaries, userLatitude, userLongitude} = useSelector(state => state.userReducer)
@@ -33,7 +33,18 @@ function VeterinariesScreen({navigation}) {
 
       const nv_items = userNearbyVeterinaries
 
+    function locateVeterinary(nv_item) {
+        const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+        const latLng = `${nv_item.latitude},${nv_item.longitude}`;
+        const label = 'Custom Label';
+        const url = Platform.select({
+        ios: `${scheme}${label}@${latLng}`,
+        android: `${scheme}${latLng}(${label})`
+        });
 
+            
+        Linking.openURL(url);
+    }
 
     return (
         <View style={styles.background}>
@@ -73,7 +84,7 @@ function VeterinariesScreen({navigation}) {
                                     </View>
 
                                     <View>    
-                                        <TouchableOpacity style= {styles.nv_button}>
+                                        <TouchableOpacity style= {styles.nv_button} onPress= {()=> locateVeterinary(nv_item)}>
                                             <Text style={styles.nv_button_text}>LOCATE</Text>
                                         </TouchableOpacity>
                                     </View>
