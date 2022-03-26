@@ -11,7 +11,6 @@ import * as Location from 'expo-location';
 import * as Linking from 'expo-linking'
 
 
-
 function PetShopsScreen({navigation}) {
     const {userToken, userImage, userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
@@ -36,6 +35,19 @@ function PetShopsScreen({navigation}) {
 
       const nps_items = userNearbyPetShops
 
+
+    function locatePetShop(nps_item) {
+        const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+        const latLng = `${nps_item.latitude},${nps_item.longitude}`;
+        const label = 'Custom Label';
+        const url = Platform.select({
+        ios: `${scheme}${label}@${latLng}`,
+        android: `${scheme}${latLng}(${label})`
+        });
+
+            
+        Linking.openURL(url);
+    }
 
     //   React.useEffect(async () => {
     //       const location = await Location.reverseGeocodeAsync({latitude: 33.885351, longitude: 35.483362})
@@ -79,7 +91,7 @@ function PetShopsScreen({navigation}) {
                                     </View>
 
                                     <View>    
-                                        <TouchableOpacity style= {styles.nps_button}>
+                                        <TouchableOpacity style= {styles.nps_button} onPress= {()=> locatePetShop(nps_item)}>
                                             <Text style={styles.nps_button_text}>LOCATE</Text>
                                         </TouchableOpacity>
                                     </View>
