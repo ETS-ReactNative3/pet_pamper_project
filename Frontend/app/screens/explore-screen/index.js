@@ -7,51 +7,20 @@ import NavigationBar from '../../components/navigationBar'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
-import {addUserFollowedCommunity, setUserFollowedCommunities, setUserUnFollowedCommunities} from '../../redux/actions/user-info'
+import {addUserFollowedCommunity, removeUserUnfollowedCommunity, setUserFollowedCommunities, setUserUnFollowedCommunities} from '../../redux/actions/user-info'
 
-
-const nc_items = [
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 7",
-        members: "256 members"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 8",
-        members: "72 members"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 9",
-        members: "15 members"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 10",
-        members: "10 members"
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Community 11",
-        members: "4 members"
-    },
-];
 
 
 function ExploreScreen({ navigation }) {
 
     const {userToken, userImage, userCommunities, userFollowedCommunities, userUnFollowedCommunities, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
-    const url_1 = 'http://192.168.1.107:3000/user/communities'
-    const url_2 = 'http://192.168.1.107:3000/user/all_communities'
+    const url_followed_communities = 'http://192.168.1.107:3000/user/communities'
+    const url_all_communities = 'http://192.168.1.107:3000/user/all_communities'
+    const url_add_community = 'http://192.168.1.107:3000/user/add_community'
 
     React.useEffect(async ()=> {
-            let result = await fetch(url_1, {
+            let result = await fetch(url_followed_communities, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -67,11 +36,11 @@ function ExploreScreen({ navigation }) {
             dispatch(setUserFollowedCommunities(nearby_followed_communities))
             
           }, [userCommunities]);
-        //   console.log(userFollowedCommunities)
+        
           const fc_items = userFollowedCommunities
     
     React.useEffect(async ()=> {
-            let result = await fetch(url_2, {
+            let result = await fetch(url_all_communities, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -89,6 +58,7 @@ function ExploreScreen({ navigation }) {
           const nc_items = userUnFollowedCommunities
           
 
+     
       
     return (
         <View style={styles.background}>
@@ -148,7 +118,7 @@ function ExploreScreen({ navigation }) {
                                     </View>
     
                                     <View>    
-                                        <TouchableOpacity style= {styles.nc_button} onPress={()=> dispatch(addUserFollowedCommunity(nc_item))}>
+                                        <TouchableOpacity style= {styles.nc_button} onPress={()=> addCommunity(nc_item)}>
                                             <Text style={styles.nc_button_text}>JOIN</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -159,7 +129,7 @@ function ExploreScreen({ navigation }) {
                 </ScrollView>              
             </View>
 
-            {/* dispatch(addUserFollowedCommunity(nc_item))dispatch(addUserFollowedCommunity(nc_item)) */}
+            
             <View style={styles.nav_bar}>
 
             <View style={styles.nav_icon_area}>

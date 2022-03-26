@@ -14,7 +14,7 @@ function SigninScreen({navigation}) {
     const [latitude, setLatitude] = React.useState("");
     const [longitude, setLongitude] = React.useState("");
     const [status, setStatus] = React.useState("")
-    // const [communities, setCommunities] = React.useState("")
+    
     const url = 'http://192.168.1.107:3000/user/signin'
 
   
@@ -59,10 +59,6 @@ function SigninScreen({navigation}) {
         })
 
         result = await result.json()
-        
-        
-
- 
 
         dispatch(setUserToken(result.token))
         dispatch(setUserCommunities(result.communities))
@@ -114,7 +110,7 @@ function SigninScreen({navigation}) {
                 <Text style= {styles.orText}>or</Text>
 
                 <View style={styles.buttonArea}>
-                    <TouchableOpacity onPress={() => alert('Hello, world!')} style={styles.button}>
+                    <TouchableOpacity style={styles.button}>
                         <View style={styles.googleIconArea}>
                             <Image style={styles.googleIcon} source={require('../../assets/Google-icon.png')}></Image>
                         </View>

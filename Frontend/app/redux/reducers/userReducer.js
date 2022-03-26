@@ -1,4 +1,4 @@
-import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS, SET_USER_UNFOLLOWED_COMMUNITIES, ADD_FOLLOWED_COMMUNNITY} from '../constants';
+import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS, SET_USER_UNFOLLOWED_COMMUNITIES, ADD_FOLLOWED_COMMUNITY, REMOVE_UNFOLLOWED_COMMUNITY} from '../constants';
 
 
 const initial_state = {
@@ -98,10 +98,16 @@ const userReducer = (state = initial_state, action) => {
                 userNearbyPetShops: action.payload
             };
 
-        case ADD_FOLLOWED_COMMUNNITY:
+        case ADD_FOLLOWED_COMMUNITY:
             return {
                 ...state,
                 userFollowedCommunities: [...state.userFollowedCommunities, action.payload]
+            };
+        
+        case REMOVE_UNFOLLOWED_COMMUNITY:
+            return {
+                ...state,
+                userUnFollowedCommunities: [...state.userUnFollowedCommunities.filter(nc_item => nc_item._id !== action.payload._id)]
             };
 
         default:

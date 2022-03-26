@@ -1,4 +1,4 @@
-import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_IMAGE, SET_USER_LATITUDE, SET_USER_LONGITUDE,SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS, SET_USER_UNFOLLOWED_COMMUNITIES, ADD_FOLLOWED_COMMUNNITY} from '../constants'
+import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_IMAGE, SET_USER_LATITUDE, SET_USER_LONGITUDE,SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS, SET_USER_UNFOLLOWED_COMMUNITIES, ADD_FOLLOWED_COMMUNITY, REMOVE_UNFOLLOWED_COMMUNITY} from '../constants'
 
 // export function addUserinfo(user_info) {
 //     return {
@@ -100,7 +100,14 @@ export const setUserNearbyPetShops = userNearbyPetShops => dispatch => {
 
 export const addUserFollowedCommunity = nc_item => dispatch => {
     dispatch({
-        type: ADD_FOLLOWED_COMMUNNITY,
-        payload: {...nc_item} 
+        type: ADD_FOLLOWED_COMMUNITY,
+        payload: nc_item 
+    }) 
+}
+
+export const removeUserUnfollowedCommunity = nc_item => dispatch => {
+    dispatch({
+        type: REMOVE_UNFOLLOWED_COMMUNITY,
+        payload: nc_item
     }) 
 }
