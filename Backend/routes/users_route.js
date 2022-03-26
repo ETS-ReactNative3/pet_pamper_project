@@ -12,6 +12,8 @@ const userInfoController = require('../controllers/userInfoController')
 const addCommunityController = require('../controllers/addCommunityController')
 const logoutController = require('../controllers/logoutController')
 const addUserImageController = require('../controllers/addUserImageController')
+const allCommunityController = require('../controllers/allCommunityController')
+
 try{
 //Signup route
 app.post('/signup', body('email').isEmail(), body('password').isLength({min: 8}), (req, res) => { 
@@ -37,6 +39,9 @@ app.post('/pet_shops', petShopController.getPetShops)
 
 //Show veterinaries
 app.post('/veterinaries', veterinariesController.getVeterinaries)
+
+//Get all communities
+app.post('/all_communities', allCommunityController.getAllCommunities)
 
 //Update user information
 app.post('/user_info_update', userInfoController.infoUpdate)

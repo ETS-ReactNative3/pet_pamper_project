@@ -55,7 +55,7 @@ function PetShopsScreen({navigation}) {
         })
 
         result = await result.json()
-        console.log(userNearbyPetShops)
+        
         const nearby_pet_shops = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 )
         dispatch(setUserNearbyPetShops(nearby_pet_shops))
         

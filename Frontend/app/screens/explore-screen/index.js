@@ -7,7 +7,7 @@ import NavigationBar from '../../components/navigationBar'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
-import {setUserFollowedCommunities} from '../../redux/actions/user-info'
+import {setUserFollowedCommunities, setUserUnFollowedCommunities} from '../../redux/actions/user-info'
 
 
 const nc_items = [
@@ -45,12 +45,13 @@ const nc_items = [
 
 function ExploreScreen({ navigation }) {
 
-    const {userToken, userImage, userCommunities, userFollowedCommunities, userLatitude, userLongitude} = useSelector(state => state.userReducer)
+    const {userToken, userImage, userCommunities, userFollowedCommunities, userUnFollowedCommunities, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
-    const url = 'http://192.168.1.107:3000/user/communities'
+    const url_1 = 'http://192.168.1.107:3000/user/communities'
+    const url_2 = 'http://192.168.1.107:3000/user/all_communities'
 
     React.useEffect(async ()=> {
-            let result = await fetch(url, {
+            let result = await fetch(url_1, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -68,6 +69,24 @@ function ExploreScreen({ navigation }) {
           }, [userCommunities]);
 
           const fc_items = userFollowedCommunities
+    
+    React.useEffect(async ()=> {
+            let result = await fetch(url_2, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({})
+            })
+    
+            result = await result.json()
+            const nearby_unfollowed_communities = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 && !userCommunities.includes(value._id))
+            dispatch(setUserUnFollowedCommunities(nearby_unfollowed_communities))
+            
+          }, [userCommunities]);
+
+          const nc_items = userUnFollowedCommunities
           
 
       
@@ -120,12 +139,12 @@ function ExploreScreen({ navigation }) {
                             <View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View>
-                                        <Image style= {styles.nc_image} source= {nc_item.image}/>
+                                        <Image style= {styles.nc_image} source= {{uri: `data:image/gif;base64,${nc_item.image}`}}/>
                                     </View>
     
                                     <View style= {styles.nc_text}>
-                                        <Text style= {styles.nc_text_title}>{nc_item.text}</Text>
-                                        <Text style= {styles.nc_text_members}>{nc_item.members}</Text>
+                                        <Text style= {styles.nc_text_title}>{nc_item.name}</Text>
+                                        {/* <Text style= {styles.nc_text_members}>{nc_item.members}</Text> */}
                                     </View>
     
                                     <View>    

@@ -1,4 +1,4 @@
-import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_IMAGE, SET_USER_LATITUDE, SET_USER_LONGITUDE,SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS} from '../constants'
+import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_IMAGE, SET_USER_LATITUDE, SET_USER_LONGITUDE,SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS, SET_USER_UNFOLLOWED_COMMUNITIES} from '../constants'
 
 // export function addUserinfo(user_info) {
 //     return {
@@ -74,6 +74,13 @@ export const setUserFollowedCommunities = userFollowedCommunities => dispatch =>
     dispatch({
         type: SET_USER_FOLLOWED_COMMUNITIES,
         payload: userFollowedCommunities 
+    }) 
+}
+
+export const setUserUnFollowedCommunities = userUnFollowedCommunities => dispatch => {
+    dispatch({
+        type: SET_USER_UNFOLLOWED_COMMUNITIES,
+        payload: userUnFollowedCommunities 
     }) 
 }
 
