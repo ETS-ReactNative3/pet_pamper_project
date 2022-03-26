@@ -58,7 +58,25 @@ function ExploreScreen({ navigation }) {
           const nc_items = userUnFollowedCommunities
           
 
-     
+    async function addCommunity(nc_item) {
+
+        let result = await fetch(url_add_community, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                id: nc_item._id,
+                token: userToken
+            })
+        })
+
+        result = await result.json()
+        dispatch(removeUserUnfollowedCommunity(nc_item))
+        dispatch(addUserFollowedCommunity(nc_item))       
+        
+    }      
       
     return (
         <View style={styles.background}>
