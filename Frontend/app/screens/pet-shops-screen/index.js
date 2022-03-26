@@ -7,6 +7,7 @@ import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
 import {setUserNearbyPetShops} from '../../redux/actions/user-info'
+import * as Location from 'expo-location';
 
 const nps_items = [
     {
@@ -63,6 +64,11 @@ function PetShopsScreen({navigation}) {
 
       const nps_items = userNearbyPetShops
 
+
+    //   React.useEffect(async () => {
+    //       const location = await Location.reverseGeocodeAsync({latitude: 33.885351, longitude: 35.483362})
+    //   console.log(location[0].city)},[])
+
     return (
         <View style={styles.background}>
             <View style={styles.header_area}>
@@ -97,7 +103,7 @@ function PetShopsScreen({navigation}) {
 
                                     <View style= {styles.nps_text}>
                                         <Text style= {styles.nps_text_title}>{nps_item.first_name}</Text>
-                                        {/* <Text style= {styles.nps_text_location}>{nps_item.location}</Text> */}
+                                        {/* <Text style= {styles.nps_text_location}>hello</Text> */}
                                     </View>
 
                                     <View>    

@@ -7,7 +7,7 @@ import NavigationBar from '../../components/navigationBar'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
-import {setUserFollowedCommunities, setUserUnFollowedCommunities} from '../../redux/actions/user-info'
+import {addUserFollowedCommunity, setUserFollowedCommunities, setUserUnFollowedCommunities} from '../../redux/actions/user-info'
 
 
 const nc_items = [
@@ -67,7 +67,7 @@ function ExploreScreen({ navigation }) {
             dispatch(setUserFollowedCommunities(nearby_followed_communities))
             
           }, [userCommunities]);
-
+        //   console.log(userFollowedCommunities)
           const fc_items = userFollowedCommunities
     
     React.useEffect(async ()=> {
@@ -144,11 +144,11 @@ function ExploreScreen({ navigation }) {
     
                                     <View style= {styles.nc_text}>
                                         <Text style= {styles.nc_text_title}>{nc_item.name}</Text>
-                                        {/* <Text style= {styles.nc_text_members}>{nc_item.members}</Text> */}
+                                        <Text style= {styles.nc_text_members}>{nc_item.members.length} members</Text>
                                     </View>
     
                                     <View>    
-                                        <TouchableOpacity style= {styles.nc_button}>
+                                        <TouchableOpacity style= {styles.nc_button} onPress={()=> dispatch(addUserFollowedCommunity(nc_item))}>
                                             <Text style={styles.nc_button_text}>JOIN</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -159,7 +159,7 @@ function ExploreScreen({ navigation }) {
                 </ScrollView>              
             </View>
 
-
+            {/* dispatch(addUserFollowedCommunity(nc_item))dispatch(addUserFollowedCommunity(nc_item)) */}
             <View style={styles.nav_bar}>
 
             <View style={styles.nav_icon_area}>
