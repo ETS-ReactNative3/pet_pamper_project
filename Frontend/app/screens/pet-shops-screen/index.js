@@ -9,7 +9,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {setUserNearbyPetShops} from '../../redux/actions/user-info'
 import * as Location from 'expo-location';
 import * as Linking from 'expo-linking'
-
+import {getPreciseDistance} from 'geolib'
 
 function PetShopsScreen({navigation}) {
     const {userToken, userImage, userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
@@ -28,7 +28,7 @@ function PetShopsScreen({navigation}) {
 
         result = await result.json()
         
-        const nearby_pet_shops = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 )
+        const nearby_pet_shops = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
         dispatch(setUserNearbyPetShops(nearby_pet_shops))
         
       }, []);

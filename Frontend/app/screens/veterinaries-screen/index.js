@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
 import {setUserNearbyVeterinaries} from '../../redux/actions/user-info'
 import * as Linking from 'expo-linking'
+import {getPreciseDistance} from 'geolib'
 
 function VeterinariesScreen({navigation}) {
     const {userToken, userImage, userNearbyVeterinaries, userLatitude, userLongitude} = useSelector(state => state.userReducer)
@@ -26,7 +27,7 @@ function VeterinariesScreen({navigation}) {
 
         result = await result.json()
         
-        const nearby_veterinaries = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 )
+        const nearby_veterinaries = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
         dispatch(setUserNearbyVeterinaries(nearby_veterinaries))
         
       }, []);

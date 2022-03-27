@@ -12,6 +12,9 @@ import {getPreciseDistance} from 'geolib'
 
 
 function ExploreScreen({ navigation }) {
+    const precise_distance = getPreciseDistance({ latitude: 51.528308, longitude: -0.3817765 }, { latitude: 20.0504188, longitude: 64.4139099 })
+
+        console.log(precise_distance/1000)
 
     const {userToken, userImage, userCommunities, userFollowedCommunities, userUnFollowedCommunities, userLatitude, userLongitude, userFirstName, userLastName} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
@@ -33,7 +36,7 @@ function ExploreScreen({ navigation }) {
             })
     
             result = await result.json()
-            const nearby_followed_communities = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 )
+            const nearby_followed_communities = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
             dispatch(setUserFollowedCommunities(nearby_followed_communities))
             
           }, [userCommunities]);
@@ -51,7 +54,7 @@ function ExploreScreen({ navigation }) {
             })
     
             result = await result.json()
-            const nearby_unfollowed_communities = result.filter(value => Math.abs(value.latitude - userLatitude) <= 1 && + Math.abs(value.longitude - userLongitude) <= 1 && !userCommunities.includes(value._id))
+            const nearby_unfollowed_communities = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1  && !userCommunities.includes(value._id))
             dispatch(setUserUnFollowedCommunities(nearby_unfollowed_communities))
             
           }, [userCommunities]);
