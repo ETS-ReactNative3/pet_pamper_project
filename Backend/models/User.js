@@ -61,6 +61,8 @@ const addUserSchema = new Schema({
     },
 
     communities: [mongoose.Types.ObjectId],
+
+    notifications: [Schema.Types.Mixed],
     
 }, { timestamps: true })
 

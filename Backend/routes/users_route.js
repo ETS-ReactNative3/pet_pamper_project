@@ -13,6 +13,7 @@ const addCommunityController = require('../controllers/addCommunityController')
 const logoutController = require('../controllers/logoutController')
 const addUserImageController = require('../controllers/addUserImageController')
 const allCommunityController = require('../controllers/allCommunityController')
+const pingCommunityController = require('../controllers/pingCommunityController')
 
 try{
 //Signup route
@@ -48,6 +49,9 @@ app.post('/user_info_update', userInfoController.infoUpdate)
 
 //add a community to the user's communities list
 app.post('/add_community', addCommunityController.addCommunity)
+
+//Ping members of the community
+app.post('/ping_community', pingCommunityController.pingMembers)
 
 //Image update
 app.post('/image', addUserImageController.imageUpdate)

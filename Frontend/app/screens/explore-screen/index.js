@@ -18,6 +18,7 @@ function ExploreScreen({ navigation }) {
     const url_followed_communities = 'http://192.168.1.107:3000/user/communities'
     const url_all_communities = 'http://192.168.1.107:3000/user/all_communities'
     const url_add_community = 'http://192.168.1.107:3000/user/add_community'
+    const url_ping_community = 'http://192.168.1.107:3000/user/ping_community'
 
     React.useEffect(async ()=> {
             let result = await fetch(url_followed_communities, {
@@ -76,7 +77,29 @@ function ExploreScreen({ navigation }) {
         dispatch(removeUserUnfollowedCommunity(nc_item))
         dispatch(addUserFollowedCommunity(nc_item))       
         
-    }      
+    }     
+    
+    async function pingCommunity(fc_item) {
+
+        let result = await fetch(url_add_community, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                id: nc_item._id,
+                token: userToken
+            })
+        })
+
+        result = await result.json()
+        // dispatch(removeUserUnfollowedCommunity(nc_item))
+        // dispatch(addUserFollowedCommunity(nc_item))       
+        
+    }     
+    
+    
       
     return (
         <View style={styles.background}>
