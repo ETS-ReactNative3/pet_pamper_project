@@ -112,7 +112,7 @@ export const removeUserUnfollowedCommunity = nc_item => dispatch => {
     }) 
 }
 
-export const userNotifications = userNotifications => dispatch => {
+export const getUserNotifications = userNotifications => dispatch => {
     dispatch({
         type: USER_NOTIFICATIONS,
         payload: userNotifications

@@ -8,7 +8,7 @@ import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
 import {addUserFollowedCommunity, removeUserUnfollowedCommunity, setUserFollowedCommunities, setUserUnFollowedCommunities} from '../../redux/actions/user-info'
-
+import {getPreciseDistance} from 'geolib'
 
 
 function ExploreScreen({ navigation }) {

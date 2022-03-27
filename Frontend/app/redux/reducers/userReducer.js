@@ -114,7 +114,7 @@ const userReducer = (state = initial_state, action) => {
             case USER_NOTIFICATIONS:
                 return {
                     ...state,
-                    userNotifications: [...state.userNotifications, action.payload]
+                    userNotifications: action.payload
                 };
         default:
             return state;

@@ -2,7 +2,10 @@ import React from 'react';
 import {ScrollView, View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {getUserNotifications} from '../../redux/actions/user-info'
+import * as Linking from 'expo-linking'
+
 
 const notification_items = [
     {
@@ -31,8 +34,47 @@ const notification_items = [
     },
 ];
 
+
+
+
 function NotificationsScreen({navigation}) {
-    const {userToken, userImage} = useSelector(state => state.userReducer)
+
+    const {userToken, userImage, userNotifications} = useSelector(state => state.userReducer)
+    const dispatch = useDispatch()
+    url = 'http://192.168.1.107:3000/user/notifications'
+
+    React.useEffect(async ()=> {
+        let result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                token: userToken
+            })
+        })
+
+        result = await result.json()
+        dispatch(getUserNotifications(result[0].notifications))
+        
+      }, []);
+    
+      const notification_items = userNotifications
+
+      function locateUser(notification_item) {
+        const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+        const latLng = `${notification_item.latitude},${notification_item.longitude}`;
+        const label = 'Custom Label';
+        const url = Platform.select({
+        ios: `${scheme}${label}@${latLng}`,
+        android: `${scheme}${latLng}(${label})`
+        });
+
+            
+        Linking.openURL(url);
+    }
+
     return (
         <View style={styles.background}>
 
@@ -62,15 +104,15 @@ function NotificationsScreen({navigation}) {
                             <View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View>
-                                        <Image style= {styles.notification_image} source= {notification_item.image}/>
+                                        <Image style= {styles.notification_image} source= {{uri: `data:image/gif;base64,${notification_item.image}`}}/>
                                     </View>
 
                                     <View style= {styles.notification_text}>
-                                        <Text style= {styles.notification_text_title}>{notification_item.text}</Text>
+                                        <Text style= {styles.notification_text_title}>{notification_item.first_name} {notification_item.last_name}</Text>
                                     </View>
 
                                     <View>    
-                                        <TouchableOpacity style= {styles.notification_button}>
+                                        <TouchableOpacity style= {styles.notification_button} onPress= {()=> locateUser(notification_item)}>
                                             <Text style={styles.notification_button_text}>LOCATE</Text>
                                         </TouchableOpacity>
                                     </View>
