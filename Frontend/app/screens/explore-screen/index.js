@@ -13,7 +13,7 @@ import {addUserFollowedCommunity, removeUserUnfollowedCommunity, setUserFollowed
 
 function ExploreScreen({ navigation }) {
 
-    const {userToken, userImage, userCommunities, userFollowedCommunities, userUnFollowedCommunities, userLatitude, userLongitude} = useSelector(state => state.userReducer)
+    const {userToken, userImage, userCommunities, userFollowedCommunities, userUnFollowedCommunities, userLatitude, userLongitude, userFirstName, userLastName} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
     const url_followed_communities = 'http://192.168.1.107:3000/user/communities'
     const url_all_communities = 'http://192.168.1.107:3000/user/all_communities'
@@ -81,21 +81,24 @@ function ExploreScreen({ navigation }) {
     
     async function pingCommunity(fc_item) {
 
-        let result = await fetch(url_add_community, {
+        let result = await fetch(url_ping_community, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                id: nc_item._id,
-                token: userToken
+                members: fc_item.members,
+                first_name: userFirstName,
+                last_name: userLastName,
+                latitude: userLatitude,
+                longitude: userLongitude,
+                image: userImage,
             })
         })
 
         result = await result.json()
-        // dispatch(removeUserUnfollowedCommunity(nc_item))
-        // dispatch(addUserFollowedCommunity(nc_item))       
+          
         
     }     
     
@@ -126,7 +129,7 @@ function ExploreScreen({ navigation }) {
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     {fc_items.map((fc_item, fc_index) => (
                         <View key= {fc_index} >
-                            <TouchableOpacity style={{alignItems: 'center'}}>
+                            <TouchableOpacity style={{alignItems: 'center'}} onPress={()=> pingCommunity(fc_item)}>
                                 <Image style= {styles.fc_image} source= {{uri: `data:image/gif;base64,${fc_item.image}`}}/>
 
                                 <Text style= {styles.fc_text}>{fc_item.name}</Text>
