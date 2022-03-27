@@ -14,6 +14,7 @@ const logoutController = require('../controllers/logoutController')
 const addUserImageController = require('../controllers/addUserImageController')
 const allCommunityController = require('../controllers/allCommunityController')
 const pingCommunityController = require('../controllers/pingCommunityController')
+const getNotificationsController = require('../controllers/getNotificationsController')
 
 try{
 //Signup route
@@ -52,6 +53,9 @@ app.post('/add_community', addCommunityController.addCommunity)
 
 //Ping members of the community
 app.post('/ping_community', pingCommunityController.pingMembers)
+
+//Get notifications
+app.post('/notifications', getNotificationsController.getNotifications)
 
 //Image update
 app.post('/image', addUserImageController.imageUpdate)
