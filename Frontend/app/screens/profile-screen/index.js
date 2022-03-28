@@ -9,7 +9,9 @@ import {setUserImage, setUserStatus} from '../../redux/actions/user-info'
 function ProfileScreen({navigation}) {
     const {userToken, userFirstName, userLastName, userImage, userStatus} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
-    const url = 'http://192.168.1.107:3000/user/image'
+    const [status, setStatus] = React.useState("")
+    const url_image = 'http://192.168.1.107:3000/user/image'
+    const url_logout = 'http://192.168.1.107:3000/user/logout'
 
     const pickImage = async () => {
         
@@ -25,7 +27,7 @@ function ProfileScreen({navigation}) {
 
             
     useEffect(async ()=> {
-        let results = await fetch(url, {
+        let results = await fetch(url_image, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -40,6 +42,31 @@ function ProfileScreen({navigation}) {
         results = await results.json()
 
       },[userImage])
+
+
+      useEffect(()=> {
+        if (status == "Successfully logged out") {
+            navigation.navigate('Home')
+        }
+      }, [status])
+
+
+    async function logout() {
+ 
+        let result = await fetch(url_logout, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                token: userToken
+            })
+        })
+
+        result = await result.json()
+        setStatus(result.message)
+    }
 
     
     return (
@@ -113,14 +140,13 @@ function ProfileScreen({navigation}) {
             <View style={styles.edit_area}>
                 <View style={styles.edit}>                              
                     
-                    <Icon style={styles.edit_user_icon} color="black" size={25} name="sign-out" />
-                    
+                    <Icon style={styles.edit_user_icon} color="black" size={25} name="sign-out" />     
                     
                     <View style={styles.edit_text_area}>
                         <Text style={styles.edit_text}>Log out</Text>
                     </View>
 
-                    <TouchableOpacity onPress={()=> navigation.navigate('Edit Status')}>
+                    <TouchableOpacity onPress={()=> logout()}>
                         <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
                     </TouchableOpacity>
                 </View>
