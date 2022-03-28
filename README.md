@@ -19,8 +19,9 @@
 
 ### User Stories
 - As a pet walker, I want someone to join me during my pet-walking time, so that I don't get bored.
+- As a pet walker, I want someone to join me during my pet-walking time, so that I can meet new people.
 - As a pet owner, I want to locate nearby veterinaries, so that I can visit regularly to check up on my pet's health or incase of emergencies.
-- As a pet owner, I want to locate nearby pet shops, so that I can visit regularly get pet's products.
+- As a pet owner, I want to locate nearby pet shops, so that I can visit regularly to buy pet products.
 
 
 <br><br>
@@ -28,19 +29,19 @@
 <img src="./readme/title3.svg"/>
 
 > This design was planned before on paper, then moved to Figma app for the fine details.
-Note that I didn't use any styling library or theme, all from scratch and using pure css modules
+Note that I didn't use any styling library or theme, all from scratch and using pure CSS modules
 
-| Landing  | Home/Search  |
+| Home  | Discover  |
 | -----------------| -----|
-| ![Landing](https://github.com/julescript/spotifyndr/blob/master/demo/Landing_Page.jpg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
+| <img src="./readme/Home_page.PNG"/> | <img src="./readme/Discover_page.PNG"/> |
 
-| Veterinary results  | Pet shop results  |
+| Veterinary  | Pet shop  |
 | -----------------| -----|
-| ![Artists results](https://github.com/julescript/spotifyndr/blob/master/demo/Artists_Page.jpg) | ![Artist's Albums](https://github.com/julescript/spotifyndr/blob/master/demo/Albums_Page.jpg) |
+| <img src="./readme/Veterinary_page.PNG"/> | <img src="./readme/Pet_shop_page.PNG"/> |
 
-| User profile  | Profile edit  |
+| User profile  | Notifications  |
 | -----------------| -----|
-| ![Artists results](https://github.com/julescript/spotifyndr/blob/master/demo/Artists_Page.jpg) | ![Artist's Albums](https://github.com/julescript/spotifyndr/blob/master/demo/Albums_Page.jpg) |
+| <img src="./readme/Profile_page.PNG"/> | <img src="./readme/Notification_page.PNG"/> |
 
 <br><br>
 
@@ -49,18 +50,16 @@ Note that I didn't use any styling library or theme, all from scratch and using 
 Here's a brief high-level overview of the tech stack the Well app uses:
 
 - This project uses the [React Native app development framework](https://reactnative.dev/). React Native combines the best parts of native development with React, a best-in-class JavaScript library for building user interfaces.
-- This project uses the [NodeJS development framework](https://nodejs.org/). As an asynchronous event-driven JavaScript runtime, Node.js is designed to build scalable network applications.
+- This project uses the [Node development framework](https://nodejs.org/). As an asynchronous event-driven JavaScript runtime, Node.js is designed to build scalable network applications.
+- This project uses the [Express development framework] (https://expressjs.com/). Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 - For persistent storage (database), the app uses [MongoDB](https://www.mongodb.com/) which allows the app to create a custom storage schema and save it to a local database.
-- To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
-  - 🚨 Currently, notifications aren't working on macOS. This is a known issue that we are working to resolve!
-- The app uses the font ["Work Sans"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
 
 
 
 <br><br>
 <img src="./readme/title5.svg"/>
 
-> Using the above mentioned tech stacks and the wireframes build with figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
+> Using the above mentioned tech stacks and the wireframes build with Figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
 
 | Landing  | Home/Search  |
 | -----------------| -----|
