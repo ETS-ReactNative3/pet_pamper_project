@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Community = require('../models/Community')
 
 exports.addCommunity = function(req, res) {
 
@@ -6,10 +7,20 @@ exports.addCommunity = function(req, res) {
         if (user) {           
             user.communities.push(req.body.id)
             user.save()
-
-            return res.status(200).json({message: "Successfully added community"})
         }else{
             return res.status(400).json({message: "You don't have access"})
         }
     }).catch(() => res.send({message: "JWT is wrong"}))
+    
+    Community.findOne({'_id': req.body.id}).then((community)=>{
+        if (community) {           
+            community.members.push(req.body.user_id)
+            community.save()
+        }
+    }).catch(() => res.send({message: "JWT is wrong"}))
+
+    Community.find({ '_id': { $in: req.body.communities}}).then((communities)=>{
+        return res.status(200).json(communities)
+        }).catch((err) => res.send({message: "Something is wrong"}))
+    
 }

@@ -1,7 +1,8 @@
-import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS, SET_USER_UNFOLLOWED_COMMUNITIES, ADD_FOLLOWED_COMMUNITY, REMOVE_UNFOLLOWED_COMMUNITY, USER_NOTIFICATIONS} from '../constants';
+import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS, SET_USER_UNFOLLOWED_COMMUNITIES, ADD_FOLLOWED_COMMUNITY, REMOVE_UNFOLLOWED_COMMUNITY, USER_NOTIFICATIONS, SET_USER_ID} from '../constants';
 
 
 const initial_state = {
+    userId: "",
     userToken: "",
     userCommunities: {},
     userFirstName: "",
@@ -25,6 +26,12 @@ const userReducer = (state = initial_state, action) => {
             return {
                 ...state,
                 userToken: action.payload
+            };
+        
+        case SET_USER_ID:
+            return {
+                ...state,
+                userId: action.payload
             };
         
         case SET_USER_COMMUNITIES:

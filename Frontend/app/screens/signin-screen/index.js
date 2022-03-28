@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
 import * as Location from 'expo-location';
 import {useSelector, useDispatch} from 'react-redux'
-import {setUserToken, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus, setUserPassword} from '../../redux/actions/user-info'
+import {setUserToken, setUserId, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus, setUserPassword} from '../../redux/actions/user-info'
 
 function SigninScreen({navigation}) {
-    const {userToken, userCommunities, userFirstName, userLastName, userLatitude, userLongitude, userImage, userStatus} = useSelector(state => state.userReducer)
+    const {userToken, userId, userCommunities, userFirstName, userLastName, userLatitude, userLongitude, userImage, userStatus} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
 
     const [email, onChangeEmail] = React.useState("");
@@ -60,6 +60,7 @@ function SigninScreen({navigation}) {
 
         result = await result.json()
 
+        dispatch(setUserId(result._id))
         dispatch(setUserToken(result.token))
         dispatch(setUserCommunities(result.communities))
         dispatch(setUserFirstName(result.first_name))
