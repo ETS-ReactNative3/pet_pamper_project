@@ -81,6 +81,22 @@ function ProfileScreen({navigation}) {
             <View style={styles.edit_area}>
                 <View style={styles.edit}>                              
                     
+                    <Icon style={styles.edit_user_icon} color="black" size={25} name="user" />
+                    
+                    
+                    <View style={styles.edit_text_area}>
+                        <Text style={styles.edit_text}>Edit status</Text>
+                    </View>
+
+                    <TouchableOpacity onPress={()=> navigation.navigate('Edit Status')}>
+                        <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+            <View style={styles.edit_area}>
+                <View style={styles.edit}>                              
+                    
                     <Icon style={styles.create_user_icon} color="black" size={25} name="group" />
                     
                     
@@ -94,6 +110,21 @@ function ProfileScreen({navigation}) {
                 </View>
             </View>
 
+            <View style={styles.edit_area}>
+                <View style={styles.edit}>                              
+                    
+                    <Icon style={styles.edit_user_icon} color="black" size={25} name="sign-out" />
+                    
+                    
+                    <View style={styles.edit_text_area}>
+                        <Text style={styles.edit_text}>Log out</Text>
+                    </View>
+
+                    <TouchableOpacity onPress={()=> navigation.navigate('Edit Status')}>
+                        <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
+                    </TouchableOpacity>
+                </View>
+            </View>
             <View style={styles.nav_bar}>
                 <View style={styles.nav_icon_area}>
 

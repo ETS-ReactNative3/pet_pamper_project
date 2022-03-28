@@ -10,6 +10,7 @@ import PetShopsScreen from './app/screens/pet-shops-screen';
 import NotificationsScreen from './app/screens/notifications-screen';
 import ProfileScreen from './app/screens/profile-screen';
 import EditProfileScreen from './app/screens/edit-profile-screen';
+import EditStatusScreen from './app/screens/edit-status-screen';
 import CreateCommunityScreen from './app/screens/create-community-screen';
 import { Provider } from 'react-redux';
 import { Store } from './app/redux/store';
@@ -75,6 +76,12 @@ export default function App() {
             <stack.Screen
               name="Edit Profile"
               component={EditProfileScreen}
+              options={{ title: '', headerShown: false }}
+            />
+            
+            <stack.Screen
+              name="Edit Status"
+              component={EditStatusScreen}
               options={{ title: '', headerShown: false }}
             />
 
