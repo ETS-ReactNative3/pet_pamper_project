@@ -51,7 +51,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 - This project uses the [React Native app development framework](https://reactnative.dev/). React Native combines the best parts of native development with React, a best-in-class JavaScript library for building user interfaces.
 - This project uses the [Node development framework](https://nodejs.org/). As an asynchronous event-driven JavaScript runtime, Node.js is designed to build scalable network applications.
-- This project uses the [Express development framework] (https://expressjs.com/). Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+- This project uses the [Express development framework](https://expressjs.com/). Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 - For persistent storage (database), the app uses [MongoDB](https://www.mongodb.com/) which allows the app to create a custom storage schema and save it to a local database.
 
 
