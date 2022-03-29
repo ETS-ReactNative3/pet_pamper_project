@@ -80,18 +80,13 @@ export const styles = StyleSheet.create({
         width: '100%'
     },
 
-    name_input: {
+    status_input: {
         width: '80%',
-        height: 45,
+        height: 100,
         marginTop: 10 ,
         textTransform: 'lowercase',
+        textAlignVertical: 'top'
         
-    },
-  
-    password_input: {
-        width: '80%',
-        height: 45,
-        marginTop: 10 
     },
 
     button_area_edit: {
