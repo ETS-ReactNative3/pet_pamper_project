@@ -16,11 +16,8 @@ exports.addCommunity = function(req, res) {
         if (community) {           
             community.members.push(req.body.user_id)
             community.save()
+            return res.status(200).json(community)
         }
     }).catch(() => res.send({message: "JWT is wrong"}))
-
-    Community.find({ '_id': { $in: req.body.communities}}).then((communities)=>{
-        return res.status(200).json(communities)
-        }).catch((err) => res.send({message: "Something is wrong"}))
     
 }

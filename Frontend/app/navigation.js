@@ -129,11 +129,6 @@ export default function NavigationScreens() {
             />
             
             <stack.Screen
-              name="Pet Shops Map"
-              component={PetShopsMapScreen}
-              options={{ title: '', headerShown: false }}
-            />
-            <stack.Screen
               name="Notifications"
               component={NotificationsScreen}
               options={{ title: '', headerShown: false }}

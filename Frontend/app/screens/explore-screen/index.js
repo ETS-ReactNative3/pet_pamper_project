@@ -77,7 +77,7 @@ function ExploreScreen({ navigation }) {
 
         result = await result.json()
         dispatch(removeUserUnfollowedCommunity(nc_item))
-        dispatch(addUserFollowedCommunity(nc_item))
+        dispatch(addUserFollowedCommunity(result))
         
            
         
