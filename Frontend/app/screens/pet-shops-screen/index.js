@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image, ScrollView} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Dimensions} from 'react-native'
 import Header from '../../components/header'
 import NearbyPetShops from '../../components/nearbyPetShops'
 import NavigationBar from '../../components/navigationBar'
@@ -10,10 +10,13 @@ import {setUserNearbyPetShops} from '../../redux/actions/user-info'
 import * as Location from 'expo-location';
 import * as Linking from 'expo-linking'
 import {getPreciseDistance} from 'geolib'
+import SegmentedControl from '@react-native-segmented-control/segmented-control';
+import MapView, { Callout, Marker } from "react-native-maps";
 
 function PetShopsScreen({navigation}) {
     const {userToken, userImage, userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
+    const [selectedIndex, setSelectedIndex] = React.useState(0)
     const url = 'http://192.168.1.107:3000/user/pet_shops'
 
     React.useEffect(async ()=> {
@@ -53,6 +56,7 @@ function PetShopsScreen({navigation}) {
     //       const location = await Location.reverseGeocodeAsync({latitude: 33.885351, longitude: 35.483362})
     //   console.log(location[0].city)},[])
 
+
     return (
         <View style={styles.background}>
             <View style={styles.header_area}>
@@ -70,65 +74,84 @@ function PetShopsScreen({navigation}) {
                         <Avatar.Icon style={styles.header_icon} size={40} icon="bell" />
                     </TouchableOpacity>
                 </View>
-                
-                <Text style={styles.header_sub_title}>Nearby pet shops</Text>
+
+                <View>
+                    <SegmentedControl
+                        values={['List', 'Map']}
+                        selectedIndex={selectedIndex}
+                        onChange={(event) => {
+                        setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
+                        }}
+                        style= {styles.list_controller}
+                    />
+                </View>  
             </View>
 
-
+            {selectedIndex == 0 ?
             <View>
-                <ScrollView vertical>
-                    {nps_items.map((nps_item, nps_index) => (
-                        <View key= {nps_index}>
-                            <View>
-                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <View>
-                                        <Image style= {styles.nps_image} source= {{uri: `data:image/gif;base64,${nps_item.image}`}}/>
-                                    </View>
+                <Text style={styles.header_sub_title}>Nearby pet shops</Text>
 
-                                    <View style= {styles.nps_text}>
-                                        <Text style= {styles.nps_text_title}>{nps_item.first_name}</Text>
-                                        {/* <Text style= {styles.nps_text_location}>hello</Text> */}
-                                    </View>
+                <View>
+                    <ScrollView vertical>
+                        {nps_items.map((nps_item, nps_index) => (
+                            <View key= {nps_index}>
+                                <View>
+                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                        <View>
+                                            <Image style= {styles.nps_image} source= {{uri: `data:image/gif;base64,${nps_item.image}`}}/>
+                                        </View>
 
-                                    <View>    
-                                        <TouchableOpacity style= {styles.nps_button} onPress= {()=> locatePetShop(nps_item)}>
-                                            <Text style={styles.nps_button_text}>LOCATE</Text>
-                                        </TouchableOpacity>
+                                        <View style= {styles.nps_text}>
+                                            <Text style= {styles.nps_text_title}>{nps_item.first_name}</Text>
+                                            {/* <Text style= {styles.nps_text_location}>hello</Text> */}
+                                        </View>
+
+                                        <View>    
+                                            <TouchableOpacity style= {styles.nps_button} onPress= {()=> locatePetShop(nps_item)}>
+                                                <Text style={styles.nps_button_text}>LOCATE</Text>
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
                                 </View>
                             </View>
-                        </View>
-                    ))}             
-                </ScrollView>
-            </View>
-
-            <View style={styles.nav_bar}>
-                <View style={styles.nav_icon_area}>
-
-                    <TouchableOpacity style={{flex: 1}} onPress={() => navigation.navigate('Explore')}>
-                        <Icon style={styles.nav_icon_discover} color= "#80f7e3" size={30} name="group"/>
-                        <Text style= {{color:'#80f7e3'}}>Discover</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{flex: 1.1}} onPress={() => navigation.navigate('Veterinaries')}>
-                        <Icon  style={styles.nav_icon_vet} color= "#80f7e3" size={30} name="medkit"/>
-                        <Text style= {{color:'#80f7e3'}}>Veterinary</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{flex: 1.02}} onPress={() => navigation.navigate('Pet Shops')}>
-                        <Icon style={styles.nav_icon_shop} color= "#80f7e3" size={30} name="paw"/>
-                        <Text style= {{color:'#80f7e3'}}>Pet Shop</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{flex: 1.}} onPress={() => navigation.navigate('Profile')}>
-                        <Icon style={styles.nav_icon_profile} color= "#80f7e3" size={30} name="user-circle-o"/>
-                        <Text style= {{color:'#80f7e3'}}>Profile</Text>
-                    </TouchableOpacity>
+                        ))}             
+                    </ScrollView>
                 </View>
-            </View>
+            </View> :
+
+            <View>
+                <MapView
+                    style={styles.map}
+                    initialRegion={{
+                    latitude: parseFloat(userLatitude),
+                    longitude: parseFloat(userLongitude),
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
+                    }}
+                    provider="google"
+                    showsUserLocation= {true}
+                    loadingEnabled= {true}>
+                
+                    {nps_items.map((nps_item, nps_index) => (                 
+                        <View key= {nps_index}>
+                            <Marker coordinate={{latitude: parseFloat(nps_item.latitude), longitude: parseFloat(nps_item.longitude)}} 
+                            pinColor="red" 
+                            onPress= {()=>locatePetShop(nps_item)}>                                                            
+                                <Callout style={{width: 100, alignItems:'center'}}>   
+                                    <Text>{nps_item.first_name}</Text>   
+                                </Callout>
+                            </Marker>
+                        </View>
+                    ))}              
+                </MapView>
+            </View>}
+
         </View>
+
     );
 }
+
+
 
 
 const styles = StyleSheet.create({
@@ -140,8 +163,8 @@ const styles = StyleSheet.create({
     header_area: {
         borderColor: 'white',
         width: '100%',
-        height: 100,
-        marginBottom: 10
+        height: 110,
+        // marginBottom: 10
     },
     
     header: {
@@ -275,5 +298,19 @@ const styles = StyleSheet.create({
     nav_icon_profile: {
         marginLeft: 5
     },
+
+    container: {
+        flex: 1,
+      },
+    
+    map: {
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+    },
+
+    list_controller: {
+        height: 35,
+        marginTop: 10
+    }
 })
 export default PetShopsScreen;
