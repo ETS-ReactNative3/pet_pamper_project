@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
         fontSize: 19,
         marginTop: 10,
         marginLeft: 15,
-        color: 'black'
+        color: 'black',
     },
 
     fc_image: {
@@ -112,7 +112,8 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 19,
         marginLeft: 15,
-        color: 'black'
+        color: 'black',
+        marginBottom: 10
     },
 
     nc_image: {
