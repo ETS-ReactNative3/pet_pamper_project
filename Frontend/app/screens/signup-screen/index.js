@@ -2,27 +2,53 @@ import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
+import {useSelector, useDispatch} from 'react-redux'
+import * as Location from 'expo-location';
+import {setUserToken, setUserId, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus, setUserPassword} from '../../redux/actions/user-info'
 import {styles} from './css'
+import SigninButton from '../../components/signinButton';
 
 function SignupScreen({navigation}) {
+    const dispatch = useDispatch()
     const [first_name, onChangeFirstName] = React.useState("");
     const [last_name, onChangeLastName] = React.useState("");
     const [email, onChangeEmail] = React.useState("");
     const [phone_number, onChangePhoneNumber] = React.useState("");
     const [password, onChangePassword] = React.useState("");
     const [account_type, setAccountType] = React.useState("");
+    const [latitude, setLatitude] = React.useState("");
+    const [longitude, setLongitude] = React.useState("");
     const [status, setStatus] = React.useState("")
-    const url = 'http://192.168.1.107:3000/user/signup'
+    const url_signup = 'http://192.168.1.107:3000/user/signup'
+    const url_signin = 'http://192.168.1.107:3000/user/signin'
+
+
+    useEffect(() => {
+        (async () => {
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+          }
+    
+          let location = await Location.getCurrentPositionAsync({});
+          setLatitude(location.coords.latitude);
+          setLongitude(location.coords.longitude);
+          
+        })();
+      }, []);
 
     useEffect(()=> {
         if (status == 'Successful sign up!') {
-            navigation.navigate('Home')
+            return signin()
+        }else if (status == "Successful login!") {
+            navigation.navigate('Explore')
         }
       }, [status])
     
     async function signup() {
  
-        let result = await fetch(url, {
+        let result = await fetch(url_signup, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -40,6 +66,38 @@ function SignupScreen({navigation}) {
 
         result = await result.json()
         
+        setStatus(result.message)
+        
+    }
+
+    async function signin() {
+ 
+        let result = await fetch(url_signin, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                latitude: latitude,
+                longitude: longitude
+            })
+        })
+
+        result = await result.json()
+
+        dispatch(setUserId(result._id))
+        dispatch(setUserToken(result.token))
+        dispatch(setUserCommunities(result.communities))
+        dispatch(setUserFirstName(result.first_name))
+        dispatch(setUserLastName(result.last_name))
+        dispatch(setUserLatitude(result.latitude))
+        dispatch(setUserLongitude(result.longitude))
+        dispatch(setUserImage(result.image))
+        dispatch(setUserStatus(result.status))
+        dispatch(setUserPassword(result.password))
         setStatus(result.message)
         
     }
