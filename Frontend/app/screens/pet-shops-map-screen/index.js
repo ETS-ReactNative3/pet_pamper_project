@@ -1,47 +1,17 @@
-import React from 'react';
-import {ScrollView, View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
+import React from "react";
+import MapView, { Callout, Marker } from "react-native-maps";
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Dimensions } from "react-native";
 import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
-import {getUserNotifications} from '../../redux/actions/user-info'
+import {setUserNearbyPetShops} from '../../redux/actions/user-info'
 import * as Linking from 'expo-linking'
+import {getPreciseDistance} from 'geolib'
 
-
-const notification_items = [
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Charbel Daoud",
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Ali Azzam",
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Joe Rizk",
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Caline Yammine",
-    },
-
-    {
-        image: require('../../assets/Pet_Pamper_signIn.png'),
-        text: "Mohammad Moussali",   
-    },
-];
-
-
-
-
-function NotificationsScreen({navigation}) {
-
-    const {userToken, userImage, userNotifications} = useSelector(state => state.userReducer)
-    const dispatch = useDispatch()
-    url = 'http://192.168.1.107:3000/user/notifications'
+function PetShopsMapScreen({navigation}) {
+    const {userToken, userImage, userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
+    const dispatch= useDispatch()
+    const url = 'http://192.168.1.107:3000/user/pet_shops'
 
     React.useEffect(async ()=> {
         let result = await fetch(url, {
@@ -50,21 +20,22 @@ function NotificationsScreen({navigation}) {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
-            body: JSON.stringify({
-                token: userToken
-            })
+            body: JSON.stringify({})
         })
 
         result = await result.json()
-        dispatch(getUserNotifications(result[0].notifications))
+        
+        const nearby_pet_shops = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
+        dispatch(setUserNearbyPetShops(nearby_pet_shops))
         
       }, []);
-    
-      const notification_items = userNotifications
 
-      function locateUser(notification_item) {
+      const nps_items = userNearbyPetShops
+
+
+    function locatePetShop(nps_item) {
         const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
-        const latLng = `${notification_item.latitude},${notification_item.longitude}`;
+        const latLng = `${nps_item.latitude},${nps_item.longitude}`;
         const label = 'Custom Label';
         const url = Platform.select({
         ios: `${scheme}${label}@${latLng}`,
@@ -77,50 +48,38 @@ function NotificationsScreen({navigation}) {
 
     return (
         <View style={styles.background}>
-
-            <View style={styles.header_area}>
-                <View style={styles.header}>              
-                    <TouchableOpacity onPress={()=> navigation.navigate('Explore')}>
-                        <Avatar.Icon style={styles.header_icon} color='black' size={60} icon="chevron-left" />
-                    </TouchableOpacity>
-
-                    <View style={styles.header_text_area}>
-                        <Text style={styles.header_text}>Notification</Text>
-                        <Icon style={styles.header_icon_arrow} size={20} name="chevron-down"/>
-                    </View>
-
-                    <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-                        <Avatar.Icon style={styles.header_icon} size={40} icon="bell" />
-                    </TouchableOpacity>
-                </View>
-
-                <Text style={styles.header_sub_title}>Your notifications</Text>
-            </View>
+          
 
             <View>
-                <ScrollView>
-                    {notification_items.map((notification_item, notification_index) => (
-                        <View key= {notification_index}>
-                            <View>
-                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <View>
-                                        <Image style= {styles.notification_image} source= {{uri: `data:image/gif;base64,${notification_item.image}`}}/>
-                                    </View>
-
-                                    <View style= {styles.notification_text}>
-                                        <Text style= {styles.notification_text_title}>{notification_item.first_name} {notification_item.last_name}</Text>
-                                    </View>
-
-                                    <View>    
-                                        <TouchableOpacity style= {styles.notification_button} onPress= {()=> locateUser(notification_item)}>
-                                            <Text style={styles.notification_button_text}>LOCATE</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
+                <MapView
+                    style={styles.map}
+                    initialRegion={{
+                    latitude: parseFloat(userLatitude),
+                    longitude: parseFloat(userLongitude),
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
+                    }}
+                    provider="google"
+                    showsUserLocation= {true}
+                    loadingEnabled= {true}
+                >
+                
+                    {nps_items.map((nps_item, nps_index) => (
+                        
+                        <View key= {nps_index}>
+                            <Marker coordinate={{latitude: parseFloat(nps_item.latitude), longitude: parseFloat(nps_item.longitude)}} 
+                            pinColor="red" 
+                            onPress= {()=>locatePetShop(nps_item)}
+                            >
+                                
+                                
+                                <Callout style={{width: 100, alignItems:'center'}}>   
+                                    <Text>{nps_item.first_name}</Text>   
+                                </Callout>
+                            </Marker>
                         </View>
-                    ))}             
-                </ScrollView>
+                    ))}              
+                </MapView>
             </View>
 
             <View style={styles.nav_bar}>
@@ -147,10 +106,10 @@ function NotificationsScreen({navigation}) {
                     </TouchableOpacity>
                 </View>
             </View>
-
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     background: {
@@ -177,7 +136,8 @@ const styles = StyleSheet.create({
     header_text_area: {
         flex:3,
         paddingLeft: 90,
-        paddingTop: 10       
+        paddingTop: 10
+        
     },
 
     header_text: {
@@ -221,39 +181,45 @@ const styles = StyleSheet.create({
         color: 'black'
     },
 
-    notification_image: {
+    nps_image: {
         flexBasis: '10%',
         width: 50,
         height: 50,
-        borderRadius: 100,
-        borderColor: 'white',
+        borderRadius: 10,
+        borderColor: '#004b67',
         borderWidth: 2,
         marginTop: 10,
         marginLeft: 10,
     },
 
-    notification_text: {
+    nps_text: {
         flexBasis: '55%',
         marginLeft: 17,
         marginTop: 5,
     },
 
-    notification_text_title: {
+    nps_text_title: {
         fontSize: 17,
         fontWeight: 'bold',
         color: '#004b67'
     },
 
-    notification_button: {
+    nps_text_location: {
+        fontSize: 12,
+        color: '#545454'
+    },
+
+    nps_button: {
         backgroundColor: '#004b67',
         marginRight: 10,
         flexBasis: '30%',
         paddingHorizontal: 12,
         paddingVertical: 5,
-        borderRadius: 5,       
+        borderRadius: 5,
+        
     },
 
-    notification_button_text: {
+    nps_button_text: {
         color: 'white',
         fontWeight: 'bold',
         fontSize: 14
@@ -289,6 +255,62 @@ const styles = StyleSheet.create({
     nav_icon_profile: {
         marginLeft: 5
     },
-})
 
-export default NotificationsScreen;
+    container: {
+        flex: 1,
+      },
+      map: {
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+      },
+
+      fc_image: {
+        width: 100,
+        height: 100,
+        borderRadius: 100,
+        opacity: 0.6,
+        borderColor: '#004b67',
+        borderWidth: 3,
+        marginTop: 10,
+        marginLeft: 10,
+    },
+
+    fc_text: {
+        marginLeft: 10,
+        marginTop: 5,
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#004b67'
+    },
+
+    fc_button_area: {
+        paddingHorizontal: 20
+    },
+    
+    fc_button: {
+        backgroundColor: '#004b67',
+        borderRadius: 5,
+        alignItems: 'center',
+        position: 'relative',
+        zIndex: 2,
+        top: -86,
+        left: 5,
+        paddingVertical: 3,
+        paddingHorizontal: 15
+    },
+
+    fc_button_text: {
+        color: 'white'
+    },
+})
+export default PetShopsMapScreen;
+
+
+
+
+ 
+
+        
+
+      
+    

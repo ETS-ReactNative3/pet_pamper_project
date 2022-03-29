@@ -70,7 +70,7 @@ function PetShopsScreen({navigation}) {
                         <Avatar.Icon style={styles.header_icon} size={40} icon="bell" />
                     </TouchableOpacity>
                 </View>
-
+                
                 <Text style={styles.header_sub_title}>Nearby pet shops</Text>
             </View>
 

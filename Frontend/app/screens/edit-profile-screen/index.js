@@ -38,7 +38,7 @@ function EditProfileScreen({navigation}) {
         <View style={styles.background}>
             <View style={styles.header_area}>
                 <View style={styles.header}>              
-                    <TouchableOpacity onPress={()=> navigation.navigate('Profile')}>
+                    <TouchableOpacity onPress={()=> navigation.navigate('Profile Screen')}>
                         <Avatar.Icon style={styles.header_icon} color='black' size={60} icon="chevron-left" />
                     </TouchableOpacity>
 
@@ -97,30 +97,6 @@ function EditProfileScreen({navigation}) {
                 </View>
             </View>
 
-            <View style={styles.nav_bar}>
-                <View style={styles.nav_icon_area}>
-
-                    <TouchableOpacity style={{flex: 1}} onPress={() => navigation.navigate('Explore')}>
-                        <Icon style={styles.nav_icon_discover} color= "#80f7e3" size={30} name="group"/>
-                        <Text style= {{color:'#80f7e3'}}>Discover</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{flex: 1.1}} onPress={() => navigation.navigate('Veterinaries')}>
-                        <Icon  style={styles.nav_icon_vet} color= "#80f7e3" size={30} name="medkit"/>
-                        <Text style= {{color:'#80f7e3'}}>Veterinary</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{flex: 1.02}} onPress={() => navigation.navigate('Pet Shops')}>
-                        <Icon style={styles.nav_icon_shop} color= "#80f7e3" size={30} name="paw"/>
-                        <Text style= {{color:'#80f7e3'}}>Pet Shop</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{flex: 1.}} onPress={()=>navigation.navigate('Profile')}>
-                        <Icon style={styles.nav_icon_profile} color= "#80f7e3" size={30} name="user-circle-o"/>
-                        <Text style= {{color:'#80f7e3'}}>Profile</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
     </View>
     )
 }
