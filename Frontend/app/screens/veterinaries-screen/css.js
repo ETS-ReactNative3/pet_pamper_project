@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     header_area: {
         borderColor: 'white',
         width: '100%',
-        height: 110,
+        height: 65,
     },
     
     header: {
