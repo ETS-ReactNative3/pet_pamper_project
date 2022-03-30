@@ -11,31 +11,28 @@ import {addUserFollowedCommunity, removeUserUnfollowedCommunity, setUserFollowed
 import {getPreciseDistance} from 'geolib'
 import {styles} from './css'
 import {getUserFollowedCommunities, getUserNearbyCommunities, addUserCommunities, pingUserCommunityMembers} from '../../services'
+import ExploreHeader from './header';
 
 function ExploreScreen({ navigation }) {
     
     const {userId, userToken, userImage, userCommunities, userFollowedCommunities, userUnFollowedCommunities, userLatitude, userLongitude, userFirstName, userLastName} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
-    // const url_followed_communities = 'http://192.168.1.107:3000/user/communities'
-    // const url_all_communities = 'http://192.168.1.107:3000/user/all_communities'
-    // const url_add_community = 'http://192.168.1.107:3000/user/add_community'
-    const url_ping_community = 'http://192.168.1.107:3000/user/ping_community'
 
     React.useEffect(async ()=> {   
-            let result_fc = await getUserFollowedCommunities(userCommunities)
-            const nearby_followed_communities = result_fc.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
-            dispatch(setUserFollowedCommunities(nearby_followed_communities))          
-          }, [userCommunities]);
-        
-          const fc_items = userFollowedCommunities
+        let result_fc = await getUserFollowedCommunities(userCommunities)
+        const nearby_followed_communities = result_fc.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
+        dispatch(setUserFollowedCommunities(nearby_followed_communities))          
+        }, [userCommunities]);
+    
+        const fc_items = userFollowedCommunities
     
     React.useEffect(async ()=> {
-            let result_nc = await getUserNearbyCommunities()
-            const nearby_unfollowed_communities = result_nc.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1  && !userCommunities.includes(value._id))
-            dispatch(setUserUnFollowedCommunities(nearby_unfollowed_communities))           
-          }, [userCommunities]);
+        let result_nc = await getUserNearbyCommunities()
+        const nearby_unfollowed_communities = result_nc.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1  && !userCommunities.includes(value._id))
+        dispatch(setUserUnFollowedCommunities(nearby_unfollowed_communities))           
+        }, [userCommunities]);
 
-          const nc_items = userUnFollowedCommunities
+        const nc_items = userUnFollowedCommunities
           
 
     async function addCommunity(nc_item, userToken, userId, userCommunities) {
@@ -43,59 +40,19 @@ function ExploreScreen({ navigation }) {
         dispatch(removeUserUnfollowedCommunity(nc_item))
         dispatch(addUserFollowedCommunity(result_ac))
         dispatch(addUserCommunityId(result_ac))
-
-    }     
-    
-    // async function pingCommunity(fc_item) {
-
-    //     let result = await fetch(url_ping_community, {
-    //         method: 'POST',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             members: fc_item.members,
-    //             first_name: userFirstName,
-    //             last_name: userLastName,
-    //             latitude: userLatitude,
-    //             longitude: userLongitude,
-    //             image: userImage,
-    //         })
-    //     })
-
-    //     result = await result.json()
-          
-        
-    // }     
+    }         
     
       
     return (
         <View style={styles.background}>
-            <View style={styles.header_area}>
-                <View style={styles.header}>              
-                    <View style={styles.header_image_area}>
-                        <Image style={styles.header_image} source={{uri: `data:image/gif;base64,${userImage}`}}></Image>
-                    </View>
+            <ExploreHeader navigation={navigation}/>
 
-                    <View style={styles.header_text_area}>
-                        <Text style={styles.header_text}>Discover</Text>
-                        <Icon style={styles.header_icon_arrow} size={20} name="chevron-down"/>
-                    </View>
-
-                    <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-                        <Avatar.Icon style={styles.header_icon} size={40} icon="bell" />
-                    </TouchableOpacity>
-                </View>
-
-                <Text style={styles.header_sub_title}>Your communities</Text>
-            </View>
 
             <View>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     {fc_items.map((fc_item, fc_index) => (
                         <View key= {fc_index} >
-                            <TouchableOpacity style={{alignItems: 'center'}} onPress={async ()=> await userStatusUpdate(fc_item, userFirstName, userLastName, userLatitude, userLongitude, userImage)}>
+                            <TouchableOpacity style={{alignItems: 'center'}} onPress={async ()=> await pingUserCommunityMembers(fc_item, userFirstName, userLastName, userLatitude, userLongitude, userImage)}>
                                 <Image style= {styles.fc_image} source= {{uri: `data:image/gif;base64,${fc_item.image}`}}/>
 
                                 <Text style= {styles.fc_text}>{fc_item.name}</Text>
