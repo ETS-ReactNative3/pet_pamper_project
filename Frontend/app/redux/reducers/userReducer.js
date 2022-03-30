@@ -1,4 +1,4 @@
-import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS, SET_USER_UNFOLLOWED_COMMUNITIES, ADD_FOLLOWED_COMMUNITY, REMOVE_UNFOLLOWED_COMMUNITY, USER_NOTIFICATIONS, SET_USER_ID} from '../constants';
+import {SET_USER_FOLLOWED_COMMUNITIES, SET_USER_TOKEN, SET_USER_COMMUNITIES, SET_USER_FIRST_NAME, SET_USER_LAST_NAME, SET_USER_LATITUDE, SET_USER_LONGITUDE, SET_USER_IMAGE, SET_USER_STATUS, SET_USER_PASSWORD, SET_USER_NEARBY_VETERINARIES, SET_USER_NEARBY_PET_SHOPS, SET_USER_UNFOLLOWED_COMMUNITIES, ADD_FOLLOWED_COMMUNITY, REMOVE_UNFOLLOWED_COMMUNITY, USER_NOTIFICATIONS, SET_USER_ID, ADD_USER_COMMUNITY} from '../constants';
 
 
 const initial_state = {
@@ -111,18 +111,24 @@ const userReducer = (state = initial_state, action) => {
                 ...state,
                 userFollowedCommunities: [...state.userFollowedCommunities, action.payload]
             };
+
+        case ADD_USER_COMMUNITY:
+            return {
+                ...state,
+                userCommunities: [...state.userCommunities, action.payload._id]
+            };
             
-            case REMOVE_UNFOLLOWED_COMMUNITY:
-                return {
-                    ...state,
-                    userUnFollowedCommunities: [...state.userUnFollowedCommunities.filter(nc_item => nc_item._id !== action.payload._id)]
-                };
-                
-            case USER_NOTIFICATIONS:
-                return {
-                    ...state,
-                    userNotifications: action.payload
-                };
+        case REMOVE_UNFOLLOWED_COMMUNITY:
+            return {
+                ...state,
+                userUnFollowedCommunities: [...state.userUnFollowedCommunities.filter(nc_item => nc_item._id !== action.payload._id)]
+            };
+            
+        case USER_NOTIFICATIONS:
+            return {
+                ...state,
+                userNotifications: action.payload
+            };
         default:
             return state;
     }

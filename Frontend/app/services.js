@@ -78,3 +78,39 @@ export const getUserNearbyCommunities = async () => {
     return result
 }
 
+export const addUserCommunities = async (nc_item, userToken, userId, userCommunities) => {
+    let result = await fetch(userUrl('add_community'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            id: nc_item._id,
+            token: userToken,
+            user_id: userId,
+            communities: userCommunities
+        })
+    })
+
+    result = await result.json()
+    
+    return result
+}
+
+export const pingUserCommunityMembers = async (fc_item, userFirstName, userLastName, userLatitude, userLongitude, userImage) => {
+    let result = await fetch(userUrl('ping_community'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            members: fc_item.members,
+            first_name: userFirstName,
+            last_name: userLastName,
+            latitude: userLatitude,
+            longitude: userLongitude,
+            image: userImage,
+        })
+    })
+
+    result = await result.json()
+    
+    return result
+}
+
