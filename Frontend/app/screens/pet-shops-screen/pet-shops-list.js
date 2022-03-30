@@ -8,7 +8,7 @@ import SegmentedControl from '@react-native-segmented-control/segmented-control'
 import MapView, { Callout, Marker } from "react-native-maps";
 import {styles} from './css'
 import {getUserPetShops} from '../../services'
-import PetShopsHeader from './header';
+
 
 export default function PetShopsList({navigation}) {
     const {userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
