@@ -10,7 +10,7 @@ import {styles} from './css'
 import {getUserPetShops} from '../../services'
 import PetShopsHeader from './header';
 
-function PetShopsScreen({navigation}) {
+export default function PetShops({navigation}) {
     const {userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
     const [selectedIndex, setSelectedIndex] = React.useState(0)
@@ -121,9 +121,3 @@ function PetShopsScreen({navigation}) {
 
     );
 }
-
-
-
-
-
-export default PetShopsScreen;

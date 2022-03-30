@@ -125,3 +125,15 @@ export const getUserVeterinaries = async () => {
     
     return result
 }
+
+export const getUserPetShops = async () => {
+    let result = await fetch(userUrl('pet_shops'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({})
+    })
+
+    result = await result.json()
+    
+    return result
+}

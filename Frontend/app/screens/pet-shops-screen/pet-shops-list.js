@@ -10,17 +10,15 @@ import {styles} from './css'
 import {getUserPetShops} from '../../services'
 import PetShopsHeader from './header';
 
-function PetShopsScreen({navigation}) {
+export default function PetShopsList({navigation}) {
     const {userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
-    const [selectedIndex, setSelectedIndex] = React.useState(0)
 
     React.useEffect(async ()=> {
-        let result = await getUserPetShops()
+        let result = await getUserPetShops()      
         
         const nearby_pet_shops = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
-        dispatch(setUserNearbyPetShops(nearby_pet_shops))
-        
+        dispatch(setUserNearbyPetShops(nearby_pet_shops))    
       }, []);
 
       const nps_items = userNearbyPetShops
@@ -38,27 +36,10 @@ function PetShopsScreen({navigation}) {
         Linking.openURL(url);
     }
 
-    //   React.useEffect(async () => {
-    //       const location = await Location.reverseGeocodeAsync({latitude: 33.885351, longitude: 35.483362})
-    //   console.log(location[0].city)},[])
-
-
+    
+    
     return (
-        <View style={styles.background}>
-            <PetShopsHeader navigation={navigation}/>
-
-                <View>
-                    <SegmentedControl
-                        values={['List', 'Map']}
-                        selectedIndex={selectedIndex}
-                        onChange={(event) => {
-                        setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
-                        }}
-                        style= {styles.list_controller}
-                    />
-                </View>  
-
-            {selectedIndex == 0 ?
+        <View>
             <View>
                 <Text style={styles.header_sub_title}>Nearby pet shops</Text>
 
@@ -74,7 +55,6 @@ function PetShopsScreen({navigation}) {
 
                                         <View style= {styles.nps_text}>
                                             <Text style= {styles.nps_text_title}>{nps_item.first_name}</Text>
-                                            {/* <Text style= {styles.nps_text_location}>hello</Text> */}
                                         </View>
 
                                         <View>    
@@ -88,42 +68,25 @@ function PetShopsScreen({navigation}) {
                         ))}             
                     </ScrollView>
                 </View>
-            </View> :
-
-            <View>
-                <MapView
-                    style={styles.map}
-                    initialRegion={{
-                    latitude: parseFloat(userLatitude),
-                    longitude: parseFloat(userLongitude),
-                    latitudeDelta: 0.01,
-                    longitudeDelta: 0.01,
-                    }}
-                    provider="google"
-                    showsUserLocation= {true}
-                    loadingEnabled= {true}>
-                
-                    {nps_items.map((nps_item, nps_index) => (                 
-                        <View key= {nps_index}>
-                            <Marker coordinate={{latitude: parseFloat(nps_item.latitude), longitude: parseFloat(nps_item.longitude)}} 
-                            pinColor="red" 
-                            onPress= {()=>locatePetShop(nps_item)}>                                                            
-                                <Callout style={{width: 100, alignItems:'center'}}>   
-                                    <Text>{nps_item.first_name}</Text>   
-                                </Callout>
-                            </Marker>
-                        </View>
-                    ))}              
-                </MapView>
-            </View>}
-
+            </View>
         </View>
 
     );
 }
 
+ 
 
 
 
 
-export default PetShopsScreen;
+
+
+
+
+
+
+{/* <Text style= {styles.nps_text_location}>hello</Text> */}
+
+//   React.useEffect(async () => {
+    //       const location = await Location.reverseGeocodeAsync({latitude: 33.885351, longitude: 35.483362})
+    //   console.log(location[0].city)},[])

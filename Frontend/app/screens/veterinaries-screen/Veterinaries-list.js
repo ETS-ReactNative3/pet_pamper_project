@@ -6,11 +6,11 @@ import * as Linking from 'expo-linking'
 import {getPreciseDistance} from 'geolib'
 import {styles} from './css'
 import {getUserVeterinaries} from '../../services'
+import { imageUri } from '../../methods';
 
 export default function VeterinariesList() {
     const {userNearbyVeterinaries, userLatitude, userLongitude} = useSelector(state => state.userReducer)
-    const dispatch= useDispatch()
-    
+    const dispatch= useDispatch()  
 
     React.useEffect(async ()=> {
         let result = await getUserVeterinaries()
@@ -46,7 +46,7 @@ export default function VeterinariesList() {
                                 <View>
                                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                         <View>
-                                            <Image style= {styles.nv_image} source= {{uri: `data:image/gif;base64,${nv_item.image}`}}/>
+                                            <Image style= {styles.nv_image} source= {{uri: imageUri(nv_item.image)}}/>
                                         </View>
 
                                         <View style= {styles.nv_text}>
