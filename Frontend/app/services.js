@@ -114,3 +114,14 @@ export const pingUserCommunityMembers = async (fc_item, userFirstName, userLastN
     return result
 }
 
+export const getUserVeterinaries = async () => {
+    let result = await fetch(userUrl('veterinaries'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({})
+    })
+
+    result = await result.json()
+    
+    return result
+}

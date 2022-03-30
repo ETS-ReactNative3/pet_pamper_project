@@ -12,24 +12,16 @@ import {getPreciseDistance} from 'geolib'
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import MapView, { Callout, Marker } from "react-native-maps";
 import {styles} from './css'
+import {getUserVeterinaries} from '../../services'
 
 function VeterinariesScreen({navigation}) {
     const {userToken, userImage, userNearbyVeterinaries, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
     const [selectedIndex, setSelectedIndex] = React.useState(0)
-    const url = 'http://192.168.1.107:3000/user/veterinaries'
+    
 
     React.useEffect(async ()=> {
-        let result = await fetch(url, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({})
-        })
-
-        result = await result.json()
+        let result = await getUserVeterinaries()
         
         const nearby_veterinaries = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
         dispatch(setUserNearbyVeterinaries(nearby_veterinaries))
