@@ -19,19 +19,6 @@ function CreateCommunityScreen({navigation}) {
     const [latitude, setLatitude] = React.useState("");
     const [longitude, setLongitude] = React.useState("");
 
-    // useEffect(() => {
-    //     (async () => {
-    //       let { status } = await Location.requestForegroundPermissionsAsync();
-    //       if (status !== 'granted') {
-    //         setErrorMsg('Permission to access location was denied');
-    //         return;
-    //       }
-    
-    //       let location = await Location.getCurrentPositionAsync({});
-    //       setLatitude(location.coords.latitude);
-    //       setLongitude(location.coords.longitude);
-    //     })();
-    //   }, []);
 
     const getCommunityLocation = async () => {
         let location = await userCreateCommunityLocation()       
