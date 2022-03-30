@@ -1,4 +1,3 @@
-import {setUserLastName, setUserFirstName, setUserPassword} from '../../redux/actions/user-info'
 import {useSelector, useDispatch} from 'react-redux'
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native'

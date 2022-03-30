@@ -5,6 +5,7 @@ import {styles} from './css'
 import {addUserFollowedCommunity, removeUserUnfollowedCommunity,setUserUnFollowedCommunities, addUserCommunityId} from '../../redux/actions/user-info'
 import {getUserNearbyCommunities, addUserCommunities} from '../../services'
 import {getPreciseDistance} from 'geolib'
+import {imageUri} from '../../methods'
 
 export default function NearbyCommunties() {
     const {userId, userToken, userCommunities, userUnFollowedCommunities, userLatitude, userLongitude} = useSelector(state => state.userReducer)
@@ -38,7 +39,7 @@ export default function NearbyCommunties() {
                             <View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                     <View>
-                                        <Image style= {styles.nc_image} source= {{uri: `data:image/gif;base64,${nc_item.image}`}}/>
+                                        <Image style= {styles.nc_image} source= {{uri: imageUri(nc_item.image)}}/>
                                     </View>
 
                                     <View style= {styles.nc_text}>

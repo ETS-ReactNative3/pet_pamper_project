@@ -4,6 +4,7 @@ import { Avatar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {styles} from './css'
 import {useSelector} from 'react-redux'
+import {imageUri} from '../../methods'
 
 export default function ExploreHeader({navigation}) {
     const {userImage} = useSelector(state => state.userReducer)
@@ -11,7 +12,7 @@ export default function ExploreHeader({navigation}) {
         <View style={styles.header_area}>
             <View style={styles.header}>              
                 <View style={styles.header_image_area}>
-                    <Image style={styles.header_image} source={{uri: `data:image/gif;base64,${userImage}`}}></Image>
+                    <Image style={styles.header_image} source={{uri: imageUri(userImage)}}></Image>
                 </View>
 
                 <View style={styles.header_text_area}>

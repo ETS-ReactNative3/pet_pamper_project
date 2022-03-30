@@ -50,8 +50,8 @@ export const userCreateCommunityLocation = async () => {
     return location
   };
 
-  export const imageUri = (image) => {
+export const imageUri = (image) => {
     return (
-        'http://192.168.1.107:3000/community/' + route
+        'data:image/gif;base64,' + image
     )
 }
