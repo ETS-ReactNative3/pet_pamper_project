@@ -51,3 +51,4 @@ export const userCreateCommunity = async (name, userToken, image_base64, latitud
     
     return result.message
 }
+
