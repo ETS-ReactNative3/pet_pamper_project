@@ -52,3 +52,29 @@ export const userCreateCommunity = async (name, userToken, image_base64, latitud
     return result.message
 }
 
+export const getUserFollowedCommunities = async (userCommunities) => {
+    let result = await fetch(userUrl('communities'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            communities: userCommunities 
+        })
+    })
+
+    result = await result.json()
+    
+    return result
+}
+
+export const getUserNearbyCommunities = async () => {
+    let result = await fetch(userUrl('all_communities'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({})
+    })
+
+    result = await result.json()
+    
+    return result
+}
+

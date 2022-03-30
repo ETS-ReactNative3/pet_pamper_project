@@ -10,29 +10,30 @@ import {useSelector, useDispatch} from 'react-redux'
 import {addUserFollowedCommunity, removeUserUnfollowedCommunity, setUserFollowedCommunities, setUserUnFollowedCommunities} from '../../redux/actions/user-info'
 import {getPreciseDistance} from 'geolib'
 import {styles} from './css'
+import {getUserFollowedCommunities, getUserNearbyCommunities} from '../../services'
 
 function ExploreScreen({ navigation }) {
     
     const {userId, userToken, userImage, userCommunities, userFollowedCommunities, userUnFollowedCommunities, userLatitude, userLongitude, userFirstName, userLastName} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
-    const url_followed_communities = 'http://192.168.1.107:3000/user/communities'
+    // const url_followed_communities = 'http://192.168.1.107:3000/user/communities'
     const url_all_communities = 'http://192.168.1.107:3000/user/all_communities'
     const url_add_community = 'http://192.168.1.107:3000/user/add_community'
     const url_ping_community = 'http://192.168.1.107:3000/user/ping_community'
 
     React.useEffect(async ()=> {
-            let result = await fetch(url_followed_communities, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                    communities: userCommunities
-                })
-            })
+            // let result = await fetch(url_followed_communities, {
+            //     method: 'POST',
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         "Accept": "application/json"
+            //     },
+            //     body: JSON.stringify({
+            //         communities: userCommunities
+            //     })
+            // })
     
-            result = await result.json()
+            let result = await getUserFollowedCommunities(userCommunities)
             const nearby_followed_communities = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
             dispatch(setUserFollowedCommunities(nearby_followed_communities))
             
@@ -41,16 +42,16 @@ function ExploreScreen({ navigation }) {
           const fc_items = userFollowedCommunities
     
     React.useEffect(async ()=> {
-            let result = await fetch(url_all_communities, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({})
-            })
+            // let result = await fetch(url_all_communities, {
+            //     method: 'POST',
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         "Accept": "application/json"
+            //     },
+            //     body: JSON.stringify({})
+            // })
     
-            result = await result.json()
+            let result = await getUserNearbyCommunities()
             const nearby_unfollowed_communities = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1  && !userCommunities.includes(value._id))
             dispatch(setUserUnFollowedCommunities(nearby_unfollowed_communities))
             
