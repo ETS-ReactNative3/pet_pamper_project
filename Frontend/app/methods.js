@@ -49,3 +49,9 @@ export const userCreateCommunityLocation = async () => {
     let location = await Location.getCurrentPositionAsync({});
     return location
   };
+
+  export const imageUri = (image) => {
+    return (
+        'http://192.168.1.107:3000/community/' + route
+    )
+}
