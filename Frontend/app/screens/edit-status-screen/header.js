@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
-import { Avatar, TextInput } from 'react-native-paper';
+import {View, Text, TouchableOpacity} from 'react-native'
+import { Avatar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {styles} from './css'
 

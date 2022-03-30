@@ -5,9 +5,8 @@ import {View, Text, TouchableOpacity} from 'react-native'
 import { TextInput } from 'react-native-paper';
 import {styles} from './css'
 import {userStatusUpdate} from '../../services'
-import StatusHeader from './header';
 
-function InputForm({navigation}) {
+function InputForm() {
     const {userToken, userStatus} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()  
     const [status, setStatus] = React.useState("")
