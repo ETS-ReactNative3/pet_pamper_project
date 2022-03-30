@@ -8,7 +8,6 @@ import SigninScreen from './screens/signin-screen';
 import ExploreScreen from './screens/explore-screen';
 import VeterinariesScreen from './screens/veterinaries-screen';
 import PetShopsScreen from './screens/pet-shops-screen';
-import PetShopsMapScreen from './screens/pet-shops-map-screen';
 import NotificationsScreen from './screens/notifications-screen';
 import ProfileScreen from './screens/profile-screen';
 import EditProfileScreen from './screens/edit-profile-screen';
@@ -17,6 +16,7 @@ import CreateCommunityScreen from './screens/create-community-screen';
 import { Provider } from 'react-redux';
 import { Store } from './redux/store';
 import Icon from 'react-native-vector-icons/FontAwesome'
+
 
 const stack = createNativeStackNavigator();
 const main = createBottomTabNavigator()

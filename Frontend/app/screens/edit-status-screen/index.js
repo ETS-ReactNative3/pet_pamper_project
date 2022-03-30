@@ -5,33 +5,12 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {setUserStatus} from '../../redux/actions/user-info'
 import {useSelector, useDispatch} from 'react-redux'
 import {styles} from './css'
+import {userStatusUpdate} from '../../services'
 
 function EditStatusScreen({navigation}) {
     const {userToken, userStatus} = useSelector(state => state.userReducer)
-    const dispatch = useDispatch()
-    
+    const dispatch = useDispatch()  
     const [status, setStatus] = React.useState("")
-    const url = 'http://192.168.1.107:3000/user/status'
-    
-    async function statusUpdate() {
- 
-        let result = await fetch(url, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                status: userStatus,
-                token: userToken
-            })
-        })
-
-        result = await result.json()
-        
-        setStatus(result.message)
-    }
-
 
     return (
         <View style={styles.background}>
@@ -72,7 +51,7 @@ function EditStatusScreen({navigation}) {
                     
 
                     <View  style={styles.button_area_edit}>
-                        <TouchableOpacity style={styles.button_edit} onPress={()=> statusUpdate()}>
+                        <TouchableOpacity style={styles.button_edit} onPress={async ()=> setStatus(await userStatusUpdate(userStatus, userToken))}>
                             <Text style={styles.text_edit}>UPDATE</Text>
                         </TouchableOpacity>
                     </View>
