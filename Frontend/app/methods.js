@@ -1,5 +1,5 @@
 // import {setUserStatus} from './redux/actions/user-info'
-import {useSelector, useDispatch} from 'react-redux'
+// import {useSelector, useDispatch} from 'react-redux'
 import {post} from './constants'
 
 
@@ -9,15 +9,6 @@ export const userUrl = (route) => {
     )
 }
 
-// export const userFetch = (route) => {
-//     return (
-//         method: 'POST',
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-//     )
-// }
 
 export const header = () => {
     return (

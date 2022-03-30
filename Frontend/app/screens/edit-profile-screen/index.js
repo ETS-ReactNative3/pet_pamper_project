@@ -5,34 +5,13 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {setUserLastName, setUserFirstName, setUserPassword} from '../../redux/actions/user-info'
 import {useSelector, useDispatch} from 'react-redux'
 import {styles} from './css'
+import {userInfoUpdate} from '../../services'
 
 function EditProfileScreen({navigation}) {
     const {userToken, userFirstName, userLastName, userPassword} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
     
     const [status, setStatus] = React.useState("")
-    const url = 'http://192.168.1.107:3000/user/user_info_update'
-    
-    async function InfoUpdate() {
- 
-        let result = await fetch(url, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                first_name: userFirstName,
-                last_name: userLastName,
-                password: userPassword,
-                token: userToken
-            })
-        })
-
-        result = await result.json()
-        
-        setStatus(result.message)
-    }
 
 
     return (
@@ -91,7 +70,7 @@ function EditProfileScreen({navigation}) {
                     />
 
                     <View  style={styles.button_area_edit}>
-                        <TouchableOpacity style={styles.button_edit} onPress={()=> InfoUpdate()}>
+                        <TouchableOpacity style={styles.button_edit} onPress={async ()=> setStatus(await userInfoUpdate(userFirstName, userLastName, userPassword, userToken))}>
                             <Text style={styles.text_edit}>UPDATE</Text>
                         </TouchableOpacity>
                     </View>
