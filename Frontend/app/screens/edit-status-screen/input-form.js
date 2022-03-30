@@ -6,7 +6,7 @@ import { TextInput } from 'react-native-paper';
 import {styles} from './css'
 import {userStatusUpdate} from '../../services'
 
-function InputForm() {
+export default function InputForm() {
     const {userToken, userStatus} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()  
     const [status, setStatus] = React.useState("")
@@ -36,5 +36,3 @@ function InputForm() {
         </View>
     );
 }
-
-export default InputForm;
