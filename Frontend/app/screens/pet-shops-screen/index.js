@@ -4,8 +4,7 @@ import {styles} from './css'
 import PetShopsHeader from './header';
 import PetShops from './pet-shops';
 
-
-function PetShopsScreen({navigation}) {
+export default function PetShopsScreen({navigation}) {
     return (
         <View style={styles.background}>
             <PetShopsHeader navigation={navigation}/>
@@ -13,9 +12,3 @@ function PetShopsScreen({navigation}) {
         </View>
     );
 }
-
-
-
-
-
-export default PetShopsScreen;

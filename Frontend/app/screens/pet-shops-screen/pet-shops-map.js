@@ -1,19 +1,16 @@
 import React from 'react';
-import {View, Text,TouchableOpacity, Image, ScrollView} from 'react-native'
+import {View, Text} from 'react-native'
 import {useSelector, useDispatch} from 'react-redux'
 import {setUserNearbyPetShops} from '../../redux/actions/user-info'
 import * as Linking from 'expo-linking'
 import {getPreciseDistance} from 'geolib'
-import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import MapView, { Callout, Marker } from "react-native-maps";
 import {styles} from './css'
 import {getUserPetShops} from '../../services'
-import PetShopsHeader from './header';
 
-export default function PetShopsMap({navigation}) {
+export default function PetShopsMap() {
     const {userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
-    const [selectedIndex, setSelectedIndex] = React.useState(0)
 
     React.useEffect(async ()=> {
         let result = await getUserPetShops()
@@ -37,11 +34,6 @@ export default function PetShopsMap({navigation}) {
        
         Linking.openURL(url);
     }
-
-    //   React.useEffect(async () => {
-    //       const location = await Location.reverseGeocodeAsync({latitude: 33.885351, longitude: 35.483362})
-    //   console.log(location[0].city)},[])
-
 
     return (
         <View>
@@ -71,9 +63,7 @@ export default function PetShopsMap({navigation}) {
                     ))}              
                 </MapView>
             </View>
-
         </View>
-
     );
 }
 

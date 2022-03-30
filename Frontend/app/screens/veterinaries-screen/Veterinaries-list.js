@@ -51,7 +51,6 @@ export default function VeterinariesList() {
 
                                         <View style= {styles.nv_text}>
                                             <Text style= {styles.nv_text_title}>{nv_item.first_name}</Text>
-                                            {/* <Text style= {styles.nv_text_location}>{nv_item.location}</Text> */}
                                         </View>
 
                                         <View>    

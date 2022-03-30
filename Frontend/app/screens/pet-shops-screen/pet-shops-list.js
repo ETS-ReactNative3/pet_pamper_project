@@ -4,13 +4,12 @@ import {useSelector, useDispatch} from 'react-redux'
 import {setUserNearbyPetShops} from '../../redux/actions/user-info'
 import * as Linking from 'expo-linking'
 import {getPreciseDistance} from 'geolib'
-import SegmentedControl from '@react-native-segmented-control/segmented-control';
-import MapView, { Callout, Marker } from "react-native-maps";
 import {styles} from './css'
 import {getUserPetShops} from '../../services'
+import { imageUri } from '../../methods';
 
 
-export default function PetShopsList({navigation}) {
+export default function PetShopsList() {
     const {userNearbyPetShops, userLatitude, userLongitude} = useSelector(state => state.userReducer)
     const dispatch= useDispatch()
 
@@ -34,9 +33,7 @@ export default function PetShopsList({navigation}) {
         });
        
         Linking.openURL(url);
-    }
-
-    
+    } 
     
     return (
         <View>
@@ -50,7 +47,7 @@ export default function PetShopsList({navigation}) {
                                 <View>
                                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                         <View>
-                                            <Image style= {styles.nps_image} source= {{uri: `data:image/gif;base64,${nps_item.image}`}}/>
+                                            <Image style= {styles.nps_image} source= {{uri: imageUri(nps_item.image)}}/>
                                         </View>
 
                                         <View style= {styles.nps_text}>
