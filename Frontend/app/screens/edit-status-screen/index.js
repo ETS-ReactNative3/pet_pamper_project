@@ -1,39 +1,24 @@
-import React from 'react';
+// import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
-import { Avatar, TextInput } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome'
-import {setUserStatus} from '../../redux/actions/user-info'
-import {useSelector, useDispatch} from 'react-redux'
+// import { Avatar, TextInput } from 'react-native-paper';
+// import Icon from 'react-native-vector-icons/FontAwesome'
+// import {setUserStatus} from '../../redux/actions/user-info'
+// import {useSelector, useDispatch} from 'react-redux'
 import {styles} from './css'
-import {userStatusUpdate} from '../../services'
+// import {userStatusUpdate} from '../../services'
+import StatusHeader from './header';
+import InputForm from './input-form';
 
 function EditStatusScreen({navigation}) {
-    const {userToken, userStatus} = useSelector(state => state.userReducer)
-    const dispatch = useDispatch()  
-    const [status, setStatus] = React.useState("")
+    // const {userToken, userStatus} = useSelector(state => state.userReducer)
+    // const dispatch = useDispatch()  
+    // const [status, setStatus] = React.useState("")
 
     return (
         <View style={styles.background}>
-            <View style={styles.header_area}>
-                <View style={styles.header}>              
-                    <TouchableOpacity onPress={()=> navigation.navigate('Profile Screen')}>
-                        <Avatar.Icon style={styles.header_icon} color='black' size={60} icon="chevron-left" />
-                    </TouchableOpacity>
-
-                    <View style={styles.header_text_area}>
-                        <Text style={styles.header_text}>Edit Profile</Text>
-                        <Icon style={styles.header_icon_arrow} size={20} name="chevron-down"/>
-                    </View>
-
-                    <TouchableOpacity onPress={()=>navigation.navigate('Notifications')}>
-                        <Avatar.Icon style={styles.header_icon} size={40} icon="bell" />
-                    </TouchableOpacity>
-                </View>
-
-                <Text style={styles.header_sub_title}></Text>
-            </View>
-
-            <View style= {styles.backgroudArea}>
+            <StatusHeader navigation={navigation}/>
+            <InputForm/>
+            {/* <View style= {styles.backgroudArea}>
 
                 <View style={styles.edit_form}>
 
@@ -56,7 +41,7 @@ function EditStatusScreen({navigation}) {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </View> */}
 
     </View>
     )

@@ -1,4 +1,4 @@
-import {setUserStatus} from './redux/actions/user-info'
+// import {setUserStatus} from './redux/actions/user-info'
 import {useSelector, useDispatch} from 'react-redux'
 import {post} from './constants'
 
