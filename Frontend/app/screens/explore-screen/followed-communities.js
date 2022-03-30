@@ -1,13 +1,13 @@
 import {useSelector, useDispatch} from 'react-redux'
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native'
-import { TextInput } from 'react-native-paper';
+import {View, Text, TouchableOpacity, ScrollView, Image} from 'react-native'
 import {styles} from './css'
 import {setUserFollowedCommunities} from '../../redux/actions/user-info'
 import {getUserFollowedCommunities, pingUserCommunityMembers} from '../../services'
+import {getPreciseDistance} from 'geolib'
 
 export default function FollowedCommunties() {
-    const {userCommunities, userFollowedCommunities} = useSelector(state => state.userReducer)
+    const {userCommunities, userFollowedCommunities, userLatitude, userLongitude, userFirstName, userLastName, userImage} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()  
     
     React.useEffect(async ()=> {   
