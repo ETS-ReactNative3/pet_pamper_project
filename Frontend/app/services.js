@@ -1,5 +1,5 @@
 import {post} from './constants';
-import {header, userUrl} from './methods'
+import {header, userUrl, communityUrl} from './methods'
 
 
 export const userStatusUpdate = async (userStatus, userToken) => {
@@ -26,6 +26,24 @@ export const userInfoUpdate = async (userFirstName, userLastName, userPassword, 
             last_name: userLastName,
             password: userPassword,
             token: userToken
+        })
+    })
+
+    result = await result.json()
+    
+    return result.message
+}
+
+export const userCreateCommunity = async (name, userToken, image_base64, latitude, longitude) => {
+    let result = await fetch(communityUrl('create_community'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            name: name,
+            token: userToken,
+            image: image_base64, 
+            latitude: latitude, 
+            longitude: longitude, 
         })
     })
 

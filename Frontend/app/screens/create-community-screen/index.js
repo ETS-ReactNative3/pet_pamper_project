@@ -6,6 +6,7 @@ import * as Location from 'expo-location';
 import * as ImagePicker from 'expo-image-picker';
 import {useSelector} from 'react-redux'
 import {styles} from './css'
+import {userCreateCommunity} from '../../services'
 
 function CreateCommunityScreen({navigation}) {
     const {userToken} = useSelector(state => state.userReducer)
@@ -15,7 +16,7 @@ function CreateCommunityScreen({navigation}) {
     const [status, setStatus] = React.useState("");
     const [latitude, setLatitude] = React.useState("");
     const [longitude, setLongitude] = React.useState("");
-    const url = 'http://192.168.1.107:3000/community/create_community'
+    // const url = 'http://192.168.1.107:3000/community/create_community'
 
     useEffect(() => {
         (async () => {
@@ -46,29 +47,29 @@ function CreateCommunityScreen({navigation}) {
       };
 
     
-    async function createCommunity() {
+    // async function createCommunity() {
  
-        let result = await fetch(url, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                name: name,
-                token: userToken,
-                image: image_base64, 
-                latitude: latitude, 
-                longitude: longitude, 
+    //     let result = await fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Accept": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             name: name,
+    //             token: userToken,
+    //             image: image_base64, 
+    //             latitude: latitude, 
+    //             longitude: longitude, 
                 
-            })
-        })
+    //         })
+    //     })
 
-        result = await result.json()
+    //     result = await result.json()
         
-        setStatus(result.message) //add message in backend response
+    //     setStatus(result.message) 
         
-    }
+    // }
 
 
     return (
@@ -115,7 +116,7 @@ function CreateCommunityScreen({navigation}) {
                     </View>
 
                     <View  style={styles.button_area_create}>
-                        <TouchableOpacity style={styles.button_create} onPress={()=> createCommunity()}>
+                        <TouchableOpacity style={styles.button_create} onPress={async ()=> setStatus(await userCreateCommunity(name, userToken, image_base64, latitude, longitude))}>
                             <Text style={styles.text_create}>CREATE</Text>
                         </TouchableOpacity>
                     </View>

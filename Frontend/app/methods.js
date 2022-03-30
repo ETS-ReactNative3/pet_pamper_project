@@ -9,6 +9,12 @@ export const userUrl = (route) => {
     )
 }
 
+export const communityUrl = (route) => {
+    return (
+        'http://192.168.1.107:3000/community/' + route
+    )
+}
+
 
 export const header = () => {
     return (
@@ -19,18 +25,3 @@ export const header = () => {
     )
 }
 
-
-export const userStatusUpdate= async (userStatus, userToken) => {
-        let result = await fetch(userUrl('status'), {
-            method: post,
-            headers: header(),
-            body: JSON.stringify({
-                status: userStatus,
-                token: userToken
-            })
-        })
-    
-        result = await result.json()
-
-        return result.message
-}
