@@ -22,16 +22,6 @@ function ExploreScreen({ navigation }) {
     const url_ping_community = 'http://192.168.1.107:3000/user/ping_community'
 
     React.useEffect(async ()=> {
-            // let result = await fetch(url_followed_communities, {
-            //     method: 'POST',
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //         "Accept": "application/json"
-            //     },
-            //     body: JSON.stringify({
-            //         communities: userCommunities
-            //     })
-            // })
     
             let result = await getUserFollowedCommunities(userCommunities)
             const nearby_followed_communities = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1 )
@@ -42,14 +32,7 @@ function ExploreScreen({ navigation }) {
           const fc_items = userFollowedCommunities
     
     React.useEffect(async ()=> {
-            // let result = await fetch(url_all_communities, {
-            //     method: 'POST',
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //         "Accept": "application/json"
-            //     },
-            //     body: JSON.stringify({})
-            // })
+
     
             let result = await getUserNearbyCommunities()
             const nearby_unfollowed_communities = result.filter(value => (getPreciseDistance({ latitude: value.latitude, longitude: value.longitude }, { latitude: userLatitude, longitude: userLongitude }))/1000 <= 1  && !userCommunities.includes(value._id))
