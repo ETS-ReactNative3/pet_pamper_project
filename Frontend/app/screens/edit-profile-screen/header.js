@@ -4,7 +4,7 @@ import { Avatar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {styles} from './css'
 
-export default function StatusHeader({navigation}) {
+export default function EditProfileHeader({navigation}) {
     return (
         <View style={styles.header_area}>
             <View style={styles.header}>              
@@ -13,7 +13,7 @@ export default function StatusHeader({navigation}) {
                 </TouchableOpacity>
 
                 <View style={styles.header_text_area}>
-                    <Text style={styles.header_text}>Edit Status</Text>
+                    <Text style={styles.header_text}>Edit Profile</Text>
                     <Icon style={styles.header_icon_arrow} size={20} name="chevron-down"/>
                 </View>
 
