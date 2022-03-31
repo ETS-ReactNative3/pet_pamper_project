@@ -6,27 +6,27 @@ import {useSelector, useDispatch} from 'react-redux'
 import {getUserNotifications} from '../../redux/actions/user-info'
 import * as Linking from 'expo-linking'
 import {styles} from './css'
-
+import {getNotifications} from '../../services'
 
 function NotificationsScreen({navigation}) {
 
-    const {userToken, userImage, userNotifications} = useSelector(state => state.userReducer)
+    const {userToken, userNotifications} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
-    url = 'http://192.168.1.107:3000/user/notifications'
-
+    // url = 'http://192.168.1.107:3000/user/notifications'
+    
     React.useEffect(async ()=> {
-        let result = await fetch(url, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                token: userToken
-            })
-        })
+        // let result = await fetch(url, {
+        //     method: 'POST',
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "Accept": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         token: userToken
+        //     })
+        // })
 
-        result = await result.json()
+        let result = await getNotifications(userToken)
         dispatch(getUserNotifications(result[0].notifications))
         
       }, []);
@@ -94,30 +94,7 @@ function NotificationsScreen({navigation}) {
                 </ScrollView>
             </View>
 
-            <View style={styles.nav_bar}>
-                <View style={styles.nav_icon_area}>
 
-                    <TouchableOpacity style={{flex: 1}} onPress={() => navigation.navigate('Explore')}>
-                        <Icon style={styles.nav_icon_discover} color= "#80f7e3" size={30} name="group"/>
-                        <Text style= {{color:'#80f7e3'}}>Discover</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{flex: 1.1}} onPress={() => navigation.navigate('Veterinaries')}>
-                        <Icon  style={styles.nav_icon_vet} color= "#80f7e3" size={30} name="medkit"/>
-                        <Text style= {{color:'#80f7e3'}}>Veterinary</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{flex: 1.02}} onPress={() => navigation.navigate('Pet Shops')}>
-                        <Icon style={styles.nav_icon_shop} color= "#80f7e3" size={30} name="paw"/>
-                        <Text style= {{color:'#80f7e3'}}>Pet Shop</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{flex: 1.}} onPress={() => navigation.navigate('Profile')}>
-                        <Icon style={styles.nav_icon_profile} color= "#80f7e3" size={30} name="user-circle-o"/>
-                        <Text style= {{color:'#80f7e3'}}>Profile</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
 
         </View>
     );

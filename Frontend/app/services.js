@@ -137,3 +137,17 @@ export const getUserPetShops = async () => {
     
     return result
 }
+
+export const getNotifications = async (userToken) => {
+    let result = await fetch(userUrl('notifications'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            token: userToken
+        })
+    })
+
+    result = await result.json()
+    
+    return result
+}
