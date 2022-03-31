@@ -1,31 +1,18 @@
 import React from 'react';
 import {ScrollView, View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
-import { Avatar, TextInput } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome'
 import {useSelector, useDispatch} from 'react-redux'
 import {getUserNotifications} from '../../redux/actions/user-info'
 import * as Linking from 'expo-linking'
 import {styles} from './css'
 import {getNotifications} from '../../services'
+import NotificationsHeader from './header'
 
 function NotificationsScreen({navigation}) {
 
     const {userToken, userNotifications} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
-    // url = 'http://192.168.1.107:3000/user/notifications'
     
     React.useEffect(async ()=> {
-        // let result = await fetch(url, {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "Accept": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         token: userToken
-        //     })
-        // })
-
         let result = await getNotifications(userToken)
         dispatch(getUserNotifications(result[0].notifications))
         
@@ -48,8 +35,8 @@ function NotificationsScreen({navigation}) {
 
     return (
         <View style={styles.background}>
-
-            <View style={styles.header_area}>
+            <NotificationsHeader navigation={navigation}/>
+            {/* <View style={styles.header_area}>
                 <View style={styles.header}>              
                     <TouchableOpacity onPress={()=> navigation.navigate('Explore')}>
                         <Avatar.Icon style={styles.header_icon} color='black' size={60} icon="chevron-left" />
@@ -66,7 +53,7 @@ function NotificationsScreen({navigation}) {
                 </View>
 
                 <Text style={styles.header_sub_title}>Your notifications</Text>
-            </View>
+            </View> */}
 
             <View>
                 <ScrollView>
