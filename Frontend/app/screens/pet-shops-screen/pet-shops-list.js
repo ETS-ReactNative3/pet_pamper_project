@@ -31,7 +31,7 @@ export default function PetShopsList() {
         ios: `${scheme}${label}@${latLng}`,
         android: `${scheme}${latLng}(${label})`
         });
-       
+        
         Linking.openURL(url);
     } 
     

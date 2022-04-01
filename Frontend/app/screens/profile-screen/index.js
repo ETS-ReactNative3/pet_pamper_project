@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import {useSelector, useDispatch} from 'react-redux'
 import {setUserImage, setUserStatus} from '../../redux/actions/user-info'
 import {styles} from './css'
+import {imageUri} from '../../methods'
 
 function ProfileScreen({navigation}) {
     const {userToken, userFirstName, userLastName, userImage, userStatus} = useSelector(state => state.userReducer)
@@ -80,7 +81,7 @@ function ProfileScreen({navigation}) {
 
             <TouchableOpacity>     
                 <View style= {styles.profile_image_area}>
-                    {userImage == undefined ? <Image style= {styles.profile_image} source={require('../../assets/avatar.png')}/> : <Image style={styles.profile_image} source= {{uri: `data:image/gif;base64,${userImage}`}}/>}
+                    {userImage == undefined ? <Image style= {styles.profile_image} source={require('../../assets/avatar.png')}/> : <Image style={styles.profile_image} source= {{uri: imageUri(userImage)}}/>}
                 </View>
             </TouchableOpacity>
 
@@ -109,9 +110,8 @@ function ProfileScreen({navigation}) {
             <View style={styles.edit_area}>
                 <View style={styles.edit}>                              
                     
-                    <Icon style={styles.edit_user_icon} color="black" size={25} name="user" />
-                    
-                    
+                    <Icon style={styles.edit_user_icon} color="black" size={25} name="edit" />
+                                   
                     <View style={styles.edit_text_area}>
                         <Text style={styles.edit_text}>Edit status</Text>
                     </View>

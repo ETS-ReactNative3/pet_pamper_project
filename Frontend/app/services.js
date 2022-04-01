@@ -1,6 +1,7 @@
 import {post} from './constants';
 import {header, userUrl, communityUrl} from './methods'
-
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
 
 export const userStatusUpdate = async (userStatus, userToken) => {
     let result = await fetch(userUrl('status'), {
@@ -150,4 +151,49 @@ export const getNotifications = async (userToken) => {
     result = await result.json()
     
     return result
+}
+
+export const registerPushToken = async () => {
+    let token;
+    if (Device.isDevice) {
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+        alert('Failed to get push token for push notification!');
+        return;
+      }
+      token = (await Notifications.getExpoPushTokenAsync()).data;
+      console.log(token);
+    } else {
+      alert('Must use physical device for Push Notifications');
+    }
+  
+    if (Platform.OS === 'android') {
+      Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+      });
+    }
+    
+    return token;
+}
+
+export const getUsersPushToken = async (fc_item) => {
+    let result = await fetch(userUrl('push_token'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            members: fc_item.members,
+        })
+    })
+
+    result = await result.json()
+
+    return result  
 }

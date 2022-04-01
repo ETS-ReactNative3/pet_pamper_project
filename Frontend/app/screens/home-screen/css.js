@@ -7,35 +7,19 @@ export const styles = StyleSheet.create({
     },
     
     image: {
-        flex:1.3,
+        flex:2,
         height: '100%',
         width: '100%',
         resizeMode:"stretch"
     },
     
-    googleButton: {
+    bottomArea: {
         flex:1,
         backgroundColor: 'white',
         borderWidth: 1,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        alignItems: 'center'
-    },
-
-    line: {
-        backgroundColor: '#004b67',
-        width: '90%',
-        marginTop: 20,
-        height: 1
-    },
-
-    orText: {
-        position: 'absolute',
-        top: 105,
-        fontSize: 19,
-        zIndex: 1,
-        backgroundColor: 'white',
-        padding: 5
+        alignItems: 'center',
     },
 
     signup: {
@@ -71,28 +55,6 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-    googleIconArea: {
-        marginLeft: 2,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexBasis: '15%',
-        width: '90%',
-        height: '90%',
-        backgroundColor: 'white',
-        resizeMode: 'contain',
-        borderWidth: 1,
-        borderColor: 'white',
-        borderRadius: 5
-    },
-
-    googleIcon: {
-        justifyContent: 'center',
-        width: '90%',
-        height: '90%',
-        resizeMode: 'contain',
-    },
-
     buttonArea: {
         borderWidth: 1,
         borderColor: '#518ef8',
@@ -100,7 +62,7 @@ export const styles = StyleSheet.create({
         width: '90%',
         height: 55,
         textTransform: 'capitalize',
-        marginTop: 30
+        marginTop: 50
     },
     
     button: {

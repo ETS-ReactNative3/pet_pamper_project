@@ -5,11 +5,11 @@ import {getUserNotifications} from '../../redux/actions/user-info'
 import * as Linking from 'expo-linking'
 import {styles} from './css'
 import {getNotifications} from '../../services'
-
+import { imageUri } from '../../methods';
 
 export default function Notifications({navigation}) {
 
-    const {userToken, userNotifications} = useSelector(state => state.userReducer)
+    const {userToken, userNotifications, userImage} = useSelector(state => state.userReducer)
     const dispatch = useDispatch()
     
     React.useEffect(async ()=> {
@@ -40,7 +40,7 @@ export default function Notifications({navigation}) {
                         <View>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <View>
-                                    <Image style= {styles.notification_image} source= {{uri: `data:image/gif;base64,${notification_item.image}`}}/>
+                                    {userImage == undefined ? <Image style={styles.notification_image} source={require('../../assets/avatar.png')}/> : <Image style= {styles.notification_image} source= {{uri: imageUri(notification_item.image)}}/>}
                                 </View>
 
                                 <View style= {styles.notification_text}>

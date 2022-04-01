@@ -55,6 +55,11 @@ const addUserSchema = new Schema({
         default: ""
     },
 
+    push_token: {
+        type: String,
+        default: ""
+    },
+
     account_type: {
         type: String,
         required: true

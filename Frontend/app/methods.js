@@ -1,6 +1,3 @@
-// import {setUserStatus} from './redux/actions/user-info'
-// import {useSelector, useDispatch} from 'react-redux'
-// import {post} from './constants'
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 

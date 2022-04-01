@@ -7,6 +7,7 @@ import * as Location from 'expo-location';
 import {setUserToken, setUserId, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus, setUserPassword} from '../../redux/actions/user-info'
 import {styles} from './css'
 import SigninButton from '../../components/signinButton';
+import {registerPushToken} from '../../services'
 
 function SignupScreen({navigation}) {
     const dispatch = useDispatch()
@@ -47,7 +48,7 @@ function SignupScreen({navigation}) {
       }, [status])
     
     async function signup() {
- 
+        let push_token = await registerPushToken()
         let result = await fetch(url_signup, {
             method: 'POST',
             headers: {
@@ -60,7 +61,8 @@ function SignupScreen({navigation}) {
                 email: email,
                 password: password,
                 phone_number: phone_number,
-                account_type: account_type
+                account_type: account_type,
+                push_token: push_token
             })
         })
 

@@ -15,7 +15,7 @@ const addUserImageController = require('../controllers/addUserImageController')
 const allCommunityController = require('../controllers/allCommunityController')
 const pingCommunityController = require('../controllers/pingCommunityController')
 const getNotificationsController = require('../controllers/getNotificationsController')
-
+const pushTokenController = require('../controllers/pushTokenController')
 try{
 //Signup route
 app.post('/signup', body('email').isEmail(), body('password').isLength({min: 8}), (req, res) => { 
@@ -53,6 +53,9 @@ app.post('/add_community', addCommunityController.addCommunity)
 
 //Ping members of the community
 app.post('/ping_community', pingCommunityController.pingMembers)
+
+//Push token
+app.post('/push_token', pushTokenController.getPushTokens)
 
 //Get notifications
 app.post('/notifications', getNotificationsController.getNotifications)

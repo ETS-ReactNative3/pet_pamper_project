@@ -25,7 +25,8 @@ exports.addUser = (req, res) => {
                     email: req.body.email,
                     password: req.body.password,
                     phone_number: req.body.phone_number,
-                    account_type: req.body.account_type
+                    account_type: req.body.account_type,
+                    push_token: req.body.push_token
                 })
 
                 newUser.save()
