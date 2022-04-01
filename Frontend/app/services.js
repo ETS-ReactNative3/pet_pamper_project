@@ -197,3 +197,20 @@ export const getUsersPushToken = async (fc_item) => {
 
     return result  
 }
+
+export const userSignIn = async (email, password, latitude, longitude) => {
+    let result = await fetch(userUrl('signin'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            email: email,
+            password: password,
+            latitude: latitude,
+            longitude: longitude
+        })
+    })
+
+    result = await result.json()
+    
+    return result
+}

@@ -7,10 +7,8 @@ import {setUserToken, setUserPushToken, setUserId, setUserCommunities, setUserLa
 import {styles} from './css'
 import {userSignIn} from '../../services'
 
-function SigninScreen({navigation}) {
-    const {userToken, userId, userCommunities, userFirstName, userLastName, userLatitude, userLongitude, userImage, userStatus} = useSelector(state => state.userReducer)
+export default function InputForm({navigation}) {
     const dispatch = useDispatch()
-
     const [email, onChangeEmail] = React.useState("");
     const [password, onChangePassword] = React.useState("");
     const [latitude, setLatitude] = React.useState("");
@@ -41,8 +39,6 @@ function SigninScreen({navigation}) {
 
 
     async function signin(email, password, latitude, longitude) {
-
-
         let result = await userSignIn(email, password, latitude, longitude)
 
         dispatch(setUserId(result._id))
@@ -56,8 +52,7 @@ function SigninScreen({navigation}) {
         dispatch(setUserStatus(result.status))
         dispatch(setUserPassword(result.password))
         dispatch(setUserPushToken(result.push_token))
-        setStatus(result.message)
-        
+        setStatus(result.message)     
     }
     
     return (
@@ -108,5 +103,3 @@ function SigninScreen({navigation}) {
         </View>  
     );
 }
-
-export default SigninScreen;
