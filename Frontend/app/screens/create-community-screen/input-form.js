@@ -3,8 +3,8 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native'
 import { TextInput } from 'react-native-paper';
 import {styles} from './css'
-import {userCreateCommunity} from '../../services'
-import {userCreateCommunityImage, userCreateCommunityLocation} from '../../methods'
+import {userCreateCommunity, usercurrentLocation} from '../../services'
+import {userCreateCommunityImage} from '../../methods'
 
 export default function InputForm() {
     const dispatch = useDispatch()  
@@ -17,7 +17,7 @@ export default function InputForm() {
     const [longitude, setLongitude] = React.useState("");
     
     const getCommunityLocation = async () => {
-        let location = await userCreateCommunityLocation()       
+        let location = await usercurrentLocation()       
         setLatitude(location.coords.latitude);
         setLongitude(location.coords.longitude);
       };

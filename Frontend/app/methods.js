@@ -1,6 +1,4 @@
 import * as ImagePicker from 'expo-image-picker';
-import * as Location from 'expo-location';
-
 
 export const userUrl = (route) => {
     return (
@@ -35,17 +33,6 @@ export const userCreateCommunityImage = async () => {
     
     return result
 };
-
-export const userCreateCommunityLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      setErrorMsg('Permission to access location was denied');
-      return;
-    }
-
-    let location = await Location.getCurrentPositionAsync({});
-    return location
-  };
 
 export const imageUri = (image) => {
     return (

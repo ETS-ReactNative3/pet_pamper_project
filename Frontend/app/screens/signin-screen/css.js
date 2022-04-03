@@ -64,22 +64,6 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-    line: {
-        backgroundColor: '#004b67',
-        width: '80%',
-        marginTop: 25,
-        height: 1
-    },
-
-    orText: {
-        position: 'absolute',
-        top: 297,
-        fontSize: 19,
-        zIndex: 1,
-        backgroundColor: 'white',
-        padding: 5
-    },
-
     buttonArea: {
         borderWidth: 1,
         borderColor: '#518ef8',
@@ -106,28 +90,6 @@ export const styles = StyleSheet.create({
         fontSize: 17,
         color: 'white',
         fontWeight: 'bold',
-    },
-
-    googleIconArea: {
-        marginLeft: 2,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexBasis: '15%',
-        width: '90%',
-        height: '90%',
-        backgroundColor: 'white',
-        resizeMode: 'contain',
-        borderWidth: 1,
-        borderColor: 'white',
-        borderRadius: 5
-    },
-
-    googleIcon: {
-        justifyContent: 'center',
-        width: '90%',
-        height: '90%',
-        resizeMode: 'contain',
     },
 
 })

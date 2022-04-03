@@ -12,7 +12,9 @@ export default function PetShopsHeader({navigation}) {
         <View style={styles.header_area}>
             <View style={styles.header}>              
                 <View style={styles.header_image_area}>
-                {userImage == undefined ? <Image style={styles.header_image} source={require('../../assets/avatar.png')}/> : <Image style={styles.header_image} source={{uri: imageUri(userImage)}}></Image>}
+                    <TouchableOpacity style={styles.header_image_nav} onPress={()=> navigation.navigate('Profile Screen')}> 
+                        {userImage == undefined ? <Image style={styles.header_image} source={require('../../assets/avatar.png')}/> : <Image style={styles.header_image} source={{uri: imageUri(userImage)}}></Image>}
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.header_text_area}>

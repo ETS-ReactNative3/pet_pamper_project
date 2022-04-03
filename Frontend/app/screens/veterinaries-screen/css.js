@@ -11,6 +11,15 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: 65,
     },
+
+    header_image_nav: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain',
+        borderRadius: 200,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     
     header: {
         flex: 1,

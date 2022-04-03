@@ -53,10 +53,20 @@ export const styles = StyleSheet.create({
         flex:3,
         paddingLeft: 24,       
     },
+
+    edit_status_area: {
+        flex:3,
+        paddingLeft: 17,       
+    },
+
+    logout_area: {
+        flex:3,
+        paddingLeft: 21,       
+    },
     
     create_text_area: {
         flex:3,
-        paddingLeft: 20,       
+        paddingLeft: 19,       
     },
 
     edit_text: {

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native'
-import { Avatar, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as ImagePicker from 'expo-image-picker';
 import {useSelector, useDispatch} from 'react-redux'
@@ -90,60 +89,66 @@ function ProfileScreen({navigation}) {
                 <Text style= {styles.user_status}>{userStatus}</Text>
             </View>
 
-            
-            <View style={styles.edit_area}>
-                <View style={styles.edit}>                              
-                    
-                    <Icon style={styles.edit_user_icon} color="black" size={25} name="user" />
-                    
-                    
-                    <View style={styles.edit_text_area}>
-                        <Text style={styles.edit_text}>Edit profile</Text>
+            <TouchableOpacity onPress={()=> navigation.navigate('Edit Profile')}>
+                <View style={styles.edit_area}>
+                    <View style={styles.edit}>                              
+                        
+                        <Icon style={styles.edit_user_icon} color="black" size={25} name="user" />
+                        
+                        
+                        <View style={styles.edit_text_area}>
+                            <Text style={styles.edit_text}>Edit profile</Text>
+                        </View>
+
+                        <TouchableOpacity onPress={()=> navigation.navigate('Edit Profile')}>
+                            <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
+                        </TouchableOpacity>
                     </View>
-
-                    <TouchableOpacity onPress={()=> navigation.navigate('Edit Profile')}>
-                        <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
-                    </TouchableOpacity>
                 </View>
-            </View>
+            </TouchableOpacity>
 
-            <View style={styles.edit_area}>
-                <View style={styles.edit}>                              
-                    
-                    <Icon style={styles.edit_user_icon} color="black" size={25} name="edit" />
-                                   
-                    <View style={styles.edit_text_area}>
-                        <Text style={styles.edit_text}>Edit status</Text>
+            <TouchableOpacity onPress={()=> navigation.navigate('Edit Status')}>
+                <View style={styles.edit_area}>
+                    <View style={styles.edit}>                              
+                        
+                        <Icon style={styles.edit_user_icon} color="black" size={25} name="edit" />
+                                    
+                        <View style={styles.edit_status_area}>
+                            <Text style={styles.edit_text}>Edit status</Text>
+                        </View>
+
+                        <TouchableOpacity onPress={()=> navigation.navigate('Edit Status')}>
+                            <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
+                        </TouchableOpacity>
                     </View>
-
-                    <TouchableOpacity onPress={()=> navigation.navigate('Edit Status')}>
-                        <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
-                    </TouchableOpacity>
                 </View>
-            </View>
+            </TouchableOpacity>
 
-            <View style={styles.edit_area}>
-                <View style={styles.edit}>                              
-                    
-                    <Icon style={styles.create_user_icon} color="black" size={25} name="group" />
-                    
-                    
-                    <View style={styles.create_text_area}>
-                        <Text style={styles.edit_text}>Create community</Text>
+            <TouchableOpacity onPress={()=> navigation.navigate('Create Community')}>
+                <View style={styles.edit_area}>
+                    <View style={styles.edit}>                              
+                        
+                        <Icon style={styles.create_user_icon} color="black" size={25} name="group" />
+                        
+                        
+                        <View style={styles.create_text_area}>
+                            <Text style={styles.edit_text}>Create community</Text>
+                        </View>
+
+                        <TouchableOpacity onPress={()=> navigation.navigate('Create Community')}>
+                            <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
+                        </TouchableOpacity>
                     </View>
-
-                    <TouchableOpacity onPress={()=> navigation.navigate('Create Community')}>
-                        <Icon style={styles.edit_icon} color="black" size={25} name="angle-right" />
-                    </TouchableOpacity>
                 </View>
-            </View>
+            </TouchableOpacity>
 
+         
             <View style={styles.edit_area}>
                 <View style={styles.edit}>                              
                     
                     <Icon style={styles.edit_user_icon} color="black" size={25} name="sign-out" />     
                     
-                    <View style={styles.edit_text_area}>
+                    <View style={styles.logout_area}>
                         <Text style={styles.edit_text}>Log out</Text>
                     </View>
 
@@ -152,7 +157,7 @@ function ProfileScreen({navigation}) {
                     </TouchableOpacity>
                 </View>
             </View>
-
+         
         </View>
     );
 }

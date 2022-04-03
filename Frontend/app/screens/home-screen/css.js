@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     },
     
     image: {
-        flex:2,
+        flex:1.25,        
         height: '100%',
         width: '100%',
         resizeMode:"stretch"
@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
         width: '90%',
         height: 55,
         textTransform: 'capitalize',
-        marginTop: 50
+        marginTop: 30
     },
     
     button: {
@@ -80,5 +80,44 @@ export const styles = StyleSheet.create({
         fontSize: 17,
         color: '#80f7e3',
         fontWeight: 'bold',
+    },
+
+    googleIconArea: {
+        marginLeft: 2,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexBasis: '15%',
+        width: '90%',
+        height: '90%',
+        backgroundColor: 'white',
+        resizeMode: 'contain',
+        borderWidth: 1,
+        borderColor: 'white',
+        borderRadius: 5
+    },
+
+    googleIcon: {
+        justifyContent: 'center',
+        width: '90%',
+        height: '90%',
+        resizeMode: 'contain',
+    },
+
+    line: {
+        backgroundColor: '#004b67',
+        width: '90%',
+        marginTop: 20,
+        height: 1
+    },
+
+    orText: {
+        position: 'absolute',
+        top: 105,
+        fontSize: 19,
+        zIndex: 1,
+        backgroundColor: 'white',
+        padding: 5,
+        alignItems: 'center',
     },
 })

@@ -1,7 +1,11 @@
+import {useSelector, useDispatch} from 'react-redux'
 import {post} from './constants';
 import {header, userUrl, communityUrl} from './methods'
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import * as Location from 'expo-location';
+import {setUserToken, setUserId, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus, setUserPassword, setUserPushToken} from './redux/actions/user-info'
+
 
 export const userStatusUpdate = async (userStatus, userToken) => {
     let result = await fetch(userUrl('status'), {
@@ -167,7 +171,7 @@ export const registerPushToken = async () => {
         return;
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log(token);
+
     } else {
       alert('Must use physical device for Push Notifications');
     }
@@ -198,7 +202,8 @@ export const getUsersPushToken = async (fc_item) => {
     return result  
 }
 
-export const userSignIn = async (email, password, latitude, longitude) => {
+export const userSignIn = async (email, password, latitude, longitude, dispatch) => {
+    
     let result = await fetch(userUrl('signin'), {
         method: post,
         headers: header(),
@@ -211,6 +216,51 @@ export const userSignIn = async (email, password, latitude, longitude) => {
     })
 
     result = await result.json()
-    
+
+    dispatch(setUserId(result._id))
+    dispatch(setUserToken(result.token))
+    dispatch(setUserCommunities(result.communities))
+    dispatch(setUserFirstName(result.first_name))
+    dispatch(setUserLastName(result.last_name))
+    dispatch(setUserLatitude(result.latitude))
+    dispatch(setUserLongitude(result.longitude))
+    dispatch(setUserImage(result.image))
+    dispatch(setUserStatus(result.status))
+    dispatch(setUserPassword(result.password))
+    dispatch(setUserPushToken(result.push_token))
     return result
+}
+
+export const usercurrentLocation = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setErrorMsg('Permission to access location was denied');
+      return;
+    }
+    let location = await Location.getCurrentPositionAsync({});
+    return location
+    // dispatch(setUserLatitude(location.coords.latitude))
+    // dispatch(setUserLongitude(location.coords.longitude))
+ 
+}
+
+export const userSignUp = async (first_name, last_name, email, password, phone_number, account_type) => {
+    let push_token = await registerPushToken()
+    let result = await fetch(userUrl('signup'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            password: password,
+            phone_number: phone_number,
+            account_type: account_type,
+            push_token: push_token
+        })
+    })
+
+    result = await result.json()
+    
+    return result.message
 }
