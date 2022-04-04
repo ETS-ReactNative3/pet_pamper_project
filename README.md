@@ -61,10 +61,17 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Using the above mentioned tech stacks and the wireframes build with Figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-| Landing  | Home/Search  |
+| Home  | Discover  |
 | -----------------| -----|
-| ![Landing](https://github.com/julescript/spotifyndr/blob/master/demo/Landing_Page.jpg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
+| <img src="./readme/Home_page_app.PNG"/> | <img src="./readme/Discover_page_app.PNG"/> |
 
+| Veterinary  | Pet shop  |
+| -----------------| -----|
+| <img src="./readme/Veterinary_page_list.PNG"/> | <img src="./readme/Veterinary_page_map.PNG"/> |
+
+| User profile  | Notifications  |
+| -----------------| -----|
+| <img src="./readme/Pet_shop_page_list.PNG"/> | <img src="./readme/Profile_page_app.PNG"/> |
 
 <br><br>
 <img src="./readme/title6.svg"/>
@@ -85,17 +92,25 @@ This is an example of how to list things you need to use the software and how to
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+
+1. Clone the repo
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+3. Install Expo CLI
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   npm install -g expo-cli
+   ```
+4. Create a package.json file for your application
+   ```js
+   npm init
+   ```
+5. Install Express
+   ```js
+   npm install express
    ```
 
