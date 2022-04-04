@@ -65,11 +65,11 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -----------------| -----|
 | <img src="./readme/Home_page_app.PNG"/> | <img src="./readme/Discover_page_app.PNG"/> |
 
-| Veterinary  | Pet shop  |
+| Veterinary list  | Veterinary map  |
 | -----------------| -----|
 | <img src="./readme/Veterinary_page_list.PNG"/> | <img src="./readme/Veterinary_page_map.PNG"/> |
 
-| User profile  | Notifications  |
+| Pet shop  | User profile  |
 | -----------------| -----|
 | <img src="./readme/Pet_shop_page_list.PNG"/> | <img src="./readme/Profile_page_app.PNG"/> |
 
