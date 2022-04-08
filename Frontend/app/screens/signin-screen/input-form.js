@@ -1,16 +1,12 @@
 import React, {useEffect} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import { Text, View, TouchableOpacity} from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
-import * as Location from 'expo-location';
-import {useSelector, useDispatch} from 'react-redux'
-import {setUserToken, setUserPushToken, setUserId, setUserCommunities, setUserLastName, setUserFirstName, setUserLatitude, setUserLongitude, setUserImage, setUserStatus, setUserPassword} from '../../redux/actions/user-info'
-import {styles} from './css'
+import {useDispatch} from 'react-redux'
 import {userSignIn, usercurrentLocation} from '../../services'
-
+import {styles} from './css'
 
 export default function InputForm({navigation}) {
     const dispatch = useDispatch()
-    const {userLatitude, userLongitude } = useSelector(state => state.userReducer)
     const [email, onChangeEmail] = React.useState("");
     const [password, onChangePassword] = React.useState("");
     const [latitude, setLatitude] = React.useState("");
@@ -19,7 +15,7 @@ export default function InputForm({navigation}) {
  
 
     useEffect(async () => {
-          let location = await usercurrentLocation(dispatch)
+          let location = await usercurrentLocation()
           setLatitude(location.coords.latitude);
           setLongitude(location.coords.longitude);  
       }, []);

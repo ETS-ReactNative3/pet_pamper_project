@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native"
+import {color} from '../../constants'
 
 export const styles = StyleSheet.create({
     backgroudArea: {
         flex:1,
-        backgroundColor: "#004b67",
+        backgroundColor: color.primary,
     },
     
     image: {
@@ -70,7 +71,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 5,
         justifyContent: 'center',
-        backgroundColor: '#004b67',
+        backgroundColor: color.primary,
         width: '100%',
         alignItems: 'center',   
     },
@@ -78,7 +79,7 @@ export const styles = StyleSheet.create({
     text: {
         paddingLeft: 15,
         fontSize: 17,
-        color: '#80f7e3',
+        color: color.secondary,
         fontWeight: 'bold',
     },
 
@@ -105,7 +106,7 @@ export const styles = StyleSheet.create({
     },
 
     line: {
-        backgroundColor: '#004b67',
+        backgroundColor: color.primary,
         width: '90%',
         marginTop: 20,
         height: 1

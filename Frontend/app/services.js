@@ -290,3 +290,31 @@ export const logoutUser = async (userToken) => {
     
     return result
 }
+
+export const userGoogleSignIn = async (email, latitude, longitude, dispatch) => {
+    
+    let result = await fetch(userUrl('google_signin'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            email: email,
+            latitude: latitude,
+            longitude: longitude
+        })
+    })
+
+    result = await result.json()
+
+    dispatch(setUserId(result._id))
+    dispatch(setUserToken(result.token))
+    dispatch(setUserCommunities(result.communities))
+    dispatch(setUserFirstName(result.first_name))
+    dispatch(setUserLastName(result.last_name))
+    dispatch(setUserLatitude(result.latitude))
+    dispatch(setUserLongitude(result.longitude))
+    dispatch(setUserImage(result.image))
+    dispatch(setUserStatus(result.status))
+    dispatch(setUserPassword(result.password))
+    dispatch(setUserPushToken(result.push_token))
+    return result
+}

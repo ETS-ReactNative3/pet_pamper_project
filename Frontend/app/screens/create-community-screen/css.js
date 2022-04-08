@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import {color} from '../../constants'
 
 export const styles = StyleSheet.create({
     background: {
@@ -29,7 +30,7 @@ export const styles = StyleSheet.create({
 
     header_text: {
         fontSize: 17,
-        color: '#004b67',
+        color: color.primary,
         fontWeight: 'bold',
     },
 
@@ -55,7 +56,7 @@ export const styles = StyleSheet.create({
     },
 
     header_icon_arrow: {
-        color: '#004b67',
+        color: color.primary,
         marginLeft: 50,
         marginTop: 0
     },
@@ -103,7 +104,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 5,
         justifyContent: 'center',
-        backgroundColor: '#004b67',
+        backgroundColor: color.primary,
         width: '100%',
         alignItems: 'center',   
     },
@@ -125,7 +126,7 @@ export const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
         justifyContent: 'center',
-        backgroundColor: '#80f7e3',
+        backgroundColor: color.secondary,
         width: '100%',
         alignItems: 'center',
         paddingHorizontal: 10,

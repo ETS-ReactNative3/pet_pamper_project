@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import {color} from '../../constants'
 
 export const styles = StyleSheet.create({
     background: {
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
         fontSize: 35,
         fontWeight: 'bold',
         marginLeft: 20,
-        color: '#004b67'
+        color: color.primary
     },
 
     user_status: {
@@ -101,7 +102,7 @@ export const styles = StyleSheet.create({
         top: 650,
         width: '100%',
         height: 60,
-        backgroundColor: '#004b67'
+        backgroundColor: color.primary
     },
 
     nav_icon_area: {

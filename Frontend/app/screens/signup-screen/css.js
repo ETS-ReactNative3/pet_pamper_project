@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import {color} from '../../constants'
 
 export const styles = StyleSheet.create({
     backgroudArea: {
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
     },
 
     icon: {
-        backgroundColor: '#004b67'
+        backgroundColor: color.primary
     },
     
     text_header: {
@@ -84,19 +85,19 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 5,
         justifyContent: 'center',
-        backgroundColor: '#004b67',
+        backgroundColor: color.primary,
         width: '100%',
         alignItems: 'center',   
     },
 
     text_signup: {
         fontSize: 17,
-        color: '#80f7e3',
+        color: color.secondary,
         fontWeight: 'bold',
     },
 
     line: {
-        backgroundColor: '#004b67',
+        backgroundColor: color.primary,
         width: '80%',
         marginTop: 25,
         height: 1

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import {styles} from './css'
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
-
+import {useSelector, useDispatch} from 'react-redux'
+import {userGoogleSignIn, usercurrentLocation} from '../../services'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -11,11 +12,14 @@ export default function BottomArea({ navigation }) {
     const [access_token , setAccessToken] = React.useState("");
     const [request, response, promptAsync] = Google.useAuthRequest({expoClientId: `909413013866-p2f7poj2lhvaot9ihk07d60nlantch4a.apps.googleusercontent.com`})
     const [user_info, setUserInfo] = React.useState("")
+    const [latitude, setLatitude] = React.useState("");
+    const [longitude, setLongitude] = React.useState("");
+    const [status, setStatus] = React.useState("")
+    const dispatch = useDispatch()
 
     React.useEffect(()=> {
         if (response?.type === 'success'){
-            setAccessToken(response.authentication.accessToken)
-            
+            setAccessToken(response.authentication.accessToken)          
         }
     }, [response])
 
@@ -26,9 +30,26 @@ export default function BottomArea({ navigation }) {
         })
     
         user_info_response.json().then(data =>{
-            setUserInfo(data)
+            setUserInfo(data.email)
         })
     }
+
+    useEffect(async () => {
+          let location = await usercurrentLocation()
+          setLatitude(location.coords.latitude);
+          setLongitude(location.coords.longitude);  
+      }, []);
+
+    useEffect(()=> {
+        if (status == "Successful login!") {
+            navigation.navigate('Explore')
+        }
+    }, [status])
+
+    useEffect(async ()=> {
+        let result = await userGoogleSignIn(user_info, latitude, longitude, dispatch)
+        setStatus(result.message)
+    }, [user_info])
 
     return (
         <View style= {styles.backgroudArea}>

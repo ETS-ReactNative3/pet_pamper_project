@@ -15,6 +15,7 @@ const addUserImageController = require('../controllers/addUserImageController')
 const allCommunityController = require('../controllers/allCommunityController')
 const pingCommunityController = require('../controllers/pingCommunityController')
 const getNotificationsController = require('../controllers/getNotificationsController')
+const googleSignInController = require('../controllers/googleSignInController')
 const pushTokenController = require('../controllers/pushTokenController')
 try{
 //Signup route
@@ -65,6 +66,9 @@ app.post('/image', addUserImageController.imageUpdate)
 
 //logout
 app.post('/logout', logoutController.logOut)
+
+//Google sign in
+app.post('/google_signin', googleSignInController.getUserInfo )
 
 }catch(err) {console.log(err)}
 

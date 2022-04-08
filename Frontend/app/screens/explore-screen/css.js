@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import {color} from '../../constants'
 
 export const styles = StyleSheet.create({
     background: {
@@ -30,7 +31,7 @@ export const styles = StyleSheet.create({
 
     header_text: {
         fontSize: 17,
-        color: '#004b67',
+        color: color.primary,
         fontWeight: 'bold',
     },
 
@@ -65,7 +66,7 @@ export const styles = StyleSheet.create({
     },
 
     header_icon_arrow: {
-        color: '#004b67',
+        color: color.primary,
         marginLeft: 24,
         marginTop: 0
     },
@@ -83,7 +84,7 @@ export const styles = StyleSheet.create({
         height: 100,
         borderRadius: 100,
         opacity: 0.6,
-        borderColor: '#004b67',
+        borderColor: color.primary,
         borderWidth: 3,
         marginTop: 10,
         marginLeft: 10,
@@ -94,7 +95,7 @@ export const styles = StyleSheet.create({
         marginTop: 5,
         fontSize: 15,
         fontWeight: 'bold',
-        color: '#004b67'
+        color: color.primary
     },
 
     fc_button_area: {
@@ -102,7 +103,7 @@ export const styles = StyleSheet.create({
     },
     
     fc_button: {
-        backgroundColor: '#004b67',
+        backgroundColor: color.primary,
         borderRadius: 5,
         alignItems: 'center',
         position: 'relative',
@@ -130,7 +131,7 @@ export const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 100,
-        borderColor: '#004b67',
+        borderColor: color.primary,
         borderWidth: 2,
         marginTop: 10,
         marginLeft: 10,
@@ -145,16 +146,16 @@ export const styles = StyleSheet.create({
     nc_text_title: {
         fontSize: 17,
         fontWeight: 'bold',
-        color: '#004b67'
+        color: color.primary
     },
 
     nc_text_members: {
         fontSize: 12,
-        color: '#545454'
+        color: color.grey
     },
-
+    
     nc_button: {
-        backgroundColor: '#004b67',
+        backgroundColor: color.primary,
         marginRight: 10,
         flexBasis: '20%',
         paddingHorizontal: 12,
