@@ -99,7 +99,7 @@ export default function SignupScreen({navigation}) {
                         style={styles.picker}
                         onValueChange={(itemValue, itemIndex) => setAccountType(itemValue)}
                     >
-                    <Picker.Item label="Pet Walker" value="Pet Walker" />
+                    <Picker.Item label="Pet Owner" value="Pet Walker" />
                     <Picker.Item label="Veterinary" value="Veterinary" />
                     <Picker.Item label="Pet Shop" value="Pet Shop" />
                 </Picker>

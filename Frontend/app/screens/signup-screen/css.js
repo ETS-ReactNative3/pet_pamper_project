@@ -35,11 +35,13 @@ export const styles = StyleSheet.create({
     first_name:{
         flexBasis: '48%',
         marginRight: 5,
+        height: 39
     },
     
     last_name:{
         flexBasis: '48%', 
         marginLeft: 5,
+        height: 39
     },
 
     email_input: {

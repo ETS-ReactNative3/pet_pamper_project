@@ -18,10 +18,10 @@
 
 
 ### User Stories
-- As a pet walker, I want someone to join me during my pet-walking time, so that I don't get bored.
-- As a pet walker, I want someone to join me during my pet-walking time, so that I can meet new people.
-- As a pet owner, I want to locate nearby veterinaries, so that I can visit regularly to check up on my pet's health or incase of emergencies.
-- As a pet owner, I want to locate nearby pet shops, so that I can visit regularly to buy pet products.
+- As a pet owner, I want someone to join me during my pet-walking time, so that I don't get bored.
+- As a pet owner, I want to join nearby pet-walking communities to walk with, so that I can meet new people.
+- As a pet owner, I want to locate nearby veterinaries within 1 km radius, so that I can visit regularly to check up on my pet's health or incase of emergencies.
+- As a pet owner, I want to locate nearby pet shops within 1 km radius, so that I can visit regularly to buy pet products.
 
 
 <br><br>
@@ -95,22 +95,70 @@ _Below is an example of how you can instruct your audience on installing and set
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/AliAzzam91/pet_pamper_project.git
    ```
 2. Install NPM packages
    ```sh
    npm install
    ```
-3. Install Expo CLI
-   ```js
-   npm install -g expo-cli
-   ```
-4. Create a package.json file for your application
+
+|Backend|
+|-------------| 
+
+3. Create a package.json file for your application
    ```js
    npm init
    ```
-5. Install Express
+4. Install Express
    ```js
    npm install express
    ```
+5. Install body parser, dotenv, and mongoose packages
+   ```js
+   npm install body-parser mongoose dotenv  
+   ``` 
+|Frontend|
+|-------------| 
+
+6. Install Expo CLI
+   ```js
+   npm install -g expo-cli
+   ``` 
+7. Install Redux to manage states
+   ```js
+   npm install redux redux-thunk react-redux
+   ``` 
+8. Install icon libraries
+   ```js
+   npm install --save react-native-vector-icons react-native-paper
+   ``` 
+9. Install location packages
+   ```js
+   expo install expo-location geolib
+   ``` 
+10. Install picker to select account type
+      ```js
+      npm install @react-native-picker/picker
+      ``` 
+11. Install Expo linking to deep link to google maps
+      ```js
+      expo install expo-linking
+      ``` 
+12. Install react native maps for map view
+      ```js
+      npm install react-native-maps
+      ``` 
+13. Install segmented controller
+      ```js
+      npm install @react-native-segmented-control/segmented-control
+      ``` 
+14. Install image picker
+      ```js
+      expo install expo-image-picker
+      ``` 
+15. Install bottom tabs navigation
+      ```js
+      npm install react-navigation-material-bottom-tabs
+      ``` 
+
 
