@@ -239,9 +239,6 @@ export const usercurrentLocation = async () => {
     }
     let location = await Location.getCurrentPositionAsync({});
     return location
-    // dispatch(setUserLatitude(location.coords.latitude))
-    // dispatch(setUserLongitude(location.coords.longitude))
- 
 }
 
 export const userSignUp = async (first_name, last_name, email, password, phone_number, account_type) => {
@@ -263,4 +260,33 @@ export const userSignUp = async (first_name, last_name, email, password, phone_n
     result = await result.json()
     
     return result.message
+}
+
+export const imageUpload = async (userToken, userImage) => {
+    let result = await fetch(userUrl('image'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            token: userToken,
+            image: userImage
+        })
+    })
+
+    result = await result.json()
+    
+    return result
+}
+
+export const logoutUser = async (userToken) => {
+    let result = await fetch(userUrl('logout'), {
+        method: post,
+        headers: header(),
+        body: JSON.stringify({
+            token: userToken,
+        })
+    })
+
+    result = await result.json()
+    
+    return result
 }

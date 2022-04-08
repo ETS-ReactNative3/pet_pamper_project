@@ -130,7 +130,7 @@ export const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 100,
-        borderColor: 'white',
+        borderColor: '#004b67',
         borderWidth: 2,
         marginTop: 10,
         marginLeft: 10,
