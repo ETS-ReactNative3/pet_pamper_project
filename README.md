@@ -4,14 +4,14 @@
 
 > Hello world! This is the project’s summary that describes the project plain and simple, limited to the space available. 
 
-**[PROJECT PHILOSOPHY](https://github.com/julescript/well_app#-project-philosophy) • [WIREFRAMES](https://github.com/julescript/well_app#-wireframes) • [TECH STACK](https://github.com/julescript/well_app#-tech-stack) • [IMPLEMENTATION](https://github.com/julescript/well_app#-impplementation) • [HOW TO RUN?](https://github.com/julescript/well_app#-how-to-run)**
+**[PROJECT PHILOSOPHY](#philosophy) • [WIREFRAMES](#wireframes) • [TECH STACK](#tech-stack) • [IMPLEMENTATION](#implementation) • [HOW TO RUN?](#how-to-run)**
 
 </div>
 
 <br><br>
 
 
-<img src="./readme/title2.svg"/>
+<img src="./readme/title2.svg" id='philosophy'/>
 
 > Pet Pamper mobile app is a solution that offers quick access to any veterinary or pet shop nearby which helps pet owners. It assist users with the mundane pet walking experience by giving access to variety of pet-walking communities nearby. 
 > 
@@ -26,7 +26,7 @@
 
 <br><br>
 
-<img src="./readme/title3.svg"/>
+<img src="./readme/title3.svg" id='wireframes'/>
 
 > This design was planned before on paper, then moved to Figma app for the fine details.
 Note that I didn't use any styling library or theme, all from scratch and using pure CSS modules
@@ -45,7 +45,7 @@ Note that I didn't use any styling library or theme, all from scratch and using 
 
 <br><br>
 
-<img src="./readme/title4.svg"/>
+<img src="./readme/title4.svg" id='tech-stack'/>
 
 Here's a brief high-level overview of the tech stack the Well app uses:
 
@@ -57,7 +57,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 
 <br><br>
-<img src="./readme/title5.svg"/>
+<img src="./readme/title5.svg" id='implementation'/>
 
 > Using the above mentioned tech stacks and the wireframes build with Figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
 
@@ -74,7 +74,14 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | <img src="./readme/Pet_shop_page_list.PNG"/> | <img src="./readme/Profile_page_app.PNG"/> |
 
 <br><br>
-<img src="./readme/title6.svg"/>
+
+
+| Discover | Veterinary | Pet shop | Notification | Profile |
+| --------| --------| --------| --------| --------|
+| <img src="./readme/Explore.gif" height= "200"/> | <img src="./readme/Veterinary.gif" height= "200"/> | <img src="./readme/Pet shop.gif" height= "200"/> | <img src="./readme/Notification.gif" height= "200"/> | <img src="./readme/Profile.gif" height= "200"/> |
+
+<br><br>
+<img src="./readme/title6.svg" id='how-to-run'/>
 
 
 > This is an example of how you may give instructions on setting up your project locally.
@@ -159,6 +166,10 @@ _Below is an example of how you can instruct your audience on installing and set
 15. Install bottom tabs navigation
       ```js
       npm install react-navigation-material-bottom-tabs
+      ``` 
+16. Run the project
+      ```js
+      expo start
       ``` 
 
 
